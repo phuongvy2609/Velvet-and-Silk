@@ -1,0 +1,2456 @@
+.checkout {
+    max-width: 1000px;
+    margin: 150px auto 0;
+}
+
+.steps {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 50px;
+    gap: 15px;
+}
+
+.step {
+    color: black;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: bold;
+}
+
+.step.active {
+    color: white;
+}
+
+.circle1,
+.circle2,
+.circlee {
+    width: 40px;
+    height: 40px;
+    border: 1px solid black;
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+}
+
+.circle1.active,
+.circle2.active,
+.circlee.active {
+    border: 1px solid black;
+    font-size: 20px;
+    font-weight: bold;
+    background: rgb(248, 178, 81);
+}
+
+.line {
+    flex: 0.1;
+    height: 1px;
+    background: #333;
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background-color: rgb(225, 247, 225);
+    max-width: 1100px;
+    margin: 80px auto;
+    padding: 40px 50px;
+    border-radius: 20px;
+    box-sizing: border-box;
+}
+
+.tong {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 30px;
+}
+
+.checkout-form {
+    width: 450px;
+    flex: none;
+}
+
+.tt h2 {
+    margin-bottom: 10px;
+    font-size: 30px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.tt .subtitle,
+.tt .subtitlee {
+    color: black;
+    font-size: 16px;
+    text-align: center;
+}
+
+.tt .subtitle {
+    margin-bottom: 20px;
+}
+
+.tt .subtitlee {
+    margin-bottom: 35px;
+}
+
+.row {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+}
+
+.group {
+    flex: 1;
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-size: 16px;
+    color: black;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    box-sizing: border-box;
+    background: white;
+    border: 1.5px solid green;
+    color: black;
+}
+
+input {
+    padding: 12px 20px;
+    border-radius: 10px;
+}
+
+select {
+    padding: 12px;
+    border-radius: 4px;
+}
+
+textarea {
+    height: 100px;
+    padding: 12px;
+    resize: none;
+    border-radius: 15px;
+    margin-bottom: 25px;
+}
+
+.btn-next,
+.btn-nextt {
+    background: rgb(248, 181, 56);
+    color: black;
+    font-size: 16px;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transform: scale(1.05);
+    transition: 0.4s ease-in-out;
+}
+
+.btn-next {
+    margin: 0 0 0 310px;
+}
+
+.btn-nextt {
+    margin: 0 10px;
+}
+
+.btn-next:hover,
+.btn-nextt:hover {
+    background: green;
+    color: white;
+    transform: scale(1.1);
+}
+
+.summary-card {
+    background: white;
+    width: 450px;
+    height: fit-content;
+    padding: 30px;
+    border-radius: 20px;
+    border: 1.5px solid green;
+    margin-top: 32px;
+    box-sizing: border-box;
+}
+
+.summary-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 15px;
+    margin-bottom: 15px;
+}
+
+.summary-header h3 {
+    margin: 0;
+    font-size: 17px;
+}
+
+.badge {
+    background: green;
+    color: white;
+    padding: 2px 7px;
+    border-radius: 50%;
+    font-size: 14px;
+}
+
+.product-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.img-box {
+    position: relative;
+}
+
+.img-box img {
+    width: 70px;
+    height: 90px;
+    border-radius: 7px;
+    display: block;
+}
+
+.qty {
+    display: none;
+}
+
+.info {
+    flex: 1;
+}
+
+.info h4 {
+    margin: 0;
+    font-size: 14px;
+}
+
+.info p {
+    margin: 3px 0 0;
+    font-size: 14px;
+    color: rgb(105, 104, 104);
+}
+
+.price {
+    margin-left: auto;
+    font-size: 16px;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+}
+
+.old-price {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin: 3px 0 0;
+    font-size: 14px;
+    color: #64748b;
+    white-space: nowrap;
+}
+
+.old-price-label {
+    text-decoration: none;
+    color: #64748b;
+}
+
+.old-price-value {
+    color: #64748b;
+    text-decoration: line-through;
+    text-decoration-thickness: 1px;
+}
+
+.discount-section {
+    display: flex;
+    gap: 10px;
+    margin: 20px 0;
+    border-top: 1px solid #333;
+    padding-top: 20px;
+}
+
+.btn-apply {
+    background: #f58888;
+    color: black;
+    border: none;
+    padding: 0 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.total-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: black;
+}
+
+.total-row.grand-total {
+    width: 100%;
+    margin-top: 20px;
+    padding-top: 12px;
+    border-top: 1.5px dashed black;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.total-row .total {
+    display: block;
+    width: auto;
+    color: black;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.gold-text {
+    color: rgb(255, 132, 0);
+    font-size: 19px;
+    font-weight: bold;
+}
+
+.free {
+    color: green;
+}
+
+.main-content1 {
+    display: none;
+    background-color: rgb(225, 247, 225);
+    max-width: 1015px;
+    margin: 80px auto;
+    border-radius: 20px;
+    padding: 40px;
+}
+
+.main-content1 .total {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 30px;
+    width: 100%;
+}
+
+.main-content1 .total .ship {
+    width: 450px;
+    flex-shrink: 0;
+}
+
+.main-content1 .total .summary-card {
+    width: 450px;
+    margin-top: 0;
+    flex-shrink: 0;
+}
+
+.option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px;
+    color: black;
+    background-color: white;
+    border: 1.5px solid green;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.4s ease-in-out;
+}
+
+.option:has(input:checked) {
+    border-color: red;
+    background-color: white;
+}
+
+.option input[type="radio"] {
+    appearance: none;
+    width: 22px;
+    height: 22px;
+    min-width: 22px;
+    min-height: 22px;
+    border: 2px solid gray;
+    border-radius: 50%;
+    margin: 0 15px 0 0;
+    padding: 0;
+    position: relative;
+    outline: none;
+    cursor: pointer;
+    flex-shrink: 0;
+    box-sizing: border-box;
+}
+
+.option input:checked {
+    border-color: red;
+}
+
+.option input:checked::after {
+    content: "";
+    width: 10px;
+    height: 10px;
+    background-color: red;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.option-info {
+    flex-grow: 1;
+}
+
+.option-info .name {
+    display: block;
+    font-weight: 600;
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.option-info .time {
+    display: block;
+    font-size: 14px;
+    color: black;
+    font-weight: normal;
+}
+
+.ship-policy {
+    padding: 20px;
+    background-color: white;
+    border: 1.5px solid green;
+    border-radius: 15px;
+    max-width: 450px;
+}
+
+.ship-policy h4 {
+    color: #f63a3a;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.ship-policy p {
+    font-size: 16px;
+    color: black;
+    line-height: 1.5;
+}
+
+.navigation-btn {
+    width: 100%;
+    margin-top: 50px;
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btn-back,
+.btn-backk,
+.btn-backkk {
+    background-color: #f9b0b0;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 20px;
+    color: black;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    font-weight: bold;
+    align-items: center;
+    gap: 8px;
+    transition: 0.4s ease-in-out;
+    transform: scale(1.05);
+}
+
+.btn-back:hover,
+.btn-backk:hover,
+.btn-backkk:hover {
+    background-color: red;
+    color: white;
+    transform: scale(1.1);
+}
+
+.main-content3 {
+    display: none;
+    background-color: rgb(225, 247, 225);
+    max-width: 1000px;
+    margin: 60px auto 0;
+    border-radius: 20px;
+    padding: 25px 30px;
+    box-sizing: border-box;
+}
+
+.main-content3 .tt {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.main-content3 .tt h2 {
+    margin: 0 0 5px;
+    font-size: 30px;
+}
+
+.main-content3 .subtitle {
+    margin: 0 0 20px;
+    font-size: 16px;
+    color: #050505;
+}
+
+.payment-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    width: 100%;
+    margin: 15px 0 20px;
+}
+
+.payment-tabs button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 15px;
+    width: 200px;
+    height: 45px;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 14px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.tab,
+.tabb {
+    background-color: white;
+    color: black;
+    transition: 0.3s ease-in-out;
+}
+
+.tab:hover,
+.tabb:hover,
+.tab.active,
+.tabb.active {
+    background-color: #3469f9;
+    color: white;
+    transform: scale(1.03);
+}
+
+.pttt-cod,
+.pttt {
+    display: none;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 20px;
+    width: 100%;
+    align-items: start;
+    box-sizing: border-box;
+}
+
+.pttt-cod.active,
+.pttt.active {
+    display: grid;
+}
+
+.payment-box,
+.payment-box1 {
+    background: white;
+    border: 1.5px solid green;
+    border-radius: 18px;
+    padding: 20px;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.pttt-cod .payment-box {
+    min-height: 0;
+}
+
+.pttt-cod .payment-box .cod {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 12px;
+    font-size: 15px;
+    border: 1.5px solid green;
+    border-radius: 12px;
+    padding: 10px 12px;
+    box-sizing: border-box;
+}
+
+.pttt .payment-box1 {
+    min-width: 0;
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.pttt .qr-box {
+    max-width: 100%;
+}
+
+.pttt .bank-info {
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
+}
+
+.pttt .bank-info h1 {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+.cod h3 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.cod button {
+    font-size: 14px;
+    font-weight: bold;
+    padding: 6px 10px;
+    background-color: orange;
+    color: black;
+    border: none;
+    border-radius: 6px;
+}
+
+.number {
+    margin: 15px 0;
+    padding-left: 5px;
+    font-size: 15px;
+    line-height: 23px;
+}
+
+.number ul {
+    margin: 0;
+    padding-left: 18px;
+}
+
+.codd p {
+    min-height: 65px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+    box-sizing: border-box;
+    border: 1.5px solid green;
+    border-radius: 12px;
+    padding: 10px 15px;
+    line-height: 20px;
+    margin: 15px 0 0;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.codd span {
+    font-size: 20px;
+    font-weight: bold;
+    color: green;
+}
+
+.cod-warnming {
+    margin-top: 15px;
+    border: 1.5px solid green;
+    border-radius: 12px;
+    padding: 10px 15px;
+    font-size: 15px;
+    line-height: 20px;
+}
+
+.cod-warnming p {
+    margin: 0;
+}
+
+.cod-warnming i {
+    color: rgb(233, 153, 5);
+}
+
+.status {
+    width: fit-content;
+    margin: 0 auto;
+    padding: 7px 12px;
+    background: rgb(248, 220, 190);
+    border-radius: 30px;
+    color: black;
+    font-size: 15px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #00d26a;
+}
+
+.qr-box {
+    width: 170px;
+    height: 170px;
+    margin: 18px auto;
+    padding: 6px;
+    border: 2px solid #2d6cff;
+    border-radius: 14px;
+    box-sizing: border-box;
+}
+
+.qr-box img {
+    width: 100%;
+    height: 100%;
+    border-radius: 9px;
+    background: white;
+    object-fit: cover;
+}
+
+.bank-info {
+    text-align: center;
+}
+
+.bank-info h2 {
+    font-size: 16px;
+    margin: 0 0 7px;
+}
+
+.bank-info h1 {
+    color: #faa228;
+    font-size: 23px;
+    letter-spacing: 1px;
+    margin: 0 0 5px;
+}
+
+.bank-info p {
+    color: #535353;
+    font-size: 13px;
+    margin: 0;
+}
+
+.money-box {
+    margin-top: 15px;
+    background: white;
+    border-radius: 12px;
+    padding: 9px 13px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1.5px solid green;
+    box-sizing: border-box;
+}
+
+.money-box span {
+    color: black;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.money-box strong {
+    color: rgb(9, 141, 9);
+    font-size: 18px;
+}
+
+.pttt-cod .summary-card,
+.pttt .summary-card {
+    margin: 0;
+    width: 100%;
+    padding: 20px;
+    border-radius: 18px;
+    border: 1.5px solid green;
+    box-sizing: border-box;
+}
+
+.payment {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-top: 25px;
+}
+
+.btn-backkk {
+    padding: 9px 18px;
+    border: none;
+    border-radius: 14px;
+    background-color: rgb(241, 196, 196);
+    color: black;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-backkk:hover {
+    background-color: #f01919;
+    color: white;
+}
+
+.done-btn {
+    margin: 0;
+    width: 220px;
+    border: none;
+    padding: 11px;
+    border-radius: 14px;
+    background-color: rgb(31, 31, 255);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+
+.done-btn:hover {
+    background-color: green;
+    color: white;
+    transform: scale(1.03);
+}
+
+.address-input-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.address-input-row input {
+    flex: 1;
+}
+
+.change-address-btn {
+    padding: 12px 16px;
+    border: 1.5px solid #b08d57;
+    background: white;
+    color: #cb7e0a;
+    font-weight: 600;
+    border-radius: 10px;
+    cursor: pointer;
+    white-space: nowrap;
+    transform: scale(1.02);
+    transition: 0.4s ease-in-out;
+}
+
+.change-address-btn:hover {
+    background: #f8b045;
+    color: black;
+    transform: scale(1.05);
+}
+
+
+#savedAddressesCheckout {
+    display: none;
+    margin-top: 10px;
+}
+
+.checkout-address-item {
+    border: 1px solid #ddd;
+    padding: 12px;
+    margin-bottom: 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    background: #fff;
+}
+
+.checkout-address-item:hover {
+    border: 1.33px solid #b55f03;
+}
+
+.checkout-address-item p {
+    margin: 4px 0;
+}
+
+.checkout-address-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 8px;
+}
+
+.checkout-address-name i {
+    margin-left: 0;
+} 
+
+.checkout-address-name {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0;
+
+}
+
+.default-address {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 10px;
+    border-radius: 20px;
+    background: #fcdbdb;
+    color: red;
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.default-address i {
+    font-size: 12px;
+}
+
+.checkout-address-item p {
+    margin: 7px 0;
+}
+
+
+.checkout-address-item p i {
+    color: green;
+    margin-left: 15px;
+}
+.voucher-card-checkout {
+    width: 100%;
+    height: 400px;
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    margin-top: 20px;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.voucher-section-checkout {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+.voucher-section-checkout h3 {
+    margin: 0 0 18px;
+    text-align: center;
+    font-size: 22px;
+    font-weight: 700;
+    color: #199c05;
+}
+
+#voucherListCheckout {
+    width: 100%;
+    height: calc(100% - 42px);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 8px;
+    box-sizing: border-box;
+}
+
+#voucherListCheckout::-webkit-scrollbar {
+    width: 7px;
+}
+
+#voucherListCheckout::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+#voucherListCheckout::-webkit-scrollbar-thumb {
+    background: #cfcfcf;
+    border-radius: 10px;
+}
+
+#voucherListCheckout::-webkit-scrollbar-thumb:hover {
+    background: #aaa;
+}
+
+.voucher-item-checkout {
+    width: 100%;
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 15px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    flex-shrink: 0;
+    box-sizing: border-box;
+    transition: all 0.2s ease;
+}
+
+.voucher-item-checkout:hover {
+    border-color: #2563eb;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+}
+
+.voucher-item-checkout div {
+    flex: 1;
+    min-width: 0;
+}
+
+.voucher-item-checkout strong {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #2563eb;
+    letter-spacing: 0.3px;
+}
+
+.voucher-item-checkout p {
+    margin: 3px 0;
+    font-size: 13px;
+    line-height: 1.4;
+    font-weight: bold;
+    color: black;
+}
+
+.voucher-item-checkout p:first-of-type {
+    color: #f01645;
+    font-weight: 600;
+}
+
+.voucher-item-checkout .date {
+    color: #666;
+    font-weight: normal;
+}
+
+.select-voucher-checkout {
+    flex-shrink: 0;
+    margin-left: 12px;
+    padding: 8px 15px;
+    border: 1px solid #2563eb;
+    border-radius: 6px;
+    background: #fff;
+    color: #2563eb;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.select-voucher-checkout:hover {
+    background: #2563eb;
+    color: #fff;
+}
+
+.select-voucher-checkout:active {
+    transform: scale(0.97);
+}
+
+.select-voucher-checkout.selected {
+    background: #2563eb;
+    color: #fff;
+}
+
+#voucherListCheckout p {
+    width: 100%;
+    margin: 0;
+    padding: 15px;
+    text-align: center;
+    border: 1px dashed #ddd;
+    border-radius: 8px;
+    color: #777;
+    font-size: 14px;
+    flex-shrink: 0;
+    box-sizing: border-box;
+}
+
+/* =========================================================
+   RESPONSIVE - CANH THANG HANG, GIU KICH THUOC INPUT
+   ========================================================= */
+
+/* ===================== DESKTOP ===================== */
+@media (min-width: 1200px) {
+
+    .checkout-form,
+    .checkout-right {
+        width: 450px;
+    }
+
+    .checkout-form input,
+    .checkout-form select,
+    .checkout-form textarea {
+        width: 100%;
+    }
+
+    .row {
+        display: flex;
+        gap: 20px;
+    }
+
+    .row .group {
+        width: calc(50% - 10px);
+        flex: none;
+    }
+
+    .tong {
+        align-items: flex-start;
+    }
+
+    .summary-card {
+        width: 450px;
+    }
+}
+
+
+/* ===================== LAPTOP 992 - 1199 ===================== */
+@media (min-width: 992px) and (max-width: 1199px) {
+
+    .checkout {
+        width: calc(100% - 40px);
+        max-width: 1000px;
+        margin-top: 130px;
+    }
+
+    .main-content {
+        width: 100%;
+        max-width: 1100px;
+        padding: 35px 35px;
+    }
+
+    .tong {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 25px;
+        width: 100%;
+        align-items: start;
+    }
+
+    .checkout-form,
+    .checkout-right {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .checkout-form input,
+    .checkout-form select,
+    .checkout-form textarea {
+        width: 100%;
+    }
+
+    .row {
+        display: flex;
+        gap: 20px;
+        width: 100%;
+    }
+
+    .row .group {
+        width: calc(50% - 10px);
+        flex: none;
+        min-width: 0;
+    }
+
+    .summary-card,
+    .checkout-right .summary-card,
+    .checkout-right .voucher-card-checkout {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .btn-next {
+        margin-left: auto;
+        display: block;
+    }
+
+    .main-content1 {
+        width: calc(100% - 40px);
+        max-width: 1015px;
+        padding: 35px;
+    }
+
+    .main-content1 .total {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 25px;
+    }
+
+    .main-content1 .total .ship,
+    .main-content1 .total .summary-card {
+        width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+    }
+
+    .ship-policy {
+        max-width: none;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .main-content3 {
+        width: calc(100% - 40px);
+        max-width: 1000px;
+    }
+
+    .pttt-cod,
+    .pttt {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 20px;
+    }
+
+    .pttt-cod .summary-card,
+    .pttt .summary-card {
+        width: 100%;
+    }
+}
+
+
+/* ===================== TABLET 768 - 991 ===================== */
+@media (min-width: 768px) and (max-width: 991px) {
+
+    .checkout {
+        width: calc(100% - 30px);
+        max-width: none;
+        margin-top: 120px;
+    }
+
+    .steps {
+        width: 100%;
+        gap: 12px;
+        margin-bottom: 35px;
+    }
+
+    .step {
+        font-size: 16px;
+        gap: 6px;
+        white-space: nowrap;
+    }
+
+    .circle1,
+    .circle2,
+    .circlee {
+        width: 36px;
+        height: 36px;
+        flex-shrink: 0;
+    }
+
+    .line {
+        flex: 1;
+    }
+
+    .main-content {
+        width: 100%;
+        padding: 30px;
+        margin: 50px auto;
+    }
+
+    .tong {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        width: 100%;
+    }
+
+    .checkout-form,
+    .checkout-right {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .checkout-form input,
+    .checkout-form select,
+    .checkout-form textarea {
+        width: 100%;
+    }
+
+    .row {
+        display: flex;
+        gap: 20px;
+        width: 100%;
+    }
+
+    .row .group {
+        width: calc(50% - 10px);
+        flex: none;
+        min-width: 0;
+    }
+
+    .summary-card,
+    .checkout-right .summary-card,
+    .checkout-right .voucher-card-checkout {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .btn-next {
+        display: block;
+        margin-left: auto;
+    }
+
+    .main-content1 {
+        width: calc(100% - 30px);
+        padding: 30px;
+        margin: 50px auto;
+    }
+
+    .main-content1 .total {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        width: 100%;
+    }
+
+    .main-content1 .total .ship,
+    .main-content1 .total .summary-card {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .ship-policy {
+        width: 100%;
+        max-width: none;
+        box-sizing: border-box;
+    }
+
+    .main-content3 {
+        width: calc(100% - 30px);
+        padding: 25px;
+    }
+
+    .pttt-cod,
+    .pttt {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .pttt-cod .summary-card,
+    .pttt .summary-card {
+        width: 100%;
+    }
+
+    .payment {
+        gap: 20px;
+    }
+}
+
+
+/* ===================== DIEN THOAI LON 576 - 767 ===================== */
+@media (min-width: 576px) and (max-width: 767px) {
+
+    .checkout {
+        width: calc(100% - 20px);
+        max-width: none;
+        margin-top: 110px;
+    }
+
+    .steps {
+        width: 100%;
+        gap: 8px;
+        margin-bottom: 30px;
+    }
+
+    .step {
+        font-size: 13px;
+        gap: 5px;
+        white-space: nowrap;
+    }
+
+    .circle1,
+    .circle2,
+    .circlee {
+        width: 32px;
+        height: 32px;
+        font-size: 14px;
+        flex-shrink: 0;
+    }
+
+    .circle1.active,
+    .circle2.active,
+    .circlee.active {
+        font-size: 16px;
+    }
+
+    .line {
+        flex: 1;
+        min-width: 15px;
+    }
+
+    .main-content,
+    .main-content1,
+    .main-content3 {
+        width: calc(100% - 20px);
+        padding: 25px 20px;
+        margin: 35px auto;
+        border-radius: 15px;
+    }
+
+    .tong,
+    .main-content1 .total {
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+        width: 100%;
+    }
+
+    .checkout-form,
+    .checkout-right,
+    .main-content1 .total .ship,
+    .main-content1 .total .summary-card {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .tt h2,
+    .main-content3 .tt h2 {
+        font-size: 25px;
+    }
+
+    .tt .subtitle,
+    .tt .subtitlee,
+    .main-content3 .subtitle {
+        font-size: 14px;
+    }
+
+    .row {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        width: 100%;
+    }
+
+    .row .group {
+        width: 100%;
+        flex: none;
+        margin-bottom: 18px;
+    }
+
+    .checkout-form input,
+    .checkout-form select,
+    .checkout-form textarea {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .address-input-row {
+        width: 100%;
+    }
+
+    .address-input-row input {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .summary-card,
+    .checkout-right .summary-card,
+    .checkout-right .voucher-card-checkout {
+        width: 100%;
+        padding: 22px;
+        box-sizing: border-box;
+    }
+
+    .btn-next {
+        width: 100%;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    .navigation-btn {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .btn-back,
+    .btn-backk,
+    .btn-backkk {
+        width: 100%;
+        justify-content: center;
+        box-sizing: border-box;
+    }
+
+    .payment-tabs {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
+    .payment-tabs button {
+        width: 100%;
+        margin-bottom: 0;
+    }
+
+    .pttt-cod,
+    .pttt {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 20px;
+        width: 100%;
+    }
+
+    .payment {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .payment * {
+        width: 100%;
+    }
+
+    .done-btn {
+        width: 100%;
+    }
+
+    .voucher-item-checkout {
+        min-width: 0;
+    }
+
+    .voucher-item-checkout strong,
+    .voucher-item-checkout p {
+        overflow-wrap: anywhere;
+    }
+}
+
+
+/* ===================== DIEN THOAI 400 - 575 ===================== */
+@media (min-width: 400px) and (max-width: 575px) {
+
+    .checkout {
+        width: calc(100% - 16px);
+        margin-top: 130px;
+    }
+
+    .steps {
+        width: 100%;
+        gap: 5px;
+        margin-bottom: 25px;
+    }
+
+    .step {
+        font-size: 11px;
+        gap: 4px;
+        white-space: nowrap;
+    }
+
+    .circle1,
+    .circle2,
+    .circlee {
+        width: 29px;
+        height: 29px;
+        font-size: 13px;
+        flex-shrink: 0;
+    }
+
+    .circle1.active,
+    .circle2.active,
+    .circlee.active {
+        font-size: 14px;
+    }
+
+    .line {
+        flex: 1;
+        min-width: 8px;
+    }
+
+    .main-content,
+    .main-content1,
+    .main-content3 {
+        width: calc(100% - 16px);
+        padding: 22px 15px;
+        margin: 30px auto;
+        border-radius: 14px;
+    }
+
+    .tong,
+    .main-content1 .total {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        width: 100%;
+    }
+
+    .checkout-form,
+    .checkout-right,
+    .main-content1 .total .ship,
+    .main-content1 .total .summary-card {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .tt h2,
+    .main-content3 .tt h2 {
+        font-size: 22px;
+    }
+
+    .tt .subtitle,
+    .tt .subtitlee,
+    .main-content3 .subtitle {
+        font-size: 13px;
+    }
+
+    .row {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        width: 100%;
+    }
+
+    .row .group {
+        width: 100%;
+        flex: none;
+        margin-bottom: 17px;
+    }
+
+    label {
+        font-size: 14px;
+        margin-bottom: 9px;
+    }
+
+    .checkout-form input,
+    .checkout-form select,
+    .checkout-form textarea {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    input {
+        padding: 11px 14px;
+    }
+
+    select {
+        padding: 11px;
+    }
+
+    textarea {
+        height: 90px;
+    }
+
+    .address-input-row {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    .address-input-row input {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .change-address-btn {
+        margin-left: 130px;
+        width: 100px;
+        box-sizing: border-box;
+        height: 35px;
+        line-height: 10px;
+    }
+
+    .summary-card,
+    .checkout-right .summary-card,
+    .checkout-right .voucher-card-checkout {
+        width: 100%;
+        padding: 18px;
+        box-sizing: border-box;
+    }
+
+    .img-box img {
+        width: 60px;
+        height: 78px;
+    }
+
+    .info h4 {
+        font-size: 13px;
+    }
+
+    .info p,
+    .price {
+        font-size: 13px;
+    }
+
+    .btn-next {
+        font-size: 14px;
+        width: 130px;
+        margin-left: 100px;
+        box-sizing: border-box;
+    }
+
+    .btn-nextt {
+        font-size: 14px;
+        width: 130px;
+    }
+
+    .navigation-btn {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .btn-back,
+    .btn-backk {
+        width: 130px;
+        font-size: 14px;
+        justify-content: center;
+        box-sizing: border-box;
+    }
+
+    .payment .btn-backkk {
+        width: 120px;
+        justify-content: center;
+        box-sizing: border-box;
+        font-size: 14px;
+        padding: 10px 15px;
+        white-space: nowrap;
+    }
+
+    .payment-tabs {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .payment-tabs button {
+        width: 100%;
+        margin-bottom: 0;
+    }
+
+    .pttt-cod,
+    .pttt {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 18px;
+        width: 100%;
+    }
+
+    .payment {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .payment * {
+        width: 100%;
+    }
+
+    .done-btn {
+        width: 160px;
+    }
+
+    .option {
+        padding: 14px;
+        gap: 10px;
+    }
+
+    .option-info .name {
+        font-size: 15px;
+    }
+
+    .option-info .time {
+        font-size: 12px;
+    }
+
+    .ship-policy {
+        width: 100%;
+        max-width: none;
+        box-sizing: border-box;
+        padding: 15px;
+    }
+
+    .ship-policy h4 {
+        font-size: 16px;
+    }
+
+    .ship-policy p {
+        font-size: 14px;
+    }
+
+    .voucher-item-checkout {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .voucher-item-checkout div {
+        min-width: 0;
+        width: 100%;
+    }
+
+    .select-voucher-checkout {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .payment-box {
+        padding: 15px;
+    }
+
+    .qr-box {
+        width: 155px;
+        height: 155px;
+    }
+
+    .bank-info h1 {
+        font-size: 20px;
+        overflow-wrap: anywhere;
+    }
+
+    .money-box {
+        gap: 8px;
+    }
+}
+
+
+/* ===================== DIEN THOAI 375px ===================== */
+@media (min-width: 361px) and (max-width: 399px) {
+
+    .checkout {
+        width: calc(100% - 16px);
+        margin-top: 120px;
+    }
+
+    .steps {
+        width: 100%;
+        gap: 4px;
+        margin-bottom: 22px;
+    }
+
+    .step {
+        font-size: 10px;
+        gap: 4px;
+        white-space: nowrap;
+    }
+
+    .circle1,
+    .circle2,
+    .circlee {
+        width: 28px;
+        height: 28px;
+        font-size: 12px;
+        flex-shrink: 0;
+    }
+
+    .circle1.active,
+    .circle2.active,
+    .circlee.active {
+        font-size: 14px;
+    }
+
+    .line {
+        flex: 1;
+        min-width: 6px;
+    }
+
+    .main-content,
+    .main-content1,
+    .main-content3 {
+        width: calc(100% - 16px);
+        padding: 20px 15px;
+        margin: 28px auto;
+        border-radius: 13px;
+    }
+
+    .tong,
+    .main-content1 .total {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        width: 100%;
+    }
+
+    .checkout-form,
+    .checkout-right,
+    .main-content1 .total .ship,
+    .main-content1 .total .summary-card {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .tt h2,
+    .main-content3 .tt h2 {
+        font-size: 21px;
+    }
+
+    .tt .subtitle,
+    .tt .subtitlee,
+    .main-content3 .subtitle {
+        font-size: 12px;
+    }
+
+    .row {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        width: 100%;
+    }
+
+    .row .group {
+        width: 100%;
+        flex: none;
+        margin-bottom: 16px;
+    }
+
+    label {
+        font-size: 13px;
+        margin-bottom: 8px;
+    }
+
+    .checkout-form input,
+    .checkout-form select,
+    .checkout-form textarea {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    input {
+        padding: 10px 12px;
+    }
+
+    select {
+        padding: 10px;
+    }
+
+    textarea {
+        height: 85px;
+    }
+
+    .address-input-row {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+        width: 100%;
+    }
+
+    .address-input-row input {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .change-address-btn {
+        width: 120px;
+        height: 36px;
+        margin: 0 auto;
+        padding: 8px 10px;
+        box-sizing: border-box;
+        text-align: center;
+        line-height: normal;
+    }
+
+    .summary-card,
+    .checkout-right .summary-card,
+    .checkout-right .voucher-card-checkout {
+        width: 100%;
+        padding: 15px;
+        box-sizing: border-box;
+    }
+
+    .summary-header h3 {
+        font-size: 15px;
+    }
+
+    .product-item {
+        gap: 8px;
+    }
+
+    .img-box img {
+        width: 55px;
+        height: 70px;
+    }
+
+    .info h4 {
+        font-size: 12px;
+    }
+
+    .info p,
+    .price {
+        font-size: 12px;
+    }
+
+    .btn-next {
+        display: block;
+        width: 130px;
+        font-size: 14px;
+        margin: 0 auto;
+        box-sizing: border-box;
+    }
+
+    .btn-nextt {
+        font-size: 14px;
+        width: 130px;
+    }
+
+    .navigation-btn {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .btn-back,
+    .btn-backk {
+        width: 130px;
+        font-size: 14px;
+        justify-content: center;
+        box-sizing: border-box;
+    }
+
+    .payment .btn-backkk {
+        width: 120px;
+        justify-content: center;
+        box-sizing: border-box;
+        font-size: 14px;
+        padding: 10px 15px;
+        white-space: nowrap;
+    }
+
+    .payment-tabs {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .payment-tabs button {
+        width: 100%;
+        margin-bottom: 0;
+    }
+
+    .pttt-cod,
+    .pttt {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .payment {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .payment * {
+        width: 100%;
+    }
+
+    .done-btn {
+        width: 160px;
+    }
+
+    .option {
+        padding: 12px;
+        gap: 8px;
+        align-items: flex-start;
+    }
+
+    .option-info .name {
+        font-size: 14px;
+    }
+
+    .option-info .time {
+        font-size: 11px;
+    }
+
+    .ship-policy {
+        width: 100%;
+        max-width: none;
+        padding: 13px;
+        box-sizing: border-box;
+    }
+
+    .ship-policy h4 {
+        font-size: 15px;
+    }
+
+    .ship-policy p {
+        font-size: 13px;
+    }
+
+    .voucher-item-checkout {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
+
+    .voucher-item-checkout div {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .select-voucher-checkout {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .payment-box {
+        padding: 12px;
+    }
+
+    .pttt-cod .payment-box .cod {
+        align-items: flex-start;
+    }
+
+    .cod h3 {
+        font-size: 16px;
+    }
+
+    .number {
+        font-size: 13px;
+    }
+
+    .codd p,
+    .cod-warnming {
+        font-size: 13px;
+        padding: 9px 10px;
+    }
+
+    .qr-box {
+        width: 135px;
+        height: 135px;
+    }
+
+    .bank-info h2 {
+        font-size: 14px;
+    }
+
+    .bank-info h1 {
+        font-size: 18px;
+        overflow-wrap: anywhere;
+    }
+
+    .bank-info p {
+        font-size: 12px;
+    }
+
+    .money-box {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 5px;
+    }
+
+    .gold-text {
+        font-size: 17px;
+    }
+}
+
+
+/* ===================== DIEN THOAI 320px ===================== */
+@media (max-width: 360px) {
+
+    .checkout {
+        width: calc(100% - 10px);
+        margin-top: 120px;
+    }
+
+    .steps {
+        width: 100%;
+        gap: 2px;
+        margin-bottom: 20px;
+    }
+
+    .step {
+        font-size: 8px;
+        gap: 2px;
+        white-space: nowrap;
+    }
+
+    .circle1,
+    .circle2,
+    .circlee {
+        width: 25px;
+        height: 25px;
+        font-size: 11px;
+        flex-shrink: 0;
+    }
+
+    .circle1.active,
+    .circle2.active,
+    .circlee.active {
+        font-size: 12px;
+    }
+
+    .line {
+        flex: 1;
+        min-width: 4px;
+    }
+
+    .main-content,
+    .main-content1,
+    .main-content3 {
+        width: calc(100% - 10px);
+        padding: 17px 10px;
+        margin: 23px auto;
+        border-radius: 11px;
+    }
+
+    .tong,
+    .main-content1 .total {
+        display: flex;
+        flex-direction: column;
+        gap: 17px;
+        width: 100%;
+    }
+
+    .checkout-form,
+    .checkout-right,
+    .main-content1 .total .ship,
+    .main-content1 .total .summary-card {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .tt h2,
+    .main-content3 .tt h2 {
+        font-size: 19px;
+    }
+
+    .tt .subtitle,
+    .tt .subtitlee,
+    .main-content3 .subtitle {
+        font-size: 11px;
+    }
+
+    .row {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        width: 100%;
+    }
+
+    .row .group {
+        width: 100%;
+        flex: none;
+        margin-bottom: 14px;
+    }
+
+    label {
+        font-size: 12px;
+        margin-bottom: 7px;
+    }
+
+    .checkout-form input,
+    .checkout-form select,
+    .checkout-form textarea {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    input {
+        padding: 9px 10px;
+    }
+
+    select {
+        padding: 9px;
+    }
+
+    textarea {
+        height: 80px;
+    }
+
+    .address-input-row {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 7px;
+        width: 100%;
+    }
+
+    .address-input-row input {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .change-address-btn {
+        width: 115px;
+        height: 34px;
+        margin: 0 auto;
+        padding: 7px 8px;
+        box-sizing: border-box;
+        text-align: center;
+        line-height: normal;
+        font-size: 12px;
+    }
+
+    .summary-card,
+    .checkout-right .summary-card,
+    .checkout-right .voucher-card-checkout {
+        width: 100%;
+        padding: 14px;
+        box-sizing: border-box;
+    }
+
+    .summary-header h3 {
+        font-size: 14px;
+    }
+
+    .product-item {
+        gap: 7px;
+    }
+
+    .img-box img {
+        width: 52px;
+        height: 67px;
+    }
+
+    .info {
+        min-width: 0;
+    }
+
+    .info h4 {
+        font-size: 11px;
+    }
+
+    .info p,
+    .price {
+        font-size: 11px;
+    }
+
+    .btn-next {
+        display: block;
+        width: 130px;
+        margin: 0 auto;
+        box-sizing: border-box;
+        font-size: 14px;
+        padding: 10px 15px;
+    }
+
+    .btn-nextt {
+        font-size: 14px;
+        width: 130px;
+    }
+
+    .navigation-btn {
+        flex-direction: column;
+        gap: 9px;
+    }
+
+    .btn-back,
+    .btn-backk {
+        width: 130px;
+        justify-content: center;
+        box-sizing: border-box;
+        font-size: 14px;
+        padding: 10px 15px;
+    }
+
+    .payment .btn-backkk {
+        width: 120px;
+        justify-content: center;
+        box-sizing: border-box;
+        font-size: 14px;
+        padding: 10px 15px;
+        white-space: nowrap;
+    }
+
+    .payment-tabs {
+        display: flex;
+        flex-direction: column;
+        gap: 7px;
+    }
+
+    .payment-tabs button {
+        width: 100%;
+        margin-bottom: 0;
+        font-size: 13px;
+    }
+
+    .pttt-cod,
+    .pttt {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 14px;
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .payment {
+        flex-direction: column;
+        gap: 9px;
+    }
+
+    .payment * {
+        width: 100%;
+    }
+
+    .done-btn {
+        width: 150px;
+        font-size: 14px;
+    }
+
+    .option {
+        padding: 11px;
+        gap: 7px;
+        align-items: flex-start;
+    }
+
+    .option-info {
+        min-width: 0;
+    }
+
+    .option-info .name {
+        font-size: 13px;
+    }
+
+    .option-info .time {
+        font-size: 10px;
+    }
+
+    .ship-policy {
+        width: 100%;
+        max-width: none;
+        padding: 12px;
+        box-sizing: border-box;
+    }
+
+    .ship-policy h4 {
+        font-size: 14px;
+    }
+
+    .ship-policy p {
+        font-size: 12px;
+    }
+
+    .voucher-item-checkout {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 7px;
+    }
+
+    .voucher-item-checkout div {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .select-voucher-checkout {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .payment-box {
+        padding: 11px;
+    }
+
+    .pttt-cod .payment-box .cod {
+        align-items: flex-start;
+    }
+
+    .cod h3 {
+        font-size: 15px;
+    }
+
+    .number {
+        font-size: 12px;
+    }
+
+    .codd p,
+    .cod-warnming {
+        font-size: 12px;
+        padding: 8px 9px;
+    }
+
+    .qr-box {
+        width: 125px;
+        height: 125px;
+    }
+
+    .bank-info h2 {
+        font-size: 13px;
+    }
+
+    .bank-info h1 {
+        font-size: 16px;
+        overflow-wrap: anywhere;
+        word-break: break-word;
+    }
+
+    .bank-info p {
+        font-size: 11px;
+    }
+
+    .money-box {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 4px;
+    }
+
+    .gold-text {
+        font-size: 16px;
+    }
+}

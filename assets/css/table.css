@@ -1,0 +1,451 @@
+.table-container {
+    background-color: white;
+    border-radius: 15px;
+    width: 100%;
+    overflow-x: auto;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+table {
+    border-collapse: collapse;
+    table-layout: fixed;
+    text-align: center;
+}
+
+table th {
+    background-color: #2563eb;
+    color: white;
+    padding: 12px 8px;
+    font-size: 17px;
+    font-weight: 500;
+    text-align: center;
+}
+
+table td {
+    padding: 10px 8px;
+    height: 55px;
+    font-size: 16px;
+    border-bottom: 1px solid #edf2f7;
+    text-align: center;
+    vertical-align: middle;
+    white-space: normal;
+    overflow-wrap: break-word;
+}
+
+table td:last-child {
+    white-space: nowrap;
+}
+
+.delete-btn,
+.see-btn {
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition: opacity 0.2s;
+}
+
+.delete-btn {
+    background-color: #ef4444;
+}
+
+.see-btn {
+    background-color: green;
+}
+
+.delete-btn:hover,
+.see-btn:hover {
+    opacity: 0.9;
+}
+
+.email-cell {
+    color: #2563eb;
+    text-decoration: none;
+    white-space: normal;
+    overflow-wrap: break-word;
+    text-align: left;
+}
+
+.read-btn {
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-weight: bold;
+    width: 70px;
+    text-align: center;
+}
+
+.read-btn.unread {
+    background-color: #ef4444;
+}
+
+.read-btn.read {
+    background-color: green;
+}
+
+table .delete-btn,
+table .see-btn,
+table .edit-btn,
+table .reply-btn,
+table .reply {
+    margin: 2px;
+}
+
+/* ========================================
+   RESPONSIVE TABLE - 320PX
+======================================== */
+@media screen and (max-width: 320px) {
+
+    .table-container {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: auto;
+        overflow-y: auto;
+        border-radius: 8px;
+        -webkit-overflow-scrolling: touch;
+        box-sizing: border-box;
+    }
+
+    .table-container table {
+        width: 700px;
+        min-width: 700px;
+        table-layout: fixed;
+    }
+
+    .table-container table th {
+        font-size: 9px;
+        padding: 5px 2px;
+        line-height: 1.2;
+        overflow-wrap: break-word;
+    }
+
+    .table-container table td {
+        padding: 6px 4px;
+        height: 42px;
+        font-size: 11px;
+    }
+
+    .delete-btn,
+    .see-btn {
+        padding: 5px 7px;
+        font-size: 10px;
+        gap: 3px;
+    }
+
+    .read-btn {
+        width: 55px;
+        padding: 5px 4px;
+        font-size: 10px;
+    }
+
+    .table-container table .delete-btn,
+    .table-container table .see-btn,
+    .table-container table .edit-btn,
+    .table-container table .reply-btn,
+    .table-container table .reply {
+        margin: 1px;
+    }
+}
+
+
+/* ========================================
+   RESPONSIVE TABLE - 375PX
+======================================== */
+@media screen and (min-width: 321px) and (max-width: 375px) {
+
+    .table-container {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: auto;
+        overflow-y: auto;
+        border-radius: 9px;
+        -webkit-overflow-scrolling: touch;
+        box-sizing: border-box;
+    }
+
+    .table-container table {
+        width: 750px;
+        min-width: 750px;
+        table-layout: fixed;
+    }
+
+    .table-container table th {
+        font-size: 10px;
+        padding: 6px 3px;
+        line-height: 1.2;
+        overflow-wrap: break-word;
+    }
+
+    .table-container table td {
+        padding: 7px 5px;
+        height: 45px;
+        font-size: 12px;
+    }
+
+    .delete-btn,
+    .see-btn {
+        padding: 6px 8px;
+        font-size: 11px;
+        gap: 4px;
+    }
+
+    .read-btn {
+        width: 60px;
+        padding: 6px 5px;
+        font-size: 11px;
+    }
+
+    .table-container table .delete-btn,
+    .table-container table .see-btn,
+    .table-container table .edit-btn,
+    .table-container table .reply-btn,
+    .table-container table .reply {
+        margin: 1px;
+    }
+}
+
+
+/* ========================================
+   RESPONSIVE TABLE - 425PX
+======================================== */
+@media screen and (min-width: 376px) and (max-width: 425px) {
+
+    .table-container {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: auto;
+        overflow-y: auto;
+        border-radius: 10px;
+        -webkit-overflow-scrolling: touch;
+        box-sizing: border-box;
+    }
+
+    .table-container table {
+        width: 800px;
+        min-width: 800px;
+        table-layout: fixed;
+    }
+
+    .table-container table th {
+        font-size: 11px;
+        padding: 7px 4px;
+        line-height: 1.2;
+        overflow-wrap: break-word;
+    }
+
+    .table-container table td {
+        padding: 8px 6px;
+        height: 48px;
+        font-size: 13px;
+    }
+
+    .delete-btn,
+    .see-btn {
+        padding: 6px 9px;
+        font-size: 12px;
+        gap: 4px;
+    }
+
+    .read-btn {
+        width: 65px;
+        padding: 6px;
+        font-size: 12px;
+    }
+
+    .table-container table .delete-btn,
+    .table-container table .see-btn,
+    .table-container table .edit-btn,
+    .table-container table .reply-btn,
+    .table-container table .reply {
+        margin: 2px;
+    }
+}
+
+
+/* ========================================
+   RESPONSIVE TABLE - TABLET 768PX
+======================================== */
+@media screen and (min-width: 426px) and (max-width: 768px) {
+
+    .table-container {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: auto;
+        overflow-y: auto;
+        border-radius: 12px;
+        -webkit-overflow-scrolling: touch;
+        box-sizing: border-box;
+    }
+
+    .table-container table {
+        width: 850px;
+        min-width: 850px;
+        table-layout: fixed;
+    }
+
+    .table-container table th {
+        font-size: 12px;
+        padding: 8px 5px;
+        line-height: 1.3;
+        overflow-wrap: break-word;
+    }
+
+    .table-container table td {
+        padding: 9px 7px;
+        height: 50px;
+        font-size: 14px;
+    }
+
+    .delete-btn,
+    .see-btn {
+        padding: 7px 11px;
+        font-size: 12px;
+    }
+
+    .read-btn {
+        width: 65px;
+        padding: 7px;
+        font-size: 12px;
+    }
+}
+
+
+/* ========================================
+   RESPONSIVE TABLE - LAPTOP 992PX
+======================================== */
+@media screen and (min-width: 769px) and (max-width: 992px) {
+
+    .table-container {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: auto;
+        box-sizing: border-box;
+    }
+
+    .table-container table {
+        width: 100%;
+        min-width: 850px;
+        table-layout: fixed;
+    }
+
+    .table-container table th {
+        font-size: 13px;
+        padding: 9px 6px;
+        line-height: 1.3;
+        overflow-wrap: break-word;
+    }
+
+    .table-container table td {
+        padding: 9px 7px;
+        height: 52px;
+        font-size: 14px;
+    }
+
+    .delete-btn,
+    .see-btn {
+        padding: 7px 11px;
+        font-size: 12px;
+    }
+
+    .read-btn {
+        width: 65px;
+        padding: 7px;
+        font-size: 12px;
+    }
+}
+
+
+/* ========================================
+   RESPONSIVE TABLE - LAPTOP 1200PX
+======================================== */
+@media screen and (min-width: 993px) and (max-width: 1200px) {
+
+    .table-container {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: auto;
+        box-sizing: border-box;
+    }
+
+    .table-container table {
+        width: 100%;
+        min-width: 900px;
+        table-layout: fixed;
+    }
+
+    .table-container table th {
+        font-size: 14px;
+        padding: 10px 7px;
+        line-height: 1.3;
+        overflow-wrap: break-word;
+    }
+
+    .table-container table td {
+        padding: 10px 8px;
+        height: 53px;
+        font-size: 15px;
+    }
+
+    .delete-btn,
+    .see-btn {
+        padding: 7px 13px;
+        font-size: 13px;
+    }
+
+    .read-btn {
+        width: 68px;
+        padding: 8px;
+        font-size: 13px;
+    }
+}
+
+
+/* ========================================
+   RESPONSIVE TABLE - TRÊN 1200PX
+======================================== */
+@media screen and (min-width: 1201px) {
+
+    .table-container {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: auto;
+        box-sizing: border-box;
+    }
+
+    .table-container table {
+        width: 100%;
+        min-width: 900px;
+        table-layout: fixed;
+    }
+
+    .table-container table th {
+        font-size: 16px;
+        padding: 12px 8px;
+        line-height: 1.4;
+        overflow-wrap: break-word;
+    }
+
+    .table-container table td {
+        padding: 10px 8px;
+        height: 55px;
+        font-size: 16px;
+    }
+
+    .delete-btn,
+    .see-btn {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+
+    .read-btn {
+        width: 70px;
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+}

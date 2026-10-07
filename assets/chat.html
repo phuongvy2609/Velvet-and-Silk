@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHAT - Velvet & Silk</title>
+    <link rel="stylesheet" href="/css/chat.css">
+    <link rel="stylesheet" href="css/notice.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <div id="header"></div>
+
+    <div class="chat-box">
+
+        <div class="chat-header">
+
+            <button
+                type="button"
+                class="back-chat"
+                id="backChat"
+                title="Quay lại"
+                aria-label="Quay lại">
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+            </button>
+
+            <div class="shop-info">
+
+                <div class="shop-avatar">
+                    VS
+                </div>
+
+                <div class="shop-name">
+
+                    <h3>
+                        Velvet & Silk
+                    </h3>
+
+                    <span>
+                        <i class="fa-solid fa-circle"></i>
+                        Đang hoạt động
+                    </span>
+                </div>
+            </div>
+
+            <div class="header-space"></div>
+        </div>
+
+        <div
+            class="chat-content"
+            id="chatContent">
+
+            <div class="message-row shop-message">
+
+                <div class="message-avatar">
+                    VS
+                </div>
+
+                <div class="message-content">
+
+                    <div class="chat-message">
+                        Xin chào! Velvet & Silk có thể
+                        hỗ trợ gì cho bạn?
+                    </div>
+
+                    <div class="message-time">
+                        <span class="date">
+                            07/09/2026
+                        </span>
+
+                        <span class="time">
+                            20:00
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chat-bottom">
+            <div class="emoji-box" id="emojiBox">
+                <emoji-picker></emoji-picker>
+            </div>
+
+            <div class="chat-tools">
+
+                <button
+                    type="button"
+                    id="emojiButton"
+                    title="Biểu tượng cảm xúc"
+                    aria-label="Biểu tượng cảm xúc">
+                    <i class="fa-regular fa-face-smile"></i>
+                </button>
+
+                <button
+                    type="button"
+                    id="imageButton"
+                    title="Gửi ảnh"
+                    aria-label="Gửi ảnh">
+                    <i class="fa-regular fa-image"></i>
+                </button>
+
+                <input
+                    type="file"
+                    id="imageInput"
+                    accept="image/*"
+                    hidden>
+
+                <button
+                    type="button"
+                    id="fileButton"
+                    title="Gửi tệp"
+                    aria-label="Gửi tệp">
+                    <i class="fa-solid fa-paperclip"></i>
+                </button>
+
+                <input
+                    type="file"
+                    id="fileInput"
+                    hidden>
+            </div>
+
+            <div class="chat-input">
+
+                <input
+                    type="text"
+                    id="chatInput"
+                    placeholder="Nhập tin nhắn..."
+                    autocomplete="off">
+
+                <button
+                    type="button"
+                    id="sendChat"
+                    title="Gửi tin nhắn"
+                    aria-label="Gửi tin nhắn">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="notice"></div>
+    <div id="footer"></div>
+    
+    <script type="module">import 'https://cdn.jsdelivr.net/npm/emoji-picker-element@^1/index.js';</script>
+    <script src="js/header.js"></script>
+    <script src="js/notice.js"></script>
+    <script src="js/chat.js"></script>
+    <script src="js/notificationUser.js"></script>
+</body>
+</html>

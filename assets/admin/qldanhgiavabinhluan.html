@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QUẢN LÝ ĐÁNH GIÁ & BÌNH LUẬN</title>
+    <link rel="stylesheet" href="../css/table.css">
+    <link rel="stylesheet" href="../css/qldanhgiavabinhluan.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../css/notice.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+        <div id="sidebar"></div>
+
+       <main class="main-content">
+            <div class="admin-header">
+                <h1 class="page-title">QUẢN LÝ ĐÁNH GIÁ & BÌNH LUẬN</h1>
+
+                <div class="notification-box">
+
+                    <button id="notificationBtn" class="notification-btn">
+                        <i class="fa-solid fa-bell"></i>
+
+                        <span id="notificationBadge" class="notification-badge">
+                            0
+                        </span>
+                    </button>
+
+                    <div id="notificationDropdown" class="notification-dropdown">
+
+                        <div class="notification-title">
+                            THÔNG BÁO
+                        </div>
+
+                        <div id="notificationList" class="notification-list">
+
+                            <div class="notification-empty">
+                                Không có thông báo mới
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div id="searchFilter"></div>
+
+            <div class="table-container">
+                <table class="review-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Khách Hàng</th>
+                            <th>Sản Phẩm</th>
+                            <th>Số Sao</th>
+                            <th>Bình Luận</th>
+                            <th>Ngày Bình Luận</th>
+                            <th>Phản Hồi</th>
+                            <th>Trạng Thái</th>
+                            <th>Ngày Phản Hồi</th>
+                            <th>Hành Động</th>
+                        </tr>
+                    </thead>
+                    <tbody class="review-list">
+                        <!-- <tr>
+                            <td>39</td>
+                            <td>Nguyễn Ngọc Phương Vy</td>
+                            <td>Áo Cúp Ngực Trắng</td>
+                            <td>⭐⭐⭐⭐⭐</td>
+                            <td>20/05/2026</td>
+                            <td>xin cảm ơn nha</td>
+                            <td>
+                                <button class="reply-btn">
+                                    Phản hồi
+                                </button>
+                            </td>
+                            <div>
+                            <td>
+                                <div class="dg-bl">
+                                    <button class="fix-reply">
+                                        <i class="fa-solid fa-wrench"></i> Sửa
+                                    </button>
+                                    <button class="reply">
+                                        <i class="fa-solid fa-reply"></i> Phản hồi 
+                                    </button>
+                                    <button class="delete-btn">
+                                        <i class="fa-solid fa-trash"></i> Xóa
+                                    </button>
+                                </div>
+                            </td>
+                            
+                        </tr> -->
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <div id="replyModal" class="reply-modal">
+    <div class="reply-modal-content">
+
+        <div class="reply-modal-header">
+            <h2 id="replyModalTitle">PHẢN HỒI ĐÁNH GIÁ</h2>
+            <span class="close-modal">&times;</span>
+        </div>
+
+        <div class="customer-review">
+            <h3>Bình luận của khách hàng:</h3>
+            <p id="customerComment"></p>
+        </div>
+
+        <div class="reply-form">
+            <label>Phản hồi của cửa hàng:</label>
+            <textarea 
+                id="shopReplyInput" 
+                placeholder="Nhập phản hồi của bạn..."
+            ></textarea>
+
+            <button id="sendReplyBtn">
+                Gửi phản hồi
+            </button>
+        </div>
+
+    </div>
+</div>
+    <div class="notice"></div>
+
+    <script src="../js/qldanhgiavabinhluan.js"></script>
+    <script src="../js/dangxuatAdmin.js"></script>
+    <script src="../js/sidebar.js"></script>
+    <script src="../js/timkiemvaloc.js"></script>
+    <script src="../js/notice.js"></script>
+    <script src="../js/notifcation.js"></script>
+</body>
+</html>

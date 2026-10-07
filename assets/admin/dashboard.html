@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DASHBOARD</title>
+    <link rel="stylesheet" href="../css/table.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head><script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<body>
+    <div id="sidebar"></div>
+
+<main class="main">
+    <div class="admin-header">
+        <h1 class="page-title">DASHBOARD</h1>
+
+        <div class="notification-box">
+
+            <button id="notificationBtn" class="notification-btn">
+                <i class="fa-solid fa-bell"></i>
+
+                <span id="notificationBadge" class="notification-badge">
+                    0
+                </span>
+            </button>
+
+            <div id="notificationDropdown" class="notification-dropdown">
+
+                <div class="notification-title">
+                    THÔNG BÁO
+                </div>
+
+                <div id="notificationList" class="notification-list">
+
+                    <div class="notification-empty">
+                        Không có thông báo mới
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+  <div class="stat-cards">
+    <div class="stat-card" onclick="window.location.href='qlsanpham.html'">
+        <span class="icon">👗</span>
+        <div class="label">Sản Phẩm</div>
+        <div class="value" id="totalProducts">0</div>
+    </div>
+
+    <div class="stat-card" onclick="window.location.href='qldonhang.html'">
+        <span class="icon">🧾</span>
+        <div class="label">Đơn Hàng</div>
+        <div class="value" id="totalOrders">0</div>
+    </div>
+
+    <div class="stat-card" onclick="window.location.href='qldanhgiavabinhluan.html'">
+        <span class="icon">⭐</span>
+        <div class="label">Đánh Giá</div>
+        <div class="value" id="totalReviews">0</div>
+    </div>
+
+    <div class="stat-card" onclick="window.location.href='qlphanhoi.html'">
+        <span class="icon">✉️</span>
+        <div class="label">Phản Hồi</div>
+        <div class="value" id="totalContacts">0</div>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <h3>Thống Kê Doanh Thu</h3>
+    <div class="revenue-chart">
+      <canvas id="revenueChart"></canvas>
+    </div>
+  </div>
+
+  <div class="bottom-row">
+
+    <div class="chart-card">
+      <h3>Thống Kê Đơn Hàng</h3>
+      <div class="pie-wrap">
+        <canvas id="orderChart"></canvas>
+      </div>
+    </div>
+
+    <div class="chart-card top-products">
+      <h3>Danh Sách Sản Phẩm Bán Chạy</h3>
+      <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>Top</th>
+            <th>Ảnh</th>
+            <th>Sản Phẩm</th>
+            <th>Đã Bán</th>
+            <th>Doanh Thu</th>
+          </tr>
+        </thead>
+        <tbody id="topProductList">
+          <!-- <tr>
+            <td>1</td>
+            <td>
+              <img src="/assets/images/aocupnguctrang.jpg" alt="ảnh">
+            </td>
+            <td>Áo Cúp Ngực Trắng</td>
+            <td>120</td>
+            <td>470.000đ</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>
+              <img src="/assets/images/aokhoaccotimphoivien.jpg" alt="ảnh">
+            </td>
+            <td>Áo Cúp Ngực Trắng</td>
+            <td>30</td>
+            <td>470.000đ</td>
+          </tr> -->
+        </tbody>
+      </table>
+    </div>
+    </div>
+  </div>
+</main>
+<div class="notice"></div>
+
+<script src="../js/dashboard.js"></script>
+<script src="../js/dangxuatAdmin.js"></script>
+<script src="../js/sidebar.js"></script>
+<script src="../js/notifcation.js"></script>
+</body>
+</html>

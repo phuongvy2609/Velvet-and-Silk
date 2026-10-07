@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QUẢN LÝ NGƯỜI DÙNG</title>
+    <link rel="stylesheet" href="../css/table.css">
+    <link rel="stylesheet" href="../css/qlnguoidung.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../css/notice.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div id="sidebar"></div>
+
+        <main class="main-content">
+            <div class="admin-header">
+                <h1 class="page-title">QUẢN LÝ<br> NGƯỜI DÙNG</h1>
+
+                <div class="notification-box">
+
+                    <button id="notificationBtn" class="notification-btn">
+                        <i class="fa-solid fa-bell"></i>
+
+                        <span id="notificationBadge" class="notification-badge">
+                            0
+                        </span>
+                    </button>
+
+                    <div id="notificationDropdown" class="notification-dropdown">
+
+                        <div class="notification-title">
+                            THÔNG BÁO
+                        </div>
+
+                        <div id="notificationList" class="notification-list">
+
+                            <div class="notification-empty">
+                                Không có thông báo mới
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div id="searchFilter"></div>
+
+            <div class="table-container">
+                <table class="user-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Khách Hàng</th>
+                            <th>Email</th>
+                            <th>SĐT</th>
+                            <th>Hạng thành viên</th>
+                            <th>Phân loại</th>
+                            <th>Ngày Đăng Ký</th>
+                            <th>Hành Động</th>
+                        </tr>
+                    </thead>
+                        <!-- <tr>
+                            <td>3016</td>
+                            <td>Nguyễn Ngọc Phương Vy</td>
+                            <td class="email-cell">nguyenngocphuongvy073@gmail.com</td>
+                            <td>0383577505</td>
+                            <td>20/05/2026</td>
+                            <td>
+                                <button class="delete-btn">
+                                    <i class="fa-solid fa-trash"></i> Xóa
+                                </button>
+                            </td>
+                        </tr> -->
+                        
+                        <tbody class="user-list"></tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+    <div class="notice"></div>
+
+    <script src="../js/qlnguoidung.js"></script>
+    <script src="../js/sidebar.js"></script>
+    <script src="../js/dangxuatAdmin.js"></script>
+    <script src="../js/timkiemvaloc.js"></script>
+    <script src="../js/notice.js"></script>
+    <script src="../js/notifcation.js"></script>
+</body>
+</html>

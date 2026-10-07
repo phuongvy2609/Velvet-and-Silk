@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIDEBAR - Velvet & Silk</title>
+    <link rel="stylesheet" href="../css/notice.css">
+</head>
+<body>
+    <aside class="sidebar">
+        <button id="sidebarToggle" class="sidebar-toggle">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <div class="sidebar-title">ADMIN</div>
+        <nav>
+            <ul class="nav-list">
+              <li class="nav-item1"><a href="/admin/dashboard.html"><i class="fa-solid fa-chart-line"></i><span class="menu-text">Dashboard</span></a></li>
+              <li class="nav-item2"><a href="/admin/qlsanpham.html"><i class="fa-solid fa-shirt"></i><span class="menu-text">Sản Phẩm</span></a></li>
+              <li class="nav-item3"><a href="/admin/qldonhang.html"><i class="fa-solid fa-cart-shopping"></i><span class="menu-text">Đơn Hàng</span></a></li>
+              <li class="nav-item4"><a href="/admin/qldanhgiavabinhluan.html"><i class="fa-solid fa-star"></i><span class="menu-text">Đánh Giá & Bình Luận</span></a></li>
+              <li class="nav-item5"><a href="/admin/qlphanhoi.html"><i class="fa-solid fa-envelope"></i><span class="menu-text">Phản Hồi</span></a></li>
+              <li class="nav-item8"><a href="/admin/qlvoucher.html"><i class="fa-solid fa-ticket"></i><span class="menu-text">Mã Giảm Giá</span></a></li>
+              <li class="nav-item6"><a href="/admin/qlnguoidung.html"><i class="fa-solid fa-user"></i><span class="menu-text">Người Dùng</span></a></li>
+              <li class="nav-item7"><a href="/admin/mess.html"><i class="fa-solid fa-comment"></i> 
+                    <span class="menu-text">Tư Vấn</span>
+                    <span id="chatBadge" class="chat-badge">0</span>
+                  </a>
+               </li>
+            </ul>
+        </nav>
+        <a href="#" id="adminLogoutBtn">
+            <i class="fas fa-sign-out-alt"></i>
+            Đăng xuất
+        </a>
+    </aside>
+    <div class="notice"></div>
+    <script src="../js/notice.js"></script>
+</body>
+</html>

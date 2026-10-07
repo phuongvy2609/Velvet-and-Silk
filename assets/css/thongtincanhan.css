@@ -1,0 +1,1940 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    margin-top: 100px;
+    background: white;
+    color: black;
+}
+
+.navbar {
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 50px;
+    border-bottom: 2px solid #333;
+    min-height: 60px;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.nav-links a {
+    color: #2ecc71;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: bold;
+    font-size: 14px;
+    transition: 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: white;
+}
+
+.nav-icons {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.nav-icons i {
+    color: #2ecc71;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.nav-icons i:hover {
+    color: white;
+}
+
+.user-circle {
+    width: 35px;
+    height: 35px;
+    background: #c0392b;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.btn-logout {
+    background: #d4e157;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.btn-logout:hover {
+    transform: translateY(-2px);
+}
+
+.container {
+    width: min(1100px, calc(100% - 40px));
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 30px;
+    padding: 45px 0 60px;
+}
+
+.sidebar {
+    width: 270px;
+    min-height: 510px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgb(223, 245, 223);
+    border-radius: 20px;
+    padding: 30px 22px;
+    border: 1.5px solid #2ecc71;
+    box-shadow: 0 5px 18px rgba(46, 204, 113, 0.08);
+    position: sticky;
+    top: 120px;
+}
+
+.avatar-circle {
+    width: 100px;
+    height: 100px;
+    background: #e7704f;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 34px;
+    color: white;
+    font-weight: bold;
+    margin-bottom: 28px;
+    border: 4px solid white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    flex-shrink: 0;
+}
+
+.tab-btn,
+.tab-btnn {
+    width: 100%;
+    min-height: 48px;
+    padding: 12px 0 12px 35px;
+    margin-bottom: 20px;
+    border-radius: 25px;
+    border: 1.5px solid #078a1c;
+    background: white;
+    color: black;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    transition: 0.3s ease;
+    line-height: 1.3;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+}
+
+.tab-btn:hover,
+.tab-btnn:hover,
+.tab-btn.active,
+.tab-btnn.active {
+    background: #74d776;
+    color: black;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(46, 204, 113, 0.18);
+}
+
+.tab-btn:last-child,
+.tab-btnn:last-child {
+    margin-bottom: 0;
+}
+
+section.info-form {
+    width: 650px;
+    min-width: 0;
+    margin-top: 0;
+    padding: 38px 40px;
+    background: rgb(223, 245, 223);
+    border-radius: 20px;
+    border: 1.5px solid #2ecc71;
+    box-shadow: 0 5px 18px rgba(46, 204, 113, 0.08);
+    text-align: center;
+    overflow: visible;
+}
+
+.profile,
+.change,
+.address {
+    width: 100%;
+}
+
+.change,
+.address {
+    display: none;
+}
+
+.address {
+    width: 100%;
+    text-align: center;
+}
+
+.info-form h2 {
+    font-size: 28px;
+    color: black;
+    margin: 0 0 8px;
+    line-height: 1.3;
+}
+
+.info-form .des {
+    font-size: 15px;
+    color: black;
+    margin: 0 0 28px;
+    line-height: 1.6;
+}
+
+.address h2 {
+    font-size: 28px;
+    color: black;
+    margin: 0 0 8px;
+    line-height: 1.3;
+}
+
+.address .des {
+    font-size: 15px;
+    color: black;
+    margin: 0 0 15px;
+    line-height: 1.5;
+}
+
+.input-form {
+    width: 100%;
+    text-align: left;
+    margin-bottom: 18px;
+}
+
+.input-form label {
+    display: block;
+    font-weight: bold;
+    font-size: 15px;
+    color: black;
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+.input-wrapper,
+.input-wrap {
+    position: relative;
+    width: 100%;
+}
+
+.input-wrapper input,
+.input-wrap input {
+    width: 100%;
+    height: 46px;
+    padding: 11px 15px;
+    border-radius: 20px;
+    border: 1.5px solid #2ecc71;
+    background: white;
+    outline: none;
+    font-size: 14px;
+    margin: 0;
+    color: black;
+    transition: 0.3s ease;
+}
+
+.input-wrap input {
+    padding-right: 45px;
+}
+
+.input-wrapper input:focus,
+.input-wrap input:focus {
+    border-color: #078a1c;
+    box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.12);
+}
+
+.input-wrapper input::placeholder,
+.input-wrap input::placeholder {
+    color: #888;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 17px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: black;
+    transition: 0.3s ease;
+}
+
+.toggle-password:hover {
+    color: #078a1c;
+}
+
+.btn-save {
+    background: rgb(243, 88, 88);
+    color: white;
+    min-height: 44px;
+    padding: 10px 22px;
+    border: none;
+    border-radius: 25px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 4px;
+    transition: 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+}
+
+.btn-save:hover {
+    background: #ec0000;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px rgba(236, 0, 0, 0.15);
+}
+
+.address-form {
+    display: none;
+    width: 100%;
+    margin-top: 18px;
+    padding: 25px;
+    background: rgb(223, 245, 223);
+    border: 1.5px solid #2ecc71;
+    border-radius: 18px;
+    text-align: left;
+    box-shadow: 0 4px 12px rgba(46, 204, 113, 0.07);
+}
+
+.address-form .input-form {
+    margin-bottom: 16px;
+}
+
+.address-form input,
+#editAddressForm input {
+    width: 100%;
+    height: 46px;
+    padding: 11px 15px;
+    border-radius: 20px;
+    border: 1.5px solid #2ecc71;
+    background: white;
+    color: black;
+    outline: none;
+    font-size: 14px;
+    transition: 0.3s ease;
+}
+
+.address-form input:focus,
+#editAddressForm input:focus {
+    border-color: #078a1c;
+    box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.12);
+}
+
+.address-form select,
+#editAddressForm select {
+    width: 100%;
+    height: 46px;
+    padding: 10px 15px;
+    border-radius: 20px;
+    border: 1.5px solid #2ecc71;
+    background: white;
+    color: black;
+    outline: none;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.address-form select:focus,
+#editAddressForm select:focus {
+    border-color: #078a1c;
+    box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.12);
+}
+
+.address-form select option,
+#editAddressForm select option {
+    background: white;
+    color: black;
+}
+
+.address-default {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+    margin-bottom: 20px;
+}
+
+.address-default input {
+    width: 17px;
+    height: 17px;
+    margin: 0;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.address-default label {
+    font-size: 14px;
+    font-weight: bold;
+    color: black;
+    cursor: pointer;
+    line-height: 1.4;
+}
+
+.address-content span i {
+    font-size: 15px;
+    padding-bottom: 5px;
+    color: red;
+}
+
+.address-buttons {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.address-buttons button {
+    min-height: 42px;
+    padding: 9px 18px;
+    border: none;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+#btnCancelAddress,
+#btnCancelEditAddress {
+    background: #ddd;
+    color: black;
+}
+
+#btnCancelAddress:hover,
+#btnCancelEditAddress:hover {
+    background: #bbb;
+    transform: translateY(-2px);
+}
+
+#btnSaveAddress,
+#btnUpdateAddress {
+    background: rgb(243, 88, 88);
+    color: white;
+}
+
+#btnSaveAddress:hover,
+#btnUpdateAddress:hover {
+    background: #ec0000;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(236, 0, 0, 0.15);
+}
+
+#btnSaveAddress i,
+#btnUpdateAddress i {
+    margin-right: 6px;
+}
+
+#editAddressForm {
+    display: none;
+    width: 100%;
+    margin-top: 20px;
+    padding: 25px;
+    background: rgb(223, 245, 223);
+    border: 1.5px solid #2ecc71;
+    border-radius: 18px;
+    text-align: left;
+    box-shadow: 0 4px 12px rgba(46, 204, 113, 0.07);
+}
+
+#addressList {
+    width: 100%;
+    height: 470px;
+    max-height: 470px;
+    margin-top: 25px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 15px;
+    padding-top: 10px;
+    text-align: left;
+}
+
+#addressList::-webkit-scrollbar {
+    width: 9px;
+}
+
+#addressList::-webkit-scrollbar-track {
+    background: #e8f8e8;
+    border-radius: 10px;
+}
+
+#addressList::-webkit-scrollbar-thumb {
+    background: #a3a3a3;
+    border-radius: 10px;
+    border: 2px solid #e8f8e8;
+}
+
+#addressList::-webkit-scrollbar-thumb:hover {
+    background: #909090;
+}
+
+.address-item {
+    width: 100%;
+    background: white;
+    border: 1.5px solid #2ecc71;
+    border-radius: 18px;
+    padding: 20px;
+    margin-bottom: 18px;
+    text-align: left;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+    transition: 0.3s ease;
+}
+
+.address-item:last-child {
+    margin-bottom: 0;
+}
+
+.address-item:hover {
+    box-shadow: 0 7px 18px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+}
+
+.address-content {
+    width: 100%;
+    min-width: 0;
+}
+
+.address-content i {
+    font-size: 18px;
+    color: rgb(5, 112, 5);
+    margin-top: 3px;
+}
+
+.address-name {
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+    margin: 0 0 13px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    line-height: 1.4;
+    word-break: break-word;
+}
+
+.address-phone {
+    font-size: 15px;
+    color: black;
+    margin: 0 0 9px 30px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    line-height: 1.5;
+    word-break: break-word;
+}
+
+.address-detail {
+    font-size: 15px;
+    color: black;
+    margin: 0 0 9px 30px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    line-height: 1.6;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+}
+
+.address-location {
+    font-size: 15px;
+    color: black;
+    margin: 0 0 12px 30px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    line-height: 1.5;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+}
+
+.address-default-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #faf592;
+    color: red;
+    padding: 6px 13px;
+    border-radius: 18px;
+    font-size: 13px;
+    font-weight: bold;
+    margin: 5px 0 2px 30px;
+    border: 1px solid rgb(203, 181, 14);
+}
+
+.address-actions {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    margin-top: 15px;
+    padding-top: 14px;
+    border-top: 1px solid #eeeeee;
+}
+
+.btn-edit-address {
+    min-height: 40px;
+    padding: 8px 17px;
+    border-radius: 20px;
+    border: 1.5px solid #078a1c;
+    background: white;
+    color: #078a1c;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.btn-edit-address:hover {
+    background: #74d776;
+    color: black;
+    transform: translateY(-2px);
+}
+
+.btn-edit-address i {
+    margin-right: 6px;
+}
+
+.btn-delete-address {
+    min-height: 40px;
+    padding: 8px 17px;
+    border-radius: 20px;
+    border: none;
+    background: rgb(243, 88, 88);
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.btn-delete-address:hover {
+    background: #ec0000;
+    transform: translateY(-2px);
+}
+
+.btn-delete-address i {
+    margin-right: 6px;
+}
+
+.no-address {
+    text-align: center;
+    color: black;
+    font-size: 15px;
+    line-height: 1.5;
+    padding: 35px 20px;
+    background: white;
+    border: 1.5px dashed #2ecc71;
+    border-radius: 18px;
+    margin: 0;
+}
+
+.overview {
+    width: 100%;
+    display: none;
+}
+
+.overview h2 {
+    font-size: 28px;
+    color: black;
+    margin: 0 0 8px;
+    line-height: 1.3;
+}
+
+.overview .des {
+    font-size: 15px;
+    color: black;
+    margin: 0 0 28px;
+    line-height: 1.6;
+}
+
+.overview-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+}
+
+.overview-card {
+    min-height: 165px;
+    background: white;
+    border: 1.5px solid #2ecc71;
+    border-radius: 18px;
+    padding: 25px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    text-align: left;
+    box-shadow: 0 5px 18px rgba(46, 204, 113, 0.08);
+    transition: 0.3s ease;
+}
+
+.overview-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(46, 204, 113, 0.15);
+}
+
+.overview-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 15px;
+    background: #9d6bfa;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+}
+
+.overview-content {
+    min-width: 0;
+}
+
+.overview-content h3 {
+    margin: 0 0 8px;
+    font-size: 18px;
+    color: black;
+    line-height: 1.3;
+}
+
+.overview-content strong {
+    display: block;
+    color: red;
+    font-size: 23px;
+    line-height: 1.3;
+    word-break: break-word;
+}
+
+.overview-card:nth-child(2) .overview-icon {
+    background: rgb(10, 118, 241);
+}
+
+.overview-card:nth-child(2) .overview-content strong {
+    color: red;
+}
+
+.overview-card:nth-child(3) .overview-icon {
+    background: #deda02;
+}
+
+.overview-card:nth-child(4) .overview-icon {
+    background: #039c31;
+}
+
+.membership-rank {
+    min-width: 145px;
+    padding: 9px 20px;
+    margin-bottom: 18px;
+    border-radius: 30px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    text-align: center;
+    white-space: nowrap;
+    background: linear-gradient(
+        135deg,
+        #f7f7f7,
+        #dedede
+    );
+    color: #555;
+    border: 1px solid #c7c7c7;
+    box-shadow:
+        0 5px 14px rgba(0, 0, 0, 0.10),
+        inset 0 1px 1px rgba(255, 255, 255, 0.8);
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.membership-rank:hover {
+    transform: translateY(-2px);
+    box-shadow:
+        0 7px 18px rgba(0, 0, 0, 0.15),
+        inset 0 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+.membership-rank.rank-dong {
+    background: linear-gradient(
+        135deg,
+        #f6c98b 0%,
+        #d99252 45%,
+        #a95727 100%
+    );
+    color: #ffffff;
+    border-color: #b86632;
+    box-shadow:
+        0 5px 15px rgba(169, 87, 39, 0.32),
+        inset 0 1px 2px rgba(255, 255, 255, 0.45);
+}
+
+.membership-rank.rank-dong::before {
+    content: "🥉";
+    font-size: 18px;
+}
+
+.membership-rank.rank-bac {
+    background: linear-gradient(
+        135deg,
+        #e1e0e0 0%,
+        #d4d6d8 35%,
+        #b9c1c9 70%,
+        #8e979f 100%
+    );
+    color: #353b40;
+    border-color: #aeb6bd;
+    box-shadow:
+        0 5px 15px rgba(95, 105, 115, 0.30),
+        inset 0 1px 2px rgba(255, 255, 255, 0.9);
+}
+
+.membership-rank.rank-bac::before {
+    content: "🥈";
+    font-size: 18px;
+}
+
+.membership-rank.rank-vang {
+    background: linear-gradient(
+        135deg,
+        #fff7bd 0%,
+        #ffe47a 30%,
+        #e9bd32 65%,
+        #b8860b 100%
+    );
+    color: #624800;
+    border-color: #d1a51c;
+    box-shadow:
+        0 5px 17px rgba(218, 174, 38, 0.38),
+        inset 0 1px 2px rgba(255, 255, 255, 0.65);
+}
+
+.membership-rank.rank-vang::before {
+    content: "🥇";
+    font-size: 18px;
+}
+
+.membership-rank.rank-kim-cuong {
+    background: linear-gradient(
+        135deg,
+        #e9ffff 0%,
+        #a8f5f5 25%,
+        #55d5d5 60%,
+        #159caa 100%
+    );
+    color: #064f58;
+    border-color: #35b8c2;
+    box-shadow:
+        0 5px 18px rgba(21, 156, 170, 0.38),
+        inset 0 1px 2px rgba(255, 255, 255, 0.75);
+}
+
+.membership-rank.rank-kim-cuong::before {
+    content: "💎";
+    font-size: 18px;
+}
+
+/* =========================================================
+   RESPONSIVE THÔNG TIN CÁ NHÂN
+========================================================= */
+
+/* =========================================================
+   DESKTOP LỚN >= 1200px
+========================================================= */
+
+@media (min-width: 1200px) {
+
+    body {
+        margin-top: 100px;
+    }
+
+    .container {
+        width: min(1200px, calc(100% - 50px));
+        gap: 35px;
+        padding: 50px 0 70px;
+    }
+
+    .sidebar {
+        width: 280px;
+        min-height: 520px;
+        padding: 32px 24px;
+        border-radius: 20px;
+        top: 120px;
+    }
+
+    .membership-rank {
+        min-width: 150px;
+        padding: 10px 20px;
+        margin-bottom: 20px;
+        font-size: 14px;
+    }
+
+    .avatar-circle {
+        width: 105px;
+        height: 105px;
+        font-size: 36px;
+        margin-bottom: 30px;
+    }
+
+    .tab-btn,
+    .tab-btnn {
+        min-height: 50px;
+        padding: 13px 10px 13px 30px;
+        margin-bottom: 20px;
+        font-size: 16px;
+        gap: 9px;
+    }
+
+    section.info-form {
+        width: 700px;
+        padding: 40px 45px;
+        border-radius: 20px;
+    }
+
+    .info-form h2,
+    .address h2,
+    .overview h2 {
+        font-size: 29px;
+    }
+
+    .info-form .des,
+    .address .des,
+    .overview .des {
+        font-size: 15px;
+    }
+
+    .input-form {
+        margin-bottom: 20px;
+    }
+
+    .input-form label {
+        font-size: 15px;
+        margin-bottom: 8px;
+    }
+
+    .input-wrapper input,
+    .input-wrap input,
+    .address-form input,
+    #editAddressForm input,
+    .address-form select,
+    #editAddressForm select {
+        height: 48px;
+        font-size: 15px;
+        padding: 11px 16px;
+    }
+
+    .btn-save {
+        min-height: 46px;
+        padding: 11px 24px;
+        font-size: 15px;
+    }
+
+    .address-form,
+    #editAddressForm {
+        padding: 28px;
+    }
+
+    #addressList {
+        height: 500px;
+        max-height: 500px;
+        padding-right: 15px;
+    }
+
+    .address-item {
+        padding: 22px;
+        margin-bottom: 20px;
+    }
+
+    .address-name {
+        font-size: 21px;
+    }
+
+    .address-phone,
+    .address-detail,
+    .address-location {
+        font-size: 15px;
+    }
+
+    .address-default-label {
+        font-size: 13px;
+    }
+
+    .overview-grid {
+        gap: 25px;
+    }
+
+    .overview-card {
+        min-height: 170px;
+        padding: 27px;
+        gap: 20px;
+    }
+
+    .overview-icon {
+        width: 52px;
+        height: 52px;
+        font-size: 25px;
+    }
+
+    .overview-content h3 {
+        font-size: 18px;
+    }
+
+    .overview-content strong {
+        font-size: 24px;
+    }
+}
+
+/* =========================================================
+   LAPTOP 992px - 1199px
+========================================================= */
+
+@media (min-width: 992px) and (max-width: 1199px) {
+
+    body {
+        margin-top: 90px;
+    }
+
+    .container {
+        width: min(950px, calc(100% - 30px));
+        gap: 20px;
+        padding: 35px 0 50px;
+    }
+
+    .sidebar {
+        width: 240px;
+        min-height: 500px;
+        padding: 25px 18px;
+    }
+
+    .avatar-circle {
+        width: 90px;
+        height: 90px;
+        font-size: 30px;
+        margin-bottom: 25px;
+    }
+
+    .membership-rank {
+        min-width: 130px;
+        padding: 8px 15px;
+        font-size: 13px;
+    }
+
+    .tab-btn,
+    .tab-btnn {
+        min-height: 46px;
+        padding: 11px 12px 11px 22px;
+        margin-bottom: 15px;
+        font-size: 14px;
+    }
+
+    section.info-form {
+        width: calc(100% - 260px);
+        padding: 32px 30px;
+    }
+
+    .info-form h2,
+    .address h2,
+    .overview h2 {
+        font-size: 25px;
+    }
+
+    .info-form .des,
+    .address .des,
+    .overview .des {
+        font-size: 14px;
+    }
+
+    .overview-grid {
+        gap: 18px;
+    }
+
+    .overview-card {
+        min-height: 145px;
+        padding: 20px;
+        gap: 15px;
+    }
+
+    .overview-icon {
+        width: 45px;
+        height: 45px;
+        font-size: 21px;
+    }
+
+    .overview-content h3 {
+        font-size: 16px;
+    }
+
+    .overview-content strong {
+        font-size: 21px;
+    }
+}
+
+
+/* =========================================================
+   TABLET 768px - 991px
+========================================================= */
+
+@media (min-width: 768px) and (max-width: 991px) {
+
+    body {
+        margin-top: 85px;
+    }
+
+    .container {
+        width: calc(100% - 30px);
+        gap: 18px;
+        padding: 30px 0 45px;
+    }
+
+    .sidebar {
+        width: 210px;
+        min-height: 480px;
+        padding: 22px 15px;
+        border-radius: 18px;
+        top: 105px;
+    }
+
+    .membership-rank {
+        min-width: 115px;
+        padding: 8px 10px;
+        font-size: 12px;
+        margin-bottom: 15px;
+    }
+
+    .avatar-circle {
+        width: 80px;
+        height: 80px;
+        font-size: 28px;
+        margin-bottom: 22px;
+    }
+
+    .tab-btn,
+    .tab-btnn {
+        min-height: 44px;
+        padding: 10px 8px 10px 15px;
+        margin-bottom: 13px;
+        font-size: 13px;
+        gap: 6px;
+    }
+
+    section.info-form {
+        width: calc(100% - 228px);
+        padding: 28px 24px;
+        border-radius: 18px;
+    }
+
+    .info-form h2,
+    .address h2,
+    .overview h2 {
+        font-size: 23px;
+    }
+
+    .info-form .des,
+    .address .des,
+    .overview .des {
+        font-size: 13px;
+        margin-bottom: 22px;
+    }
+
+    .input-form {
+        margin-bottom: 15px;
+    }
+
+    .input-form label {
+        font-size: 14px;
+        margin-bottom: 6px;
+    }
+
+    .input-wrapper input,
+    .input-wrap input,
+    .address-form input,
+    #editAddressForm input,
+    .address-form select,
+    #editAddressForm select {
+        height: 43px;
+        font-size: 13px;
+        padding: 9px 13px;
+    }
+
+    .btn-save {
+        min-height: 42px;
+        padding: 9px 18px;
+        font-size: 14px;
+    }
+
+    .address-form,
+    #editAddressForm {
+        padding: 20px;
+    }
+
+    #addressList {
+        height: 400px;
+        max-height: 400px;
+        padding-right: 10px;
+    }
+
+    .address-item {
+        padding: 17px;
+        margin-bottom: 14px;
+    }
+
+    .address-name {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .address-phone,
+    .address-detail,
+    .address-location {
+        font-size: 13px;
+        margin-left: 27px;
+    }
+
+    .address-default-label {
+        margin-left: 27px;
+        font-size: 12px;
+    }
+
+    .overview-grid {
+        gap: 15px;
+    }
+
+    .overview-card {
+        min-height: 135px;
+        padding: 18px;
+        gap: 12px;
+    }
+
+    .overview-icon {
+        width: 42px;
+        height: 42px;
+        font-size: 19px;
+        border-radius: 12px;
+    }
+
+    .overview-content h3 {
+        font-size: 14px;
+    }
+
+    .overview-content strong {
+        font-size: 19px;
+    }
+}
+
+
+/* =========================================================
+   ĐIỆN THOẠI NGANG 576px - 767px
+========================================================= */
+
+@media (min-width: 576px) and (max-width: 767px) {
+
+    body {
+        margin-top: 110px;
+    }
+
+    .container {
+        width: calc(100% - 24px);
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 18px;
+        padding: 20px 0 35px;
+    }
+
+    .sidebar {
+        position: relative;
+        top: auto;
+        width: 100%;
+        min-height: auto;
+        padding: 18px 15px;
+        border-radius: 18px;
+    }
+
+    .membership-rank {
+        min-width: 125px;
+        padding: 7px 14px;
+        margin-bottom: 15px;
+        font-size: 12px;
+    }
+
+    .avatar-circle {
+        width: 75px;
+        height: 75px;
+        font-size: 27px;
+        margin-bottom: 18px;
+    }
+
+    .sidebar {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+        align-items: center;
+    }
+
+    .membership-rank {
+        grid-column: 1 / -1;
+        justify-self: center;
+    }
+
+    .avatar-circle {
+        grid-column: 1 / -1;
+        justify-self: center;
+    }
+
+    .tab-btn,
+    .tab-btnn {
+        width: 100%;
+        min-height: 43px;
+        padding: 8px 5px;
+        margin-bottom: 0;
+        justify-content: center;
+        text-align: center;
+        font-size: 12px;
+        border-radius: 20px;
+    }
+
+    section.info-form {
+        width: 100%;
+        padding: 25px 22px;
+        border-radius: 18px;
+    }
+
+    .info-form h2,
+    .address h2,
+    .overview h2 {
+        font-size: 23px;
+    }
+
+    .info-form .des,
+    .address .des,
+    .overview .des {
+        font-size: 13px;
+        margin-bottom: 22px;
+    }
+
+    .input-form {
+        margin-bottom: 15px;
+    }
+
+    .input-form label {
+        font-size: 14px;
+    }
+
+    .input-wrapper input,
+    .input-wrap input,
+    .address-form input,
+    #editAddressForm input,
+    .address-form select,
+    #editAddressForm select {
+        height: 43px;
+        font-size: 13px;
+    }
+
+    .address-form,
+    #editAddressForm {
+        padding: 18px;
+    }
+
+    #addressList {
+        height: 400px;
+        max-height: 400px;
+        padding-right: 8px;
+    }
+
+    .address-item {
+        padding: 16px;
+    }
+
+    .address-name {
+        font-size: 18px;
+    }
+
+    .address-phone,
+    .address-detail,
+    .address-location {
+        font-size: 13px;
+        margin-left: 27px;
+    }
+
+    .address-default-label {
+        margin-left: 27px;
+    }
+
+    .overview-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .overview-card {
+        min-height: 125px;
+        padding: 15px;
+        gap: 10px;
+    }
+
+    .overview-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+    }
+
+    .overview-content h3 {
+        font-size: 13px;
+    }
+
+    .overview-content strong {
+        font-size: 18px;
+    }
+}
+
+
+/* =========================================================
+   ĐIỆN THOẠI 400px - 575px
+========================================================= */
+
+@media (max-width: 575px) {
+
+    body {
+        margin-top: 115px;
+    }
+
+    .container {
+        width: calc(100% - 20px);
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+        padding: 15px 0 30px;
+    }
+
+    .sidebar {
+        position: relative;
+        top: auto;
+        width: 100%;
+        min-height: auto;
+        padding: 18px 12px;
+        border-radius: 16px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        margin-bottom: 10px;
+    }
+
+    .membership-rank {
+        grid-column: 1 / -1;
+        justify-self: center;
+        min-width: 120px;
+        padding: 7px 13px;
+        margin-bottom: 4px;
+        font-size: 12px;
+    }
+
+    .avatar-circle {
+        grid-column: 1 / -1;
+        justify-self: center;
+        width: 70px;
+        height: 70px;
+        font-size: 25px;
+        margin-bottom: 8px;
+    }
+
+    .tab-btn,
+    .tab-btnn {
+        width: 100%;
+        min-height: 44px;
+        padding: 8px 5px;
+        margin-bottom: 0;
+        justify-content: center;
+        text-align: center;
+        font-size: 12px;
+        border-radius: 20px;
+        line-height: 1.25;
+    }
+
+    section.info-form {
+        width: 100%;
+        padding: 23px 16px;
+        border-radius: 16px;
+    }
+
+    .info-form h2,
+    .address h2,
+    .overview h2 {
+        font-size: 21px;
+        margin-bottom: 7px;
+    }
+
+    .info-form .des,
+    .address .des,
+    .overview .des {
+        font-size: 12px;
+        line-height: 1.5;
+        margin-bottom: 20px;
+    }
+
+    .input-form {
+        margin-bottom: 14px;
+    }
+
+    .input-form label {
+        font-size: 13px;
+        margin-bottom: 6px;
+    }
+
+    .input-wrapper input,
+    .input-wrap input,
+    .address-form input,
+    #editAddressForm input,
+    .address-form select,
+    #editAddressForm select {
+        width: 100%;
+        height: 42px;
+        padding: 9px 13px;
+        font-size: 13px;
+        border-radius: 18px;
+    }
+
+    .input-wrap input {
+        padding-right: 40px;
+    }
+
+    .toggle-password {
+        right: 14px;
+    }
+
+    .btn-save {
+        min-height: 41px;
+        padding: 9px 17px;
+        font-size: 13px;
+        border-radius: 21px;
+    }
+
+    .address-form,
+    #editAddressForm {
+        margin-top: 15px;
+        padding: 16px;
+        border-radius: 15px;
+    }
+
+    .address-default {
+        gap: 7px;
+        margin-top: 10px;
+        margin-bottom: 17px;
+    }
+
+    .address-default input {
+        width: 16px;
+        height: 16px;
+    }
+
+    .address-default label {
+        font-size: 12px;
+    }
+
+    .address-buttons {
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .address-buttons button {
+        min-height: 39px;
+        padding: 8px 14px;
+        font-size: 12px;
+    }
+
+    #addressList {
+        height: 390px;
+        max-height: 390px;
+        margin-top: 18px;
+        padding-right: 6px;
+    }
+
+    .address-item {
+        padding: 14px;
+        margin-bottom: 12px;
+        border-radius: 15px;
+    }
+
+    .address-name {
+        font-size: 17px;
+        margin-bottom: 10px;
+        gap: 8px;
+    }
+
+    .address-content i {
+        font-size: 15px;
+    }
+
+    .address-phone,
+    .address-detail,
+    .address-location {
+        font-size: 12px;
+        margin-left: 23px;
+        gap: 8px;
+        line-height: 1.5;
+    }
+
+    .address-default-label {
+        margin-left: 23px;
+        padding: 5px 10px;
+        font-size: 11px;
+    }
+
+    .address-actions {
+        gap: 7px;
+        margin-top: 12px;
+        padding-top: 11px;
+    }
+
+    .btn-edit-address,
+    .btn-delete-address {
+        min-height: 36px;
+        padding: 7px 12px;
+        font-size: 11px;
+    }
+
+    .overview-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .overview-card {
+        min-height: 105px;
+        padding: 16px;
+        gap: 14px;
+        border-radius: 15px;
+    }
+
+    .overview-icon {
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+        font-size: 18px;
+        flex-shrink: 0;
+    }
+
+    .overview-content h3 {
+        font-size: 14px;
+        margin-bottom: 5px;
+    }
+
+    .overview-content strong {
+        font-size: 19px;
+    }
+
+    .no-address {
+        padding: 25px 12px;
+        font-size: 13px;
+    }
+}
+
+
+/* =========================================================
+   ĐIỆN THOẠI NHỎ <=399px
+========================================================= */
+
+@media (max-width: 399px) {
+
+    body {
+        margin-top: 110px;
+    }
+
+    .container {
+        width: calc(100% - 14px);
+        gap: 12px;
+        padding-top: 12px;
+    }
+
+    .sidebar {
+        padding: 15px 8px;
+        gap: 8px;
+        border-radius: 14px;
+        margin-bottom: 10px;
+    }
+
+    .membership-rank {
+        min-width: 110px;
+        padding: 6px 10px;
+        font-size: 11px;
+    }
+
+    .avatar-circle {
+        width: 62px;
+        height: 62px;
+        font-size: 22px;
+    }
+
+    .tab-btn,
+    .tab-btnn {
+        min-height: 42px;
+        padding: 7px 3px;
+        font-size: 11px;
+        border-radius: 18px;
+    }
+
+    section.info-form {
+        padding: 20px 12px;
+        border-radius: 14px;
+    }
+
+    .info-form h2,
+    .address h2,
+    .overview h2 {
+        font-size: 19px;
+    }
+
+    .info-form .des,
+    .address .des,
+    .overview .des {
+        font-size: 11px;
+        margin-bottom: 17px;
+    }
+
+    .input-form {
+        margin-bottom: 12px;
+    }
+
+    .input-form label {
+        font-size: 12px;
+    }
+
+    .input-wrapper input,
+    .input-wrap input,
+    .address-form input,
+    #editAddressForm input,
+    .address-form select,
+    #editAddressForm select {
+        height: 40px;
+        padding: 8px 11px;
+        font-size: 12px;
+        border-radius: 17px;
+    }
+
+    .btn-save {
+        min-height: 39px;
+        padding: 8px 14px;
+        font-size: 12px;
+    }
+
+    .address-form,
+    #editAddressForm {
+        padding: 13px;
+        border-radius: 13px;
+    }
+
+    #addressList {
+        height: 360px;
+        max-height: 360px;
+    }
+
+    .address-item {
+        padding: 12px;
+        border-radius: 13px;
+    }
+
+    .address-name {
+        font-size: 15px;
+    }
+
+    .address-phone,
+    .address-detail,
+    .address-location {
+        font-size: 11px;
+        margin-left: 20px;
+    }
+
+    .address-default-label {
+        margin-left: 20px;
+        font-size: 10px;
+        padding: 4px 8px;
+    }
+
+    .address-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .btn-edit-address,
+    .btn-delete-address {
+        width: 100%;
+        min-height: 35px;
+        font-size: 11px;
+    }
+
+    .overview-card {
+        min-height: 95px;
+        padding: 13px;
+    }
+
+    .overview-icon {
+        width: 38px;
+        height: 38px;
+        font-size: 16px;
+    }
+
+    .overview-content h3 {
+        font-size: 13px;
+    }
+
+    .overview-content strong {
+        font-size: 17px;
+    }
+}
+
+
+/* =========================================================
+   ĐIỆN THOẠI CỰC NHỎ <=350px
+========================================================= */
+
+@media (max-width: 350px) {
+
+    body {
+        margin-top: 110px;
+    }
+
+    .container {
+        width: calc(100% - 10px);
+        padding-top: 10px;
+    }
+
+    .sidebar {
+        padding: 12px 6px;
+        gap: 6px;
+        margin-bottom: 10px;
+    }
+
+    .membership-rank {
+        min-width: 100px;
+        padding: 5px 8px;
+        font-size: 10px;
+    }
+
+    .avatar-circle {
+        width: 57px;
+        height: 57px;
+        font-size: 20px;
+    }
+
+    .tab-btn,
+    .tab-btnn {
+        min-height: 40px;
+        padding: 6px 2px;
+        font-size: 10px;
+    }
+
+    section.info-form {
+        padding: 17px 10px;
+    }
+
+    .info-form h2,
+    .address h2,
+    .overview h2 {
+        font-size: 18px;
+    }
+
+    .info-form .des,
+    .address .des,
+    .overview .des {
+        font-size: 10px;
+    }
+
+    .input-form label {
+        font-size: 11px;
+    }
+
+    .input-wrapper input,
+    .input-wrap input,
+    .address-form input,
+    #editAddressForm input,
+    .address-form select,
+    #editAddressForm select {
+        height: 38px;
+        font-size: 11px;
+        padding: 7px 10px;
+    }
+
+    .btn-save {
+        min-height: 37px;
+        padding: 7px 12px;
+        font-size: 11px;
+    }
+
+    .address-form,
+    #editAddressForm {
+        padding: 11px;
+    }
+
+    #addressList {
+        height: 330px;
+        max-height: 330px;
+    }
+
+    .address-item {
+        padding: 10px;
+    }
+
+    .address-name {
+        font-size: 14px;
+    }
+
+    .address-phone,
+    .address-detail,
+    .address-location {
+        font-size: 10px;
+        margin-left: 18px;
+    }
+
+    .address-default-label {
+        margin-left: 18px;
+        font-size: 9px;
+    }
+
+    .overview-card {
+        min-height: 88px;
+        padding: 11px;
+        gap: 9px;
+    }
+
+    .overview-icon {
+        width: 34px;
+        height: 34px;
+        font-size: 14px;
+    }
+
+    .overview-content h3 {
+        font-size: 12px;
+    }
+
+    .overview-content strong {
+        font-size: 15px;
+    }
+}

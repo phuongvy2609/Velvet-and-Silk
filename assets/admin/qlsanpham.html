@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QUẢN LÝ SẢN PHẨM</title>
+    <link rel="stylesheet" href="../css/table.css">
+    <link rel="stylesheet" href="../css/qlsanpham.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../css/notice.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div id="sidebar"></div>
+
+       <main class="main-content">
+            <div class="admin-header">
+                <h1 class="page-title">QUẢN LÝ SẢN PHẨM</h1>
+
+                <div class="notification-box">
+
+                    <button id="notificationBtn" class="notification-btn">
+                        <i class="fa-solid fa-bell"></i>
+
+                        <span id="notificationBadge" class="notification-badge">
+                            0
+                        </span>
+                    </button>
+
+                    <div id="notificationDropdown" class="notification-dropdown">
+
+                        <div class="notification-title">
+                            THÔNG BÁO
+                        </div>
+
+                        <div id="notificationList" class="notification-list">
+
+                            <div class="notification-empty">
+                                Không có thông báo mới
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+                <div class="add-products">
+                    <button class="add-product-btn" id="addProductBtn">
+                        <i class="fa-solid fa-plus"></i> Thêm sản phẩm
+                    </button>
+                </div>
+
+                <div id="searchFilter"></div>
+
+            <div class="table-container">
+                <table class="product-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Hình Ảnh</th>
+                            <th>Tên Sản Phẩm</th>
+                            <th>Giá</th>
+                            <th>Giá Cũ</th>
+                            <th>Giảm Giá</th>
+                            <th>Số Lượng</th>
+                            <th>Mô Tả</th>
+                            <th colspan="2" class="action-header">Hành Động</th>
+                        </tr>
+                    </thead>
+
+                    <!-- <tr>
+                        <td>3016</td>
+                        <td><img src="" alt=""></td>
+                        <td>Áo Cúp Ngực Trắng</td>
+                        <td>470.000đ</td>
+                        <td></td>
+                        <td>jakajaaas</td>
+                        <td>
+                            <button class="delete-btn"
+                                <i class="fa-solid fa-trash"></i> Xóa
+                            </button>
+                        </td>
+                        <td>
+                            <button class="edit-btn"
+                                <i class="fa-solid fa-wrench"></i> Sửa
+                            </button>
+                        </td>
+                    </tr> -->
+                    <tbody class="product-list"></tbody>
+                </table>
+            </div>
+
+        
+            <div class="add-product-overlay" id="addProductOverlay">
+
+                <div class="add-product-form" id="addProductForm">
+
+                    <h2 id="formTitle">THÊM SẢN PHẨM</h2>
+
+                    <input type="hidden" id="editProductId">
+
+                    <input
+                        type="text"
+                        id="productName"
+                        placeholder="Tên sản phẩm"
+                    >
+
+                    <input
+                        type="text"
+                        id="productPrice"
+                        placeholder="Giá sản phẩm"
+                    >
+
+                    <input
+                        type="text"
+                        id="productPriceOld"
+                        placeholder="Giá cũ"
+                    >
+
+                    <input
+                        type="text"
+                        id="productDiscount"
+                        placeholder="Giảm giá (%)"
+                        readonly 
+                    >
+
+                    <input 
+                        type="number" 
+                        id="productStock" 
+                        placeholder="Số lượng sản phẩm"
+                        min="0"
+                    >
+                    
+                    <select id="productCategory" title="Chọn phân loại sản phẩm">
+                        <option value="" disabled selected>-- Chọn phân loại --</option>
+                        <option value="VÁY">VÁY</option>
+                        <option value="CHÂN VÁY">CHÂN VÁY</option>
+                        <option value="ÁO">ÁO</option>
+                        <option value="QUẦN">QUẦN</option>
+                        <option value="ÁO KHOÁC">ÁO KHOÁC</option>
+                    </select>
+
+                    <div class="image-upload">
+                        <label for="productImage">
+                            <i class="fa-solid fa-image"></i> Chọn hình ảnh
+                        </label>
+
+                        <input
+                            type="file"
+                            id="productImage"
+                            accept="image/*"
+                        >
+
+                        <img id="imagePreview" src="" alt="Ảnh xem trước">
+                    </div>
+
+                    <textarea
+                        id="productDescription"
+                        placeholder="Mô tả sản phẩm"
+                    ></textarea>
+
+                    <div class="form-buttons">
+                        <button type="button" id="saveProductBtn">Lưu</button>
+                        <button type="button" id="cancelProductBtn">Hủy</button>
+                    </div>
+
+                </div>
+
+            </div>
+        </main>
+    </div>
+    <div class="notice"></div>
+
+    <script src="../js/qlsanpham.js"></script>
+    <script src="../js/dangxuatAdmin.js"></script>
+    <script src="../js/sidebar.js"></script>
+    <script src="../js/timkiemvaloc.js"></script>
+    <script src="../js/notice.js"></script>
+    <script src="../js/notifcation.js"></script>
+</body>
+</html>

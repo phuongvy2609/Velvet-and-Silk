@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THÔNG TIN CÁ NHÂN - Velvet & Silk</title>
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/thongtincanhan.css">
+    <link rel="stylesheet" href="css/notice.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <div id="header"></div>
+
+    <main class="container">
+        <aside class="sidebar">
+            <div class="membership-rank" id="membershipRank">
+                Chưa đạt hạng
+            </div>
+
+            <div class="avatar-circle" id="avatar">
+                U
+            </div>
+            
+            <button class="tab-btnn active" id="tabProfile">
+                Thông Tin Cá Nhân
+            </button>
+
+            <button class="tab-btn" id="tabPassword">
+                Đổi Mật Khẩu
+            </button>
+
+            <button class="tab-btn" id="tabAddress">
+                Địa Chỉ Cá Nhân
+            </button>
+
+            <button class="tab-btn" id="tabOverview">
+                Tổng Quan Mua Hàng
+            </button>
+        </aside>
+
+        <section class="info-form">
+            <div class="profile">
+            <h2>Thông Tin Cá Nhân</h2>
+            <p class="des">Cập nhật thông tin cá nhân để Velvet & Silk phục vụ bạn tốt hơn.</p>
+            
+            <div class="input-form">
+                <label>Họ và tên</label>
+                <div class="input-wrapper">
+                    <input type="text" aria-label="hvt" id="fullname">
+                </div>
+            </div>
+
+            <div class="input-form">
+                <label>Số điện thoại</label>
+                <div class="input-wrapper">
+                    <input type="text" aria-label="sđt" id="phone">
+                </div>
+            </div>
+
+            <div class="input-form">
+                <label>Email</label>
+                <div class="input-wrapper">
+                    <input type="email" aria-label="email" id="email">
+                </div>
+            </div>
+
+            <button class="btn-save" id="btnSaveProfile"><i class="fa-solid fa-floppy-disk"></i> Lưu</button>
+            </div>
+
+            <div class="change">
+                <h2>Đổi Mật Khẩu</h2>
+                <p class="des">Cập nhật mật khẩu để bảo mật tài khoản của bạn.</p>
+            
+            <div class="input-form">
+                <label>Mật khẩu hiện tại</label>
+                <div class="input-wrap">
+                    <input type="password" id="oldPassword" placeholder="Nhập mật khẩu hiện tại" required>
+                </div>
+            </div>
+
+            <div class="input-form">
+                <label>Mật khẩu mới</label>
+                <div class="input-wrap">
+                    <input type="password" id="newPassword" placeholder="Nhập mật khẩu mới" required>
+                    <i class="fa-solid fa-eye toggle-password" data-target="newPassword"></i>
+                </div>
+            </div>
+                <button class="btn-save" id="btnChangePassword"><i class="fa-solid fa-arrows-rotate"></i> Cập Nhật</button>
+            </div>
+
+            <div class="address">
+                <h2>Địa Chỉ Cá Nhân</h2>
+
+                <p class="des">
+                    Cập nhật địa chỉ nhận hàng của bạn để Velvet & Silk giao hàng nhanh chóng.
+                </p>
+
+                <button class="btn-save" id="btnAddAddress">
+                    <i class="fa-solid fa-plus"></i>
+                    Thêm địa chỉ
+                </button>
+
+                <div id="addressForm" class="address-form">
+
+                    <div class="input-form">
+                        <label>Họ và tên</label>
+                        <div class="input-wrapper">
+                            <input
+                                type="text"
+                                id="addressFullname"
+                                placeholder="Nhập họ và tên"
+                            >
+                        </div>
+                    </div>
+
+                    <div class="input-form">
+                        <label>Số điện thoại</label>
+                        <div class="input-wrapper">
+                            <input
+                                type="text"
+                                id="addressPhone"
+                                placeholder="Nhập số điện thoại"
+                            >
+                        </div>
+                    </div>
+
+                    <div class="input-form">
+                        <label>Tỉnh / Thành phố</label>
+                        <div class="input-wrapper">
+                            <select aria-label="tỉnh/thành phố" id="city">
+                                <option value="">-- Chọn Tỉnh / Thành phố --</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="input-form">
+                        <label>Phường / Xã</label>
+                        <div class="input-wrapper">
+                            <select aria-label="phường/xã" id="ward">
+                                <option value="">-- Chọn Phường / Xã --</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="input-form">
+                        <label>Địa chỉ</label>
+                        <div class="input-wrapper">
+                            <input
+                                type="text"
+                                id="addressDetail"
+                                placeholder="Số nhà, tên đường..."
+                            >
+                        </div>
+                    </div>
+
+                    <div class="address-default">
+                        <input type="checkbox" id="isDefault">
+                        <label for="isDefault">Đặt làm địa chỉ mặc định</label>
+                    </div>
+
+                    <div class="address-buttons">
+                        <button type="button" id="btnCancelAddress">
+                            Hủy
+                        </button>
+
+                        <button type="button" id="btnSaveAddress">
+                            <i class="fa-solid fa-floppy-disk"></i>
+                            Lưu địa chỉ
+                        </button>
+                    </div>
+
+                </div>
+
+                <div id="editAddressForm" class="address-form">
+
+                    <div class="input-form">
+                        <label>Họ và tên</label>
+
+                        <div class="input-wrapper">
+                            <input
+                                type="text"
+                                id="editAddressFullname"
+                                placeholder="Nhập họ và tên">
+                        </div>
+                    </div>
+
+
+                    <div class="input-form">
+                        <label>Số điện thoại</label>
+
+                        <div class="input-wrapper">
+                            <input
+                                type="text"
+                                id="editAddressPhone"
+                                placeholder="Nhập số điện thoại">
+                        </div>
+                    </div>
+
+
+                    <div class="input-form">
+                        <label>Tỉnh / Thành phố</label>
+
+                        <div class="input-wrapper">
+                            <select aria-label="tỉnh/ thành phố" id="editCity">
+
+                                <option value="">
+                                    -- Chọn Tỉnh / Thành phố --
+                                </option>
+
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="input-form">
+                        <label>Phường / Xã</label>
+
+                        <div class="input-wrapper">
+                            <select aria-label="phường/ xã" id="editWard">
+
+                                <option value="">
+                                    -- Chọn Phường / Xã --
+                                </option>
+
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="input-form">
+                        <label>Địa chỉ </label>
+
+                        <div class="input-wrapper">
+                            <input
+                                type="text"
+                                id="editAddressDetail"
+                                placeholder="Số nhà, tên đường...">
+                        </div>
+                    </div>
+
+
+                    <div class="address-default">
+
+                        <input
+                            type="checkbox"
+                            id="editIsDefault">
+
+                        <label for="editIsDefault">
+                            Đặt làm địa chỉ mặc định
+                        </label>
+
+                    </div>
+
+
+                    <div class="address-buttons">
+
+                        <button
+                            type="button"
+                            id="btnCancelEditAddress">
+                            Hủy
+                        </button>
+
+                        <button
+                            type="button"
+                            id="btnUpdateAddress">
+
+                            <i class="fa-solid fa-floppy-disk"></i>
+                            Cập nhật
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <div id="addressList"></div>
+            </div>
+            <div class="overview">
+
+            <h2>
+                Tổng Quan Mua Hàng
+            </h2>
+
+            <p class="des">
+                Cập nhật tổng quan quá trình mua sắm của bạn tại Velvet & Silk.
+            </p>
+
+            <div class="overview-grid">
+
+                <div class="overview-card">
+
+                    <div class="overview-icon">
+                        <i class="fa-solid fa-bag-shopping"></i>
+                    </div>
+
+                    <div class="overview-content">
+                        <h3>Sản Phẩm Đã Mua</h3>
+                        <strong id="totalProducts">0</strong>
+                    </div>
+
+                </div>
+
+                <div class="overview-card">
+
+                    <div class="overview-icon">
+                        <i class="fa-solid fa-receipt"></i>
+                    </div>
+
+                    <div class="overview-content">
+                        <h3>Tổng Đơn Hàng</h3>
+                        <strong id="totalOrders">0</strong>
+                    </div>
+
+                </div>
+
+                <div class="overview-card">
+
+                    <div class="overview-icon">
+                        <i class="fa-solid fa-sack-dollar"></i>
+                    </div>
+
+                    <div class="overview-content">
+                        <h3>Tổng Tiền Đã Mua</h3>
+                        <strong id="totalMoney">0 đ</strong>
+                    </div>
+
+                </div>
+
+                <div class="overview-card">
+
+                    <div class="overview-icon">
+                        <i class="fa-solid fa-circle-check"></i>
+                    </div>
+
+                    <div class="overview-content">
+                        <h3>Đơn Hoàn Thành</h3>
+                        <strong id="completedOrders">0</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        </section>
+    </main>
+    <div class="notice"></div>
+    <div id="footer"></div>
+
+    <script src="js/header.js"></script>
+    <script src="js/thongtincanhan.js"></script>
+    <script src="js/notice.js"></script>
+    <script src="js/notificationUser.js"></script>
+</body>
+</html>

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QUẢN LÝ VOUCHER</title>
+
+    <link rel="stylesheet" href="../css/table.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../css/qlvoucher.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/notice.css">
+</head>
+<body>
+
+<div class="container">
+
+    <div id="sidebar"></div>
+
+    <main class="main-content">
+            <div class="admin-header">
+                <h1 class="page-title">QUẢN LÝ VOUCHER</h1>
+
+                <div class="notification-box">
+
+                    <button id="notificationBtn" class="notification-btn">
+                        <i class="fa-solid fa-bell"></i>
+
+                        <span id="notificationBadge" class="notification-badge">
+                            0
+                        </span>
+                    </button>
+
+                    <div id="notificationDropdown" class="notification-dropdown">
+
+                        <div class="notification-title">
+                            THÔNG BÁO
+                        </div>
+
+                        <div id="notificationList" class="notification-list">
+
+                            <div class="notification-empty">
+                                Không có thông báo mới
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        <div class="add-products">
+
+            <button
+                class="add-product-btn"
+                id="addVoucherBtn"
+            >
+                <i class="fa-solid fa-plus"></i>
+                Thêm voucher
+            </button>
+
+        </div>
+
+        <div id="searchFilter"></div>
+
+        <div class="table-container">
+
+            <table class="product-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Tên Voucher</th>
+                        <th>Loại giảm</th>
+                        <th>Giá trị giảm</th>
+                        <th>Đơn tối thiểu</th>
+                        <th>Ngày bắt đầu</th>
+                        <th>Ngày kết thúc</th>
+                        <th>Số lượng</th>
+                        <th>Trạng thái</th>
+                        <th colspan="2" class="action-header">
+                            Hành Động
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="voucher-list"></tbody>
+            </table>
+        </div>
+
+
+        <div
+            class="add-product-overlay"
+            id="addVoucherOverlay"
+        >
+            <div
+                class="add-product-form"
+                id="addVoucherForm"
+            >
+                <h2 id="formTitle">
+                    THÊM VOUCHER
+                </h2>
+
+                <input
+                    type="hidden"
+                    id="editVoucherId"
+                >
+
+                <input
+                    type="text"
+                    id="voucherName"
+                    placeholder="Tên voucher"
+                >
+
+                <select
+                    id="voucherType"
+                    title="Chọn loại giảm giá"
+                >
+
+                    <option
+                        value=""
+                        disabled
+                        selected
+                    >
+                        -- Chọn loại giảm giá --
+                    </option>
+
+                    <option value="percent">
+                        Giảm theo %
+                    </option>
+
+                    <option value="fixed">
+                        Giảm tiền
+                    </option>
+
+                </select>
+
+                <input
+                    type="number"
+                    id="voucherValue"
+                    placeholder="Giá trị giảm"
+                >
+
+                <input
+                    type="number"
+                    id="voucherMinOrder"
+                    placeholder="Giá trị đơn hàng tối thiểu"
+                >
+
+                <input
+                    type="datetime-local"
+                    id="voucherStartDate"
+                    title="Ngày bắt đầu"
+                >
+
+                <input
+                    type="datetime-local"
+                    id="voucherEndDate"
+                    title="Ngày kết thúc"
+                >
+
+                <input
+                    type="number"
+                    id="voucherQuantity"
+                    placeholder="Số lượng voucher"
+                    min="1"
+                >
+
+                <select
+                    id="voucherStatus"
+                    title="Chọn trạng thái voucher"
+                >
+
+                    <option
+                        value=""
+                        disabled
+                        selected
+                    >
+                        -- Chọn trạng thái --
+                    </option>
+
+                    <option value="active">
+                        Đang hoạt động
+                    </option>
+
+                    <option value="inactive">
+                        Ngừng hoạt động
+                    </option>
+
+                </select>
+
+                <div class="form-buttons">
+
+                    <button
+                        type="button"
+                        id="saveVoucherBtn"
+                    >
+                        Lưu
+                    </button>
+
+                    <button
+                        type="button"
+                        id="cancelVoucherBtn"
+                    >
+                        Hủy
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+    <div class="notice"></div>
+
+<script src="../js/qlvoucher.js"></script>
+<script src="../js/timkiemvaloc.js"></script>
+<script src="../js/sidebar.js"></script>
+<script src="../js/dangxuatAdmin.js"></script>
+<script src="../js/notice.js"></script>
+<script src="../js/notifcation.js"></script>
+
+</body>
+</html>

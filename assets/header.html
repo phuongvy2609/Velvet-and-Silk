@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Velvet & Silk</title>
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/notice.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="header">
+            <div><a href="index.html" class="logo">Velvet & Silk</a></div>
+
+            <div class="nav">
+                <ul class="nav-menu">
+                    <li><a href="sanpham.html?category=VÁY">VÁY</a></li>
+                    <li><a href="sanpham.html?category=CHÂN VÁY">CHÂN VÁY</a></li>
+                    <li><a href="sanpham.html?category=ÁO">ÁO</a></li>
+                    <li><a href="sanpham.html?category=QUẦN">QUẦN</a></li>
+                    <li><a href="sanpham.html?category=ÁO KHOÁC">ÁO KHOÁC</a></li>
+                </ul>
+            </div>
+
+            <div class="icons"> 
+                <input type="text" class="search" id="searchInput" placeholder="Tìm kiếm...">
+                <i class="kl fa-solid fa-magnifying-glass icon-hover" id="searchBtn"></i>
+
+                <a href="giohang.html" class="cart-icon" aria-label="Xem giỏ hàng">
+                    <i class="fas fa-shopping-cart icon-hover"></i><span id="cartCount"></span></a>
+
+                <div class="notification-box">
+                    <div class="notification-icon" aria-label="Thông báo">
+                        <i class="fa-solid fa-bell icon-hover"></i>
+                        <span id="notificationCount"></span>
+                    </div>
+
+                    <div class="notification-dropdown" id="notificationDropdown">
+                        <div class="notification-header">
+                            <span>Thông báo</span>
+                        </div>
+
+                        <div id="notificationList"></div>
+                    </div>
+                </div>
+                <a href="lienhe.html" aria-label="Liên hệ" class="contact-icon"><i class="fa-solid fa-phone icon-hover"></i></a>
+                <div class="user-box">
+                    <i class="u fas fa-user icon-hover"></i>
+                    <span id="username"></span>
+                </div>
+            </div>
+            
+            <div class="user">
+                <ul>
+                    <li><a href="thongtincanhan.html"><i class="fa-solid fa-user"></i></i> Thông tin cá nhân</a></li>
+                    <li class="line-item"><div class="linee"></div></li>
+                    <li><a href="lichsudathang.html"><i class="fa-solid fa-box"></i> Đơn hàng</a></li>
+                    <li class="line-item"><div class="linee"></div></li>
+                    <li id="logoutItem"><a href="#" id="logoutBtn"><i class="fa-solid fa-arrow-right-from-bracket"></i> Đăng xuất</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+    <div class="notice"></div>
+    <script src="js/notice.js"></script>
+    <script src="js/notificationUser.js"></script>
+</body>
+</html>

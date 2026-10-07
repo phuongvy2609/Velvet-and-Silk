@@ -1,0 +1,1937 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  }
+
+body {
+background: #f0f2f5;
+display: flex;
+min-height: 100vh;
+margin: 0;
+}
+
+/* ========================================
+NỘI DUNG CHÍNH
+======================================== */
+
+.main {
+margin-left: 250px;
+flex: 1;
+width: calc(100% - 240px);
+padding: 25px 32px 35px;
+box-sizing: border-box;
+overflow-x: hidden;
+transition: margin-left 0.3s ease, width 0.3s ease;
+}
+
+/* Khi sidebar thu gọn */
+
+body.sidebar-collapsed .main {
+margin-left: 110px;
+width: calc(100% - 110px);
+}
+
+/* ========================================
+HEADER ADMIN
+======================================== */
+
+.admin-header {
+width: 100%;
+height: 55px;
+display: flex;
+align-items: center;
+position: relative;
+margin-bottom: 30px;
+z-index: 10000;
+}
+
+.page-title {
+position: absolute;
+left: 50%;
+top: 50%;
+transform: translate(-50%, -50%);
+margin: 0;
+color: #1a1a2e;
+letter-spacing: 1px;
+font-size: 32px;
+}
+
+/* ========================================
+THÔNG BÁO
+======================================== */
+
+.notification-box {
+position: absolute;
+right: 25px;
+top: 50%;
+transform: translateY(-50%);
+z-index: 10001;
+}
+
+.notification-btn {
+width: 55px;
+height: 55px;
+border: none;
+border-radius: 50%;
+background: white;
+display: flex;
+align-items: center;
+justify-content: center;
+cursor: pointer;
+position: relative;
+z-index: 10002;
+box-shadow: 0 3px 12px rgba(0, 0, 0, 0.12);
+transition: 0.2s ease;
+}
+
+.notification-btn:hover {
+transform: scale(1.03);
+}
+
+.notification-btn i {
+font-size: 27px;
+color: #f5cd1d;
+transition: 0.2s ease;
+}
+
+.notification-btn:hover i {
+color: #fa2121;
+}
+
+.notification-badge {
+position: absolute;
+top: -4px;
+right: -4px;
+min-width: 23px;
+height: 23px;
+padding: 0 5px;
+background: #ef4444;
+color: white;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 11px;
+font-weight: bold;
+border: 2px solid white;
+box-sizing: border-box;
+z-index: 10003;
+}
+
+.notification-badge.hidden {
+display: none;
+}
+
+.notification-dropdown {
+position: absolute;
+top: 65px;
+right: 0;
+width: 400px;
+background: #ffffff;
+border-radius: 14px;
+overflow: hidden;
+display: none;
+z-index: 99999;
+box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+border: 1px solid #eeeeee;
+}
+
+.notification-dropdown.show {
+display: block;
+}
+
+.notification-title {
+padding: 15px 18px;
+text-align: center;
+font-size: 18px;
+font-weight: bold;
+color: white;
+background: rgb(22, 168, 0);
+border-bottom: 1px solid #0b9604;
+}
+
+.notification-list {
+max-height: 350px;
+overflow-y: auto;
+}
+
+.notification-item {
+position: relative;
+width: 100%;
+min-height: 78px;
+padding: 13px 15px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 10px;
+box-sizing: border-box;
+border-bottom: 1px solid #cdcbcb;
+cursor: pointer;
+background: #ffffff;
+transition: 0.2s ease;
+}
+
+.notification-item:last-child {
+border-bottom: none;
+}
+
+.notification-item:hover {
+background: #e8fee4;
+}
+
+.notification-item.unread {
+background: #fff8f8;
+}
+
+.notification-item.unread:hover {
+background: #fde7e7;
+}
+
+.notification-item.unread::before {
+content: "";
+position: absolute;
+left: 0;
+top: 12px;
+bottom: 12px;
+width: 3px;
+background: #f23c3c;
+border-radius: 0 5px 5px 0;
+}
+
+.notification-icon {
+width: 42px;
+height: 42px;
+min-width: 42px;
+border-radius: 50%;
+background: #fff3cd;
+color: #fdd32e;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+.notification-icon i {
+font-size: 17px;
+}
+
+.notification-content {
+flex: 1;
+min-width: 0;
+display: flex;
+flex-direction: column;
+justify-content: center;
+}
+
+.notification-content h4 {
+margin: 0 0 4px;
+font-size: 16px;
+font-weight: bold;
+line-height: 1.3;
+color: black;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+}
+
+.notification-content p {
+margin: 0;
+font-size: 13px;
+line-height: 1.4;
+color: #565656;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+}
+
+.notification-time {
+display: flex;
+align-items: center;
+gap: 4px;
+margin-top: 5px;
+font-size: 12px;
+color: #898888;
+}
+
+.notification-empty {
+padding: 35px 20px;
+text-align: center;
+color: #747373;
+font-size: 14px;
+}
+
+.notification-list::-webkit-scrollbar {
+width: 5px;
+}
+
+.notification-list::-webkit-scrollbar-track {
+background: #f7f7f7;
+}
+
+.notification-list::-webkit-scrollbar-thumb {
+background: #d6d6d6;
+border-radius: 10px;
+}
+
+.notification-list::-webkit-scrollbar-thumb:hover {
+background: #bbbbbb;
+}
+
+.notification-delete {
+border: none;
+background: transparent;
+color: rgb(28, 93, 243);
+border-radius: 8px;
+cursor: pointer;
+font-size: 13px;
+padding: 6px 8px;
+display: flex;
+align-items: center;
+gap: 5px;
+}
+
+.notification-delete:hover {
+color: red;
+}
+
+/* ========================================
+THỐNG KÊ
+======================================== */
+
+.stat-cards {
+display: grid;
+grid-template-columns: repeat(4, 1fr);
+gap: 22px;
+margin-bottom: 22px;
+}
+
+.stat-card {
+background: #ffffff;
+border-radius: 12px;
+padding: 24px 16px;
+text-align: center;
+box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 8px;
+transition: transform 0.2s ease, box-shadow 0.2s ease;
+cursor: pointer;
+}
+
+.stat-card:hover {
+transform: translateY(-5px);
+box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+}
+
+.stat-card .icon {
+font-size: 2.1rem;
+}
+
+.stat-card .label {
+font-size: 19px;
+color: black;
+font-weight: bold;
+}
+
+.stat-card .value {
+font-size: 30px;
+font-weight: bold;
+color: green;
+}
+
+/* ========================================
+BIỂU ĐỒ
+======================================== */
+
+.chart-card {
+position: relative;
+z-index: 1;
+background: #ffffff;
+border-radius: 12px;
+padding: 15px 20px;
+margin-bottom: 20px;
+box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+box-sizing: border-box;
+}
+
+.chart-card h3 {
+text-align: center;
+font-size: 18px;
+font-weight: bold;
+margin: 6px 0 10px;
+color: black;
+}
+
+.chart-card:has(#revenueChart) {
+padding: 14px 18px 20px;
+}
+
+.revenue-chart {
+width: 100%;
+height: 260px;
+position: relative;
+z-index: 1;
+}
+
+#revenueChart {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+z-index: 1;
+}
+
+.pie-wrap {
+width: 100%;
+max-width: 300px;
+height: 250px;
+margin: 0 auto;
+position: relative;
+z-index: 1;
+}
+
+#orderChart {
+margin-left: 0;
+z-index: 1;
+}
+
+.bottom-row {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 22px;
+align-items: start;
+position: relative;
+z-index: 1;
+}
+
+/* ========================================
+SẢN PHẨM BÁN CHẠY
+======================================== */
+
+.top-products table {
+width: 100%;
+min-width: 0;
+max-width: 100%;
+table-layout: fixed;
+border-collapse: collapse;
+}
+
+.top-products th {
+padding: 12px 7px;
+text-align: center;
+color: white;
+font-size: 15px;
+font-weight: 600;
+border-bottom: 2px solid #eeeeee;
+}
+
+.top-products th:last-child,
+.top-products td:last-child {
+white-space: nowrap;
+text-align: center;
+padding: 12px;
+}
+
+.top-products td {
+padding: 11px 7px;
+text-align: center;
+font-size: 15px;
+border-bottom: 1px solid #f0f0f0;
+vertical-align: middle;
+}
+
+.top-products td img {
+width: 95px;
+height: 120px;
+object-fit: cover;
+border-radius: 6px;
+}
+
+.product-img-wrap {
+width: 65px;
+height: 45px;
+background: #ececec;
+display: inline-flex;
+align-items: center;
+justify-content: center;
+border-radius: 6px;
+}
+
+/* ========================================
+   RESPONSIVE TRÊN 1200PX - DESKTOP LỚN
+======================================== */
+
+@media screen and (min-width: 1201px) {
+
+    .main {
+        width: calc(100% - 250px);
+        padding: 25px 32px 35px;
+        min-width: 0;
+    }
+
+    body.sidebar-collapsed .main {
+        margin-left: 70px;
+        width: calc(100% - 110px);
+    }
+
+    /* HEADER */
+
+    .admin-header {
+        width: 100%;
+        height: 55px;
+        margin-bottom: 30px;
+    }
+
+    .page-title {
+        font-size: 32px;
+    }
+
+    .notification-box {
+        right: 25px;
+    }
+
+    .notification-btn {
+        width: 55px;
+        height: 55px;
+    }
+
+    .notification-btn i {
+        font-size: 27px;
+    }
+
+    /* THỐNG KÊ */
+
+    .stat-cards {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 22px;
+        margin-bottom: 22px;
+    }
+
+    .stat-card {
+        padding: 24px 16px;
+    }
+
+    .stat-card .icon {
+        font-size: 2.1rem;
+    }
+
+    .stat-card .label {
+        font-size: 19px;
+    }
+
+    .stat-card .value {
+        font-size: 30px;
+    }
+
+    /* BIỂU ĐỒ DOANH THU */
+
+    .chart-card {
+        height: auto;
+        min-height: 0;
+        padding: 15px 20px;
+        margin-bottom: 20px;
+    }
+
+    .chart-card h3 {
+        font-size: 18px;
+    }
+
+    .chart-card:has(#revenueChart) {
+        padding: 14px 18px 20px;
+    }
+
+    .revenue-chart {
+        width: 100%;
+        height: 260px;
+    }
+
+    /* BIỂU ĐỒ ĐƠN HÀNG VÀ SẢN PHẨM */
+
+    .bottom-row {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 22px;
+        align-items: start;
+        height: auto;
+        overflow: visible;
+    }
+
+    .bottom-row .chart-card {
+        width: 100%;
+        min-width: 0;
+        height: auto;
+        min-height: 0;
+        overflow: visible;
+    }
+
+    .pie-wrap {
+        width: 100%;
+        max-width: 300px;
+        height: 250px;
+        margin: 0 auto;
+    }
+
+    #orderChart {
+        width: 100%;
+        height: 100%;
+        margin-left: 0;
+    }
+
+    /* BẢNG SẢN PHẨM */
+
+    .top-products {
+        width: 100%;
+        height: auto;
+        min-height: 0;
+        max-height: none;
+        overflow: visible;
+    }
+
+    .table-scroll {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        overflow-x: auto;
+        overflow-y: visible;
+    }
+
+    .top-products table,
+    .table-scroll table {
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
+        table-layout: fixed;
+        border-collapse: collapse;
+    }
+
+    .top-products th,
+    .top-products td {
+        font-size: 15px;
+        padding: 12px 7px;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .top-products td img {
+        width: 95px;
+        height: 120px;
+        object-fit: cover;
+        border-radius: 6px;
+    }
+
+}
+
+/* ========================================
+   RESPONSIVE 1200PX - LAPTOP
+======================================== */
+
+@media screen and (max-width: 1200px) {
+
+    .main {
+        margin-left: 250px;
+        width: calc(100% - 250px);
+        padding: 22px 20px 30px;
+        min-width: 0;
+    }
+
+    body.sidebar-collapsed .main {
+        margin-left: 70px;
+        width: calc(100% - 110px);
+    }
+
+    .admin-header {
+        height: 55px;
+        margin-bottom: 25px;
+    }
+
+    .page-title {
+        font-size: 29px;
+    }
+
+    .notification-box {
+        right: 10px;
+    }
+
+    .stat-cards {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 15px;
+    }
+
+    .stat-card {
+        padding: 20px 10px;
+    }
+
+    .stat-card .icon {
+        font-size: 1.9rem;
+    }
+
+    .stat-card .label {
+        font-size: 16px;
+    }
+
+    .stat-card .value {
+        font-size: 27px;
+    }
+
+    .chart-card {
+        height: auto;
+        min-height: 0;
+    }
+
+    .revenue-chart {
+        height: 250px;
+    }
+
+    .bottom-row {
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+        align-items: start;
+        height: auto;
+        overflow: visible;
+    }
+
+    .bottom-row > .chart-card {
+        width: 100%;
+        min-width: 0;
+        height: auto;
+        overflow: visible;
+    }
+
+    .pie-wrap {
+        max-width: 260px;
+        height: 230px;
+    }
+
+    .top-products {
+        height: auto;
+        min-height: 0;
+        max-height: none;
+        overflow: visible;
+    }
+
+    .table-scroll {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: auto;
+        overflow-y: visible;
+    }
+
+    .top-products table {
+        width: 650px;
+        min-width: 650px;
+        table-layout: fixed;
+    }
+
+    .top-products td img {
+        width: 60px;
+        height: 78px;
+    }
+
+    .notification-dropdown {
+        width: 360px;
+    }
+}
+
+
+/* ========================================
+   RESPONSIVE 992PX - TABLET NGANG
+======================================== */
+
+@media screen and (max-width: 992px) {
+
+    .main {
+        margin-left: 110px;
+        width: calc(100% - 110px);
+        padding: 20px 18px 25px;
+        min-width: 0;
+    }
+
+    body.sidebar-collapsed .main {
+        margin-left: 110px;
+        width: calc(100% - 110px);
+    }
+
+    .admin-header {
+        height: 50px;
+        margin-bottom: 22px;
+    }
+
+    .page-title {
+        font-size: 27px;
+        letter-spacing: 0.5px;
+    }
+
+    .notification-box {
+        right: 5px;
+    }
+
+    .notification-btn {
+        width: 45px;
+        height: 45px;
+    }
+
+    .notification-btn i {
+        font-size: 22px;
+    }
+
+    .stat-cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 15px;
+        margin-bottom: 18px;
+    }
+
+    .stat-card {
+        padding: 20px 10px;
+    }
+
+    .stat-card .icon {
+        font-size: 2rem;
+    }
+
+    .stat-card .label {
+        font-size: 17px;
+    }
+
+    .stat-card .value {
+        font-size: 27px;
+    }
+
+    /* BIỂU ĐỒ DOANH THU */
+
+    .chart-card {
+        height: auto;
+        min-height: 0;
+        padding: 13px 12px;
+    }
+
+    .chart-card h3 {
+        font-size: 17px;
+    }
+
+    .chart-card:has(#revenueChart) {
+        height: auto;
+        padding: 12px 12px 15px;
+    }
+
+    .revenue-chart {
+        width: 100%;
+        height: 240px;
+    }
+
+    /* BIỂU ĐỒ ĐƠN HÀNG VÀ BẢNG */
+
+    .bottom-row {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 12px;
+        align-items: start;
+        height: auto;
+        overflow: visible;
+    }
+
+    .bottom-row .chart-card {
+        width: 100%;
+        min-width: 0;
+        height: auto;
+        min-height: 0;
+        max-height: none;
+        margin-bottom: 0;
+        overflow: visible;
+    }
+
+    .pie-wrap {
+        width: 100%;
+        max-width: 230px;
+        height: 220px;
+        margin: 0 auto;
+    }
+
+    #orderChart {
+        width: 100%;
+        height: 100%;
+        margin-left: 0;
+    }
+
+    /* BẢNG SẢN PHẨM */
+
+    .top-products {
+        height: auto;
+        min-height: 0;
+        max-height: none;
+        overflow: visible;
+        align-self: start;
+    }
+
+    .table-scroll {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        height: auto;
+        overflow-x: auto;
+        overflow-y: visible;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .top-products table,
+    .table-scroll table {
+        width: 650px;
+        min-width: 650px;
+        max-width: none;
+        table-layout: fixed;
+        border-collapse: collapse;
+    }
+
+    .top-products th,
+    .top-products td {
+        font-size: 13px;
+        padding: 9px 5px;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .top-products td img {
+        width: 55px;
+        height: 70px;
+        object-fit: cover;
+    }
+
+    .notification-dropdown {
+        width: 350px;
+    }
+}
+
+
+/* ========================================
+   RESPONSIVE 768PX - TABLET
+======================================== */
+
+@media screen and (max-width: 768px) {
+
+    .main {
+        width: calc(100% - 110px);
+        padding: 18px 14px 25px;
+        min-width: 0;
+    }
+
+    body.sidebar-collapsed .main {
+        margin-left: 70px;
+        width: calc(100% - 110px);
+    }
+
+    .admin-header {
+        height: 48px;
+        margin-bottom: 20px;
+        position: relative;
+        z-index: 2;
+    }
+
+    .page-title {
+        font-size: 24px;
+        letter-spacing: 0;
+    }
+
+    .notification-box {
+        right: 0;
+    }
+
+    .notification-btn {
+        width: 42px;
+        height: 42px;
+    }
+
+    .notification-btn i {
+        font-size: 20px;
+    }
+
+    .notification-badge {
+        min-width: 20px;
+        height: 20px;
+        font-size: 10px;
+    }
+
+    /* THỐNG KÊ */
+
+    .stat-cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+        margin-bottom: 15px;
+    }
+
+    .stat-card {
+        padding: 18px 8px;
+        gap: 7px;
+    }
+
+    .stat-card .icon {
+        font-size: 1.8rem;
+    }
+
+    .stat-card .label {
+        font-size: 16px;
+    }
+
+    .stat-card .value {
+        font-size: 25px;
+    }
+
+    /* BIỂU ĐỒ DOANH THU */
+
+    .chart-card {
+        width: 100%;
+        height: auto;
+        min-height: 0;
+        padding: 12px 10px;
+        margin-bottom: 14px;
+    }
+
+    .chart-card h3 {
+        font-size: 16px;
+    }
+
+    .chart-card:has(#revenueChart) {
+        height: auto;
+        padding: 10px 8px 13px;
+    }
+
+    .revenue-chart {
+        width: 100%;
+        height: 220px;
+    }
+
+    /* BIỂU ĐỒ ĐƠN HÀNG */
+
+    .bottom-row {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 12px;
+        width: 100%;
+        height: auto;
+        align-items: start;
+        overflow: visible;
+    }
+
+    .bottom-row .chart-card {
+        width: 100%;
+        height: auto;
+        min-height: 0;
+        max-height: none;
+        margin-bottom: 0;
+        overflow: visible;
+    }
+
+    .bottom-row .chart-card:first-child {
+        min-height: 250px;
+        padding: 12px 10px;
+    }
+
+    .pie-wrap {
+        width: 100%;
+        max-width: 280px;
+        height: 220px;
+        margin: 0 auto;
+    }
+
+    #orderChart {
+        width: 100%;
+        height: 100%;
+        margin-left: 0;
+    }
+
+    /* BẢNG SẢN PHẨM */
+
+    .top-products {
+        width: 100%;
+        height: auto;
+        min-height: 0;
+        max-height: none;
+        overflow: visible;
+        padding: 10px;
+    }
+
+    .top-products h3 {
+        font-size: 16px;
+        text-align: center;
+    }
+
+    .table-scroll {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        height: auto;
+        overflow-x: auto;
+        overflow-y: visible;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .top-products table,
+    .table-scroll table {
+        width: 650px;
+        min-width: 650px;
+        max-width: none;
+        table-layout: fixed;
+        border-collapse: collapse;
+    }
+
+    .top-products th,
+    .top-products td {
+        font-size: 13px;
+        padding: 9px 5px;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .top-products td img {
+        width: 55px;
+        height: 72px;
+        object-fit: cover;
+        border-radius: 6px;
+    }
+
+    .top-products th {
+        white-space: nowrap;
+    }
+
+    .top-products td {
+        white-space: normal;
+        overflow-wrap: break-word;
+    }
+
+    .top-products th:nth-child(1),
+    .top-products td:nth-child(1) {
+        width: 5%;
+    }
+
+    .top-products th:nth-child(2),
+    .top-products td:nth-child(2) {
+        width: 12%;
+    }
+
+    .top-products th:nth-child(3),
+    .top-products td:nth-child(3) {
+        width: 35%;
+    }
+
+    .top-products th:nth-child(4),
+    .top-products td:nth-child(4) {
+        width: 15%;
+    }
+
+    .top-products th:nth-child(5),
+    .top-products td:nth-child(5) {
+        width: 25%;
+        white-space: nowrap;
+    }
+
+    .notification-dropdown {
+        width: min(350px, calc(100vw - 130px));
+    }
+}
+
+
+/* ========================================
+   RESPONSIVE 425PX - ĐIỆN THOẠI LỚN
+======================================== */
+
+@media screen and (max-width: 425px) {
+
+    .main {
+        margin-left: 80px;
+        width: calc(100% - 80px);
+        padding: 15px 10px 20px 0;
+        min-width: 0;
+    }
+
+    body.sidebar-collapsed .main {
+        margin-left: 80px;
+        width: calc(100% - 80px);
+    }
+
+    /* HEADER */
+
+    .admin-header {
+        width: 100%;
+        height: 45px;
+        margin-bottom: 17px;
+        position: relative;
+        z-index: 2;
+    }
+
+    .page-title {
+        font-size: 19px;
+        left: 40%;
+        letter-spacing: 0;
+        white-space: nowrap;
+    }
+
+    .notification-box {
+        right: 0;
+    }
+
+    .notification-btn {
+        width: 36px;
+        height: 36px;
+    }
+
+    .notification-btn i {
+        font-size: 18px;
+    }
+
+    .notification-badge {
+        min-width: 18px;
+        height: 18px;
+        font-size: 9px;
+        padding: 0 3px;
+    }
+
+    /* THỐNG KÊ */
+
+    .stat-cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 9px;
+        margin-bottom: 13px;
+    }
+
+    .stat-card {
+        padding: 15px 5px;
+        gap: 6px;
+        border-radius: 8px;
+    }
+
+    .stat-card .icon {
+        font-size: 1.5rem;
+    }
+
+    .stat-card .label {
+        font-size: 14px;
+    }
+
+    .stat-card .value {
+        font-size: 22px;
+    }
+
+    /* BIỂU ĐỒ CHUNG */
+
+    .chart-card {
+        width: 100%;
+        height: auto;
+        min-height: 0;
+        max-height: none;
+        padding: 10px 7px;
+        margin-bottom: 12px;
+        overflow: visible;
+    }
+
+    .chart-card h3 {
+        font-size: 14px;
+        margin: 5px 0 8px;
+    }
+
+    /* DOANH THU */
+
+    .chart-card:has(#revenueChart) {
+        height: auto;
+        min-height: 0;
+        padding: 10px 5px 12px;
+    }
+
+    .revenue-chart {
+        width: 100%;
+        height: 190px;
+        position: relative;
+    }
+
+    #revenueChart {
+        width: 100%;
+        height: 100%;
+    }
+
+    /* ĐƠN HÀNG VÀ BẢNG */
+
+    .bottom-row {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 10px;
+        width: 100%;
+        height: auto;
+        min-height: 0;
+        align-items: start;
+        overflow: visible;
+    }
+
+    .bottom-row .chart-card {
+        width: 100%;
+        height: auto;
+        min-height: 0;
+        max-height: none;
+        margin-bottom: 0;
+        overflow: visible;
+    }
+
+    .bottom-row .chart-card:first-child {
+        min-height: 230px;
+        padding: 10px 7px 12px;
+    }
+
+    .pie-wrap {
+        width: 100%;
+        max-width: 230px;
+        height: 210px;
+        margin: 0 auto;
+        position: relative;
+    }
+
+    #orderChart {
+        width: 100%;
+        height: 100%;
+        margin-left: 0;
+    }
+
+    /* BẢNG SẢN PHẨM */
+
+    .top-products {
+        width: 100%;
+        height: auto;
+        min-height: 0;
+        max-height: none;
+        padding: 8px 5px;
+        overflow: visible;
+        align-self: start;
+    }
+
+    .top-products h3 {
+        text-align: center;
+        font-size: 13px;
+        margin: 5px 0 8px;
+        white-space: nowrap;
+    }
+
+    .table-scroll {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        height: auto;
+        min-height: 0;
+        max-height: none;
+        overflow-x: auto;
+        overflow-y: visible;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .top-products table,
+    .table-scroll table {
+        width: 650px;
+        min-width: 650px;
+        max-width: none;
+        table-layout: fixed;
+        border-collapse: collapse;
+        height: auto;
+    }
+
+    .top-products th,
+    .top-products td {
+        font-size: 12px;
+        padding: 8px 4px;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .top-products th {
+        white-space: nowrap;
+    }
+
+    .top-products td {
+        white-space: normal;
+        overflow-wrap: break-word;
+    }
+
+    .top-products th:nth-child(1),
+    .top-products td:nth-child(1) {
+        width: 5%;
+    }
+
+    .top-products th:nth-child(2),
+    .top-products td:nth-child(2) {
+        width: 10%;
+    }
+
+    .top-products th:nth-child(3),
+    .top-products td:nth-child(3) {
+        width: 35%;
+    }
+
+    .top-products th:nth-child(4),
+    .top-products td:nth-child(4) {
+        width: 18%;
+    }
+
+    .top-products th:nth-child(5),
+    .top-products td:nth-child(5) {
+        width: 27%;
+        white-space: nowrap;
+    }
+
+    .top-products td img {
+        display: block;
+        width: 50px;
+        height: 65px;
+        object-fit: cover;
+        border-radius: 6px;
+        margin: auto;
+    }
+
+    .table-scroll::-webkit-scrollbar {
+        height: 7px;
+    }
+
+    .table-scroll::-webkit-scrollbar-track {
+        background: #eeeeee;
+        border-radius: 10px;
+    }
+
+    .table-scroll::-webkit-scrollbar-thumb {
+        background: #999999;
+        border-radius: 10px;
+    }
+
+    .top-products tbody,
+    .top-products tbody tr {
+        height: auto;
+    }
+
+    /* THÔNG BÁO */
+
+    .notification-dropdown {
+        width: 260px;
+        min-width: 0;
+        max-width: calc(100vw - 95px);
+        right: 0;
+        top: 48px;
+    }
+
+    .notification-title {
+        font-size: 14px;
+        padding: 11px 6px;
+    }
+
+    .notification-item {
+        padding: 9px 6px;
+        gap: 6px;
+    }
+
+    .notification-icon {
+        width: 30px;
+        height: 30px;
+        min-width: 30px;
+    }
+
+    .notification-content h4 {
+        font-size: 12px;
+    }
+
+    .notification-content p {
+        font-size: 11px;
+    }
+
+    .notification-delete {
+        font-size: 11px;
+        padding: 4px;
+    }
+}
+
+
+/* ========================================
+   RESPONSIVE 375PX - ĐIỆN THOẠI VỪA
+======================================== */
+
+@media screen and (max-width: 375px) {
+
+    .main {
+        margin-left: 80px;
+        width: calc(100% - 80px);
+        padding: 12px 8px 18px 0;
+    }
+
+    body.sidebar-collapsed .main {
+        margin-left: 80px;
+        width: calc(100% - 80px);
+    }
+
+    /* HEADER */
+
+    .admin-header {
+        height: 42px;
+        margin-bottom: 15px;
+        position: relative;
+        z-index: 2;
+    }
+
+    .page-title {
+        font-size: 17px;
+        left: 40%;
+    }
+
+    .notification-btn {
+        width: 33px;
+        height: 33px;
+    }
+
+    .notification-btn i {
+        font-size: 16px;
+    }
+
+    /* THỐNG KÊ */
+
+    .stat-cards {
+        gap: 8px;
+        margin-bottom: 11px;
+    }
+
+    .stat-card {
+        padding: 13px 4px;
+        gap: 5px;
+    }
+
+    .stat-card .icon {
+        font-size: 1.35rem;
+    }
+
+    .stat-card .label {
+        font-size: 13px;
+    }
+
+    .stat-card .value {
+        font-size: 20px;
+    }
+
+    /* BIỂU ĐỒ */
+
+    .chart-card {
+        padding: 9px 6px;
+        margin-bottom: 10px;
+    }
+
+    .chart-card h3 {
+        font-size: 13px;
+    }
+
+    .chart-card:has(#revenueChart) {
+        padding: 9px 5px 11px;
+    }
+
+    .revenue-chart {
+        height: 175px;
+    }
+
+    .bottom-row {
+        gap: 9px;
+    }
+
+    .bottom-row .chart-card:first-child {
+        min-height: 220px;
+        padding: 9px 6px 11px;
+    }
+
+    .pie-wrap {
+        height: 200px;
+        max-width: 215px;
+    }
+
+    /* BẢNG SẢN PHẨM */
+
+    .top-products {
+        padding: 8px 5px;
+    }
+
+    .top-products h3 {
+        font-size: 12px;
+    }
+
+    .table-scroll {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: auto;
+        overflow-y: visible;
+    }
+
+    .top-products table,
+    .table-scroll table {
+        width: 650px;
+        min-width: 650px;
+        max-width: none;
+        table-layout: fixed;
+    }
+
+    .top-products th,
+    .top-products td {
+        font-size: 11px;
+        padding: 7px 3px;
+    }
+
+    .top-products td img {
+        width: 45px;
+        height: 60px;
+    }
+
+    /* THÔNG BÁO */
+
+    .notification-dropdown {
+        width: 230px;
+        max-width: calc(100vw - 90px);
+        top: 45px;
+    }
+
+    .notification-title {
+        font-size: 13px;
+        padding: 10px 5px;
+    }
+
+    .notification-item {
+        padding: 8px 5px;
+        gap: 5px;
+    }
+
+    .notification-icon {
+        width: 28px;
+        height: 28px;
+        min-width: 28px;
+    }
+
+    .notification-content h4 {
+        font-size: 11px;
+    }
+
+    .notification-content p {
+        font-size: 10px;
+    }
+
+    .notification-delete {
+        font-size: 10px;
+        padding: 3px;
+    }
+}
+
+
+/* ========================================
+   RESPONSIVE 320PX - ĐIỆN THOẠI NHỎ
+======================================== */
+
+@media screen and (max-width: 320px) {
+
+    .main {
+        margin-left: 80px;
+        width: calc(100% - 80px);
+        padding: 10px 10px 15px 0;
+        min-width: 0;
+    }
+
+    body.sidebar-collapsed .main {
+        margin-left: 80px;
+        width: calc(100% - 80px);
+    }
+
+    /* HEADER */
+
+    .admin-header {
+        width: 100%;
+        height: 40px;
+        margin-bottom: 13px;
+        position: relative;
+        z-index: 2;
+    }
+
+    .page-title {
+        font-size: 15px;
+        left: 40%;
+        letter-spacing: 0;
+        white-space: nowrap;
+    }
+
+    .notification-box {
+        right: 0;
+    }
+
+    .notification-btn {
+        width: 30px;
+        height: 30px;
+    }
+
+    .notification-btn i {
+        font-size: 15px;
+    }
+
+    .notification-badge {
+        min-width: 16px;
+        height: 16px;
+        font-size: 8px;
+        padding: 0 3px;
+    }
+
+    /* THỐNG KÊ */
+
+    .stat-cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 6px;
+        margin-bottom: 10px;
+    }
+
+    .stat-card {
+        padding: 11px 3px;
+        gap: 5px;
+        border-radius: 7px;
+    }
+
+    .stat-card .icon {
+        font-size: 1.2rem;
+    }
+
+    .stat-card .label {
+        font-size: 12px;
+    }
+
+    .stat-card .value {
+        font-size: 18px;
+    }
+
+    /* BIỂU ĐỒ CHUNG */
+
+    .chart-card {
+        width: 100%;
+        height: auto;
+        min-height: 0;
+        max-height: none;
+        padding: 8px 5px;
+        margin-bottom: 10px;
+        overflow: visible;
+    }
+
+    .chart-card h3 {
+        font-size: 12px;
+        margin: 4px 0 7px;
+    }
+
+    /* BIỂU ĐỒ DOANH THU */
+
+    .chart-card:has(#revenueChart) {
+        height: auto;
+        min-height: 0;
+        padding: 8px 5px 10px;
+    }
+
+    .revenue-chart {
+        width: 100%;
+        height: 260px;
+        position: relative;
+    }
+
+    #revenueChart {
+        width: 100%;
+        height: 100%;
+    }
+
+    /* BIỂU ĐỒ ĐƠN HÀNG */
+
+    .bottom-row {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 10px;
+        width: 100%;
+        height: auto;
+        min-height: 0;
+        align-items: start;
+        overflow: visible;
+    }
+
+    .bottom-row .chart-card {
+        width: 100%;
+        height: auto;
+        min-height: 0;
+        max-height: none;
+        margin-bottom: 0;
+        overflow: visible;
+    }
+
+    .bottom-row .chart-card:first-child {
+        min-height: 250px;
+        padding: 8px 5px 12px;
+    }
+
+    .pie-wrap {
+        width: 100%;
+        max-width: 190px;
+        height: 270px;
+        margin: 0 auto;
+        position: relative;
+    }
+
+    #orderChart {
+        width: 100%;
+        height: 100%;
+        margin-left: 0;
+    }
+
+    /* BẢNG SẢN PHẨM */
+
+    .top-products {
+        width: 100%;
+        height: auto;
+        min-height: 0;
+        max-height: none;
+        padding: 8px 5px;
+        overflow: visible;
+        align-self: start;
+    }
+
+    .top-products h3 {
+        text-align: center;
+        font-size: 12px;
+        margin: 4px 0 7px;
+        white-space: nowrap;
+    }
+
+    /* KHUNG CUỘN NGANG */
+
+    .table-scroll {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        height: auto;
+        min-height: 0;
+        max-height: none;
+        overflow-x: auto;
+        overflow-y: visible;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* GIỮ NGUYÊN KÍCH THƯỚC BẢNG */
+
+    .top-products table,
+    .table-scroll table {
+        width: 650px;
+        min-width: 650px;
+        max-width: none;
+        table-layout: fixed;
+        border-collapse: collapse;
+        height: auto;
+    }
+
+    .top-products th,
+    .top-products td {
+        font-size: 11px;
+        padding: 7px 3px;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .top-products th {
+        white-space: nowrap;
+    }
+
+    .top-products td {
+        white-space: normal;
+        overflow-wrap: break-word;
+    }
+
+    .top-products th:nth-child(1),
+    .top-products td:nth-child(1) {
+        width: 8%;
+    }
+
+    .top-products th:nth-child(2),
+    .top-products td:nth-child(2) {
+        width: 12%;
+    }
+
+    .top-products th:nth-child(3),
+    .top-products td:nth-child(3) {
+        width: 35%;
+    }
+
+    .top-products th:nth-child(4),
+    .top-products td:nth-child(4) {
+        width: 18%;
+    }
+
+    .top-products th:nth-child(5),
+    .top-products td:nth-child(5) {
+        width: 27%;
+        white-space: nowrap;
+    }
+
+    .top-products td img {
+        display: block;
+        width: 42px;
+        height: 55px;
+        object-fit: cover;
+        border-radius: 6px;
+        margin: auto;
+    }
+
+    .table-scroll::-webkit-scrollbar {
+        height: 7px;
+    }
+
+    .table-scroll::-webkit-scrollbar-track {
+        background: #eeeeee;
+        border-radius: 10px;
+    }
+
+    .table-scroll::-webkit-scrollbar-thumb {
+        background: #999999;
+        border-radius: 10px;
+    }
+
+    /* KHÔNG GIỚI HẠN CHIỀU CAO BẢNG */
+
+    .top-products tbody {
+        height: auto;
+    }
+
+    .top-products tbody tr {
+        height: auto;
+    }
+
+    /* THÔNG BÁO */
+
+    .notification-dropdown {
+        width: 205px;
+        min-width: 0;
+        right: 0;
+        top: 43px;
+    }
+
+    .notification-title {
+        font-size: 13px;
+        padding: 10px 5px;
+    }
+
+    .notification-item {
+        padding: 8px 5px;
+        gap: 5px;
+    }
+
+    .notification-icon {
+        width: 28px;
+        height: 28px;
+        min-width: 28px;
+    }
+
+    .notification-content h4 {
+        font-size: 11px;
+    }
+
+    .notification-content p {
+        font-size: 10px;
+    }
+
+    .notification-delete {
+        font-size: 10px;
+        padding: 3px;
+    }
+
+}

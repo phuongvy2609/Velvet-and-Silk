@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Velvet & Silk - Nhung và Lụa</title>
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/notice.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <main>
+    <div id="header"></div>
+
+    <div>
+        <div class="banner">
+            <div class="banner-img">
+                <img src="images/chamdong.jpg" alt="chạm đông">
+                <img src="images/manhkyuc.jpg" alt="mảnh ký ức">
+                <img src="images/yeuvaduocyeu.jpg" alt="yêu và được yêu">
+                <img src="images/bansac.jpg" alt="bản sắc">
+            </div>
+
+            <div class="btn" id="exploreButton">
+                <a href="dangky.html"><button class="button">KHÁM PHÁ THÊM</button></a>
+            </div>
+        </div>
+
+        <div class="service">
+            <div class="service-list">
+                <img src="images/freeship.png" alt="Ảnh ">
+                <h3>Miễn phí vận chuyển</h3>
+                <p>Vận chuyển miễn phí toàn quốc.</p>
+            </div>
+
+            <div class="service-list">
+                <img src="images/hotro.png" alt="Ảnh ">
+                <h3>Hỗ trợ 24/24</h3>
+                <p>Hỗ trợ khách hàng 24 giờ mỗi ngày.</p>
+            </div>
+
+            <div class="service-list">
+                <img src="images/baohanh.png" alt="Ảnh ">
+                <h3>Bảo hành</h3>
+                <p>Bảo hành sản phẩm trong thời gian quy định.</p>
+            </div>
+
+            <div class="service-list">
+                <img src="images/tietkiem.png" alt="Ảnh ">
+                <h3>Tiết kiệm</h3>
+                <p>Tiết kiệm chi phí mua sắm, chương trình hấp dẫn.</p>
+            </div>
+        </div>
+
+        <div class="product-hot">
+            <h1 class="title">SẢN PHẨM NỔI BẬT</h1>
+            <div class="line"></div>
+
+            <div class="bam">
+                <p class="nb active">Nổi bật</p>
+                <p class="bc">Bán chạy</p>
+                <p class="km">Khuyến mãi</p>
+
+                <div class="filter-product">
+                    <button type="button" class="filter-btn">
+                        <i class="fa-solid fa-filter-circle-dollar"></i>
+                    </button>
+
+                    <div class="filter-menu">
+                        <p data-min="0" data-max="999999999">Tất cả sản phẩm</p>
+                        <p data-min="0" data-max="499999">Dưới 500.000đ</p>
+                        <p data-min="500000" data-max="999999">500.000đ - 1.000.000đ</p>
+                        <p data-min="1000000" data-max="1499999">1.000.000đ - 1.500.000đ</p>
+                        <p data-min="1500000" data-max="999999999">Trên 1.500.000đ</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-list" id="featuredProducts">
+                <!-- <div class="product-item" data-product-id="39">
+                    <a href="motasanpham.html?id=39">
+                    <div class="product-image">
+                    <img src="images/vayxeplycosen.jpg"alt="Váy Xếp Ly Cổ Sen">
+                    </div>
+                    <div class="content">
+                        <h3>Váy Xếp Ly Cổ Sen</h3>
+                        <div class="money">
+                            <p class="prices">950.000đ</p>
+                        </div>
+
+                        <div class="rating" id="product-rating">
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                        </div>
+                    </a>
+
+                        <div class="size-group">
+                            <button class="size-btn">XS</button>
+                            <button class="size-btn">S</button>
+                            <button class="size-btn">M</button>
+                            <button class="size-btn">L</button>
+                        </div>
+
+                        <button class="add-to-cart">THÊM VÀO GIỎ</button>
+                        <button type="button" class="buy-now">MUA NGAY</button>
+                    </div>
+                </div>
+
+                <div class="product-item" data-product-id="19">
+                    <a href="motasanpham.html?id=19">
+                    <div class="product-image">
+                    <img src="images/chanvaydaito.jpg" alt="Chân Váy Dài Tơ">
+                    </div>
+                    <div class="content">
+                        <h3>Chân Váy Dài Tơ</h3>
+                        <p class="prices">880.000đ</p>
+
+                        <div class="rating" id="product-rating">
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                        </div>
+                    </a>
+
+                        <div class="size-group">
+                            <button class="size-btn">XS</button>
+                            <button class="size-btn">S</button>
+                            <button class="size-btn">M</button>
+                            <button class="size-btn">L</button>
+                        </div>
+
+                        <button class="add-to-cart">THÊM VÀO GIỎ</button>
+                        <button type="button" class="buy-now">MUA NGAY</button>
+                    </div>
+                </div>
+                <div class="product-item" data-product-id="8">
+                    <a href="motasanpham.html?id=8">
+                    <div class="product-image">
+                    <img src="images/aoyemtotamphoihoa.jpg" alt="Áo Yếm Tơ Tầm Phối Hoa">
+                    </div>
+                    <div class="content">
+                        <h3>Áo Yếm Tơ Tầm Phối Hoa</h3>
+                        <div class="money">
+                            <p class="prices">480.000đ</p>
+                        </div>
+
+                        <div class="rating" id="product-rating">
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                        </div>
+                    </a>
+
+                        <div class="size-group">
+                            <button class="size-btn">XS</button>
+                            <button class="size-btn">S</button>
+                            <button class="size-btn">M</button>
+                            <button class="size-btn">L</button>
+                        </div>
+
+                        <button class="add-to-cart">THÊM VÀO GIỎ</button>
+                        <button type="button" class="buy-now">MUA NGAY</button>
+                    </div>
+                </div>
+                <div class="product-item" data-product-id="24">
+                    <a href="motasanpham.html?id=24">
+                    <div class="product-image">
+                    <img src="images/chanvayxetruoccaplien.jpg" alt="Chân Váy Xẻ Trước Cạp Liền">
+                    </div>
+                    <div class="content">
+                        <h3>Chân Váy Xẻ Trước Cạp Liền</h3>
+                        <p class="prices">650.000đ</p>
+
+                        <div class="rating" id="product-rating">
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                        </div>
+                    </a>
+
+                        <div class="size-group">
+                            <button class="size-btn">XS</button>
+                            <button class="size-btn">S</button>
+                            <button class="size-btn">M</button>
+                            <button class="size-btn">L</button>
+                        </div>
+                    
+                        <button class="add-to-cart">THÊM VÀO GIỎ</button>
+                        <button type="button" class="buy-now">MUA NGAY</button>
+                    </div>
+                </div>
+                <div class="product-item" data-product-id="15">
+                    <a href="motasanpham.html?id=15">
+                    <div class="product-image">
+                    <img src="images/aomangtocothatlung.jpg" alt="Áo Măng To Có Thắt Lưng">
+                    </div>
+                    <div class="content">
+                        <h3>Áo Măng Tô Có Thắt Lưng</h3>
+                        <div class="money">
+                            <p class="prices">1.400.000đ</p>
+                        </div>
+
+                        <div class="rating" id="product-rating">
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                        </div>
+                    </a>
+
+                        <div class="size-group">
+                            <button class="size-btn">XS</button>
+                            <button class="size-btn">S</button>
+                            <button class="size-btn">M</button>
+                            <button class="size-btn">L</button>
+                        </div>
+
+                        <button class="add-to-cart">THÊM VÀO GIỎ</button>
+                        <button type="button" class="buy-now">MUA NGAY</button>
+                    </div>
+                </div>
+                <div class="product-item" data-product-id="10">
+                    <a href="motasanpham.html?id=10">
+                    <div class="product-image">
+                    <img src="images/aokhoacdacolong.jpg" alt="Áo Khoác Dạ Cổ Lông">
+                    </div>
+                    <div class="content">
+                        <h3>Áo Khoác Dạ Cổ Lông</h3>
+                        <p class="prices">1.100.000đ</p>
+     
+                        <div class="rating" id="product-rating">
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                        </div>
+                    </a>
+
+                        <div class="size-group">
+                            <button class="size-btn">XS</button>
+                            <button class="size-btn">S</button>
+                            <button class="size-btn">M</button>
+                            <button class="size-btn">L</button>
+                        </div>
+
+                        <button class="add-to-cart">THÊM VÀO GIỎ</button>
+                        <button type="button" class="buy-now">MUA NGAY</button>
+                    </div>
+                </div>
+                <div class="product-item" data-product-id="40">
+                    <a href="motasanpham.html?id=40">
+                    <div class="product-image">
+                    <img src="images/vayyemdensomicono.jpg" alt="Váy Yếm Đen Sơ Mi Có Nơ">
+                    </div>
+                    <div class="content">
+                        <h3>Váy Yếm Đen Sơ Mi Có Nơ</h3>
+                        <div class="money">
+                            <p class="prices">1.550.000đ</p>
+                        </div>
+
+                        <div class="rating" id="product-rating">
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                        </div>
+                    </a>
+
+                        <div class="size-group">
+                            <button class="size-btn">XS</button>
+                            <button class="size-btn">S</button>
+                            <button class="size-btn">M</button>
+                            <button class="size-btn">L</button>
+                        </div>
+
+                        <button class="add-to-cart">THÊM VÀO GIỎ</button>
+                        <button type="button" class="buy-now">MUA NGAY</button>
+                    </div>
+                </div>
+                <div class="product-item" data-product-id="33">
+                    <a href="motasanpham.html?id=33">
+                    <div class="product-image">
+                    <img src="images/vaycobeonhun4tang.jpg" alt="Váy Có Bèo Nhún 4 Tầng">
+                    </div>
+                    <div class="content">
+                        <h3>Váy Có Bèo Nhún 4 Tầng</h3>
+                        <div class="money">
+                            <p class="prices">1.550.000đ</p>
+                        </div>
+
+                        <div class="rating" id="product-rating">
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                        </div>
+                    </a>
+
+                        <div class="size-group">
+                            <button class="size-btn">XS</button>
+                            <button class="size-btn">S</button>
+                            <button class="size-btn">M</button>
+                            <button class="size-btn">L</button>
+                        </div>
+
+                        <button class="add-to-cart">THÊM VÀO GIỎ</button>
+                        <button type="button" class="buy-now">MUA NGAY</button>
+                    </div>
+                </div>
+                <div class="product-item" data-product-id="28">
+                    <a href="motasanpham.html?id=28">
+                    <div class="product-image">
+                    <img src="images/quanjeansdangsuongongloe.jpg" alt="Quần Jeans Dáng Suông Ống Loe">
+                    </div>
+                    <div class="content">
+                        <h3>Quần Jeans Dáng Suông Ống Loe</h3>
+                        <p class="prices">630.000đ</p>
+
+                        <div class="rating" id="product-rating">
+                           <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                        </div>
+                    </a>
+
+                        <div class="size-group">
+                            <button class="size-btn">XS</button>
+                            <button class="size-btn">S</button>
+                            <button class="size-btn">M</button>
+                            <button class="size-btn">L</button>
+                        </div>
+
+                        <button class="add-to-cart">THÊM VÀO GIỎ</button>
+                        <button type="button" class="buy-now">MUA NGAY</button>
+                    </div>
+                </div>
+                <div class="product-item" data-product-id="20">
+                    <a href="motasanpham.html?id=20">
+                    <div class="product-image">
+                    <img src="images/chanvaydaplydangdai.jpg" alt="Chân Váy Dập Ly Dáng Dài">
+                    </div>
+                    <div class="content">
+                        <h3>Chân Váy Dập Ly Dáng Dài</h3>
+                        <div class="money">
+                            <p class="prices">790.000đ</p>
+                        </div>
+
+                        <div class="rating" id="product-rating">
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                        </div>
+                    </a>
+
+                        <div class="size-group">
+                            <button class="size-btn">XS</button>
+                            <button class="size-btn">S</button>
+                            <button class="size-btn">M</button>
+                            <button class="size-btn">L</button>
+                        </div>
+
+                        <button class="add-to-cart">THÊM VÀO GIỎ</button>
+                        <button type="button" class="buy-now">MUA NGAY</button>
+                    </div>
+                </div> -->
+            </div> 
+
+            <div class="product-list2" id="bestSellingProducts">
+                <!-- <div class="product-item2" data-product-id="1">
+                    <a href="motasanpham.html?id=1">
+                    <div class="product-image">
+                    <img src="images/aocupnguctrang.jpg" alt="Áo cúp ngực trắng">
+                    </div>
+                    <div class="content">
+                        <h3>Áo Cúp Ngực Trắng</h3>
+                        <div class="money">
+                            <p class="prices">470.000đ</p>
+                        </div>
+
+                        <div class="rating" id="product-rating">
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                        </div>
+                    </a>
+
+                        <div class="size-group">
+                            <button class="size-btn">XS</button>
+                            <button class="size-btn">S</button>
+                            <button class="size-btn">M</button>
+                            <button class="size-btn">L</button>
+                        </div>
+
+                        <button class="add-to-cart">THÊM VÀO GIỎ</button>
+                        <button type="button" class="buy-now">MUA NGAY</button>
+                    </div>
+                </div>
+
+                <div class="product-item2" data-product-id="34">
+                    <a href="motasanpham.html?id=34">
+                    <div class="product-image">
+                    <img src="images/vaygamdoaochoanglung.jpg" alt="Váy gấm đỏ áo choàng lưng">
+                    </div>
+                    <div class="content">
+                        <h3>Váy Gấm Đỏ Áo Choàng Lưng</h3>
+                        <div class="money">
+                            <p class="prices">1.450.000đ</p>
+                        </div>
+
+                        <div class="rating" id="product-rating">
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                        </div>
+                    </a>
+
+                        <div class="size-group">
+                            <button class="size-btn">XS</button>
+                            <button class="size-btn">S</button>
+                            <button class="size-btn">M</button>
+                            <button class="size-btn">L</button>
+                        </div>
+
+                        <button class="add-to-cart">THÊM VÀO GIỎ</button>
+                        <button type="button" class="buy-now">MUA NGAY</button>
+                    </div>
+                </div>
+
+                <div class="product-item2" data-product-id="2">
+                    <a href="motasanpham.html?id=2">
+                    <div class="product-image">
+                    <img src="images/aoquaykemchoangvoanmong.jpg" alt="Áo quây kèm choàng voan">
+                    </div>
+                    <div class="content">
+                        <h3>Áo Quây Kèm Choàng Voan</h3>
+                        <div class="money">
+                            <p class="prices">880.000đ</p>
+                        </div>
+                        
+                        <div class="rating" id="product-rating">
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                        </div>
+                    </a>
+
+                        <div class="size-group">
+                            <button class="size-btn">XS</button>
+                            <button class="size-btn">S</button>
+                            <button class="size-btn">M</button>
+                            <button class="size-btn">L</button>
+                        </div>
+
+                        <button class="add-to-cart">THÊM VÀO GIỎ</button>
+                        <button type="button" class="buy-now">MUA NGAY</button>
+                    </div>
+                </div>
+
+                <div class="product-item2" data-product-id="17">
+                    <a href="motasanpham.html?id=17">
+                    <div class="product-image">
+                    <img src="images/chanvayaphoihoanoi.jpg" alt="Chân váy hoa phối hoa nổi">
+                    </div>
+                    <div class="content">
+                        <h3>Chân Váy Hoa Phối Hoa Nổi</h3>
+                        <div class="money">
+                            <p class="prices">540.000đ</p>
+                        </div>
+
+                        <div class="rating" id="product-rating">
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                        </div>
+                    </a>
+
+                        <div class="size-group">
+                            <button class="size-btn">XS</button>
+                            <button class="size-btn">S</button>
+                            <button class="size-btn">M</button>
+                            <button class="size-btn">L</button>
+                        </div>
+
+                        <button class="add-to-cart">THÊM VÀO GIỎ</button>
+                        <button type="button" class="buy-now">MUA NGAY</button>
+                    </div>
+                </div>
+
+                <div class="product-item2" data-product-id="12">
+                    <a href="motasanpham.html?id=12">
+                    <div class="product-image">
+                    <img src="images/aokhoaclongdangsuong2hangcuc.jpg" alt="Áo khoác lông dáng suông">
+                    </div>
+                    <div class="content">
+                        <h3>Áo Khoác Lông Dáng Suông</h3>
+                        <div class="money">
+                            <p class="prices">1.350.000đ</p>
+                        </div>
+
+                        <div class="rating" id="product-rating">
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                        </div>
+                    </a>
+
+                        <div class="size-group">
+                            <button class="size-btn">XS</button>
+                            <button class="size-btn">S</button>
+                            <button class="size-btn">M</button>
+                            <button class="size-btn">L</button>
+                        </div>
+
+                        <button class="add-to-cart">THÊM VÀO GIỎ</button>
+                        <button type="button" class="buy-now">MUA NGAY</button>
+                    </div>
+                </div>
+
+                <div class="product-item2" data-product-id="7">
+                    <a href="motasanpham.html?id=7">
+                    <div class="product-image">
+                    <img src="images/aothuntranginhoatiet.jpg" alt="Áo thun trắng in họa tiết">
+                    </div>
+                    <div class="content">
+                        <h3>Áo Thun Trắng In Họa Tiết</h3>
+                        <div class="money">
+                            <p class="prices">290.000đ</p>
+                        </div>
+
+                        <div class="rating" id="product-rating">
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                        </div>
+                    </a>
+
+                        <div class="size-group">
+                            <button class="size-btn">XS</button>
+                            <button class="size-btn">S</button>
+                            <button class="size-btn">M</button>
+                            <button class="size-btn">L</button>
+                        </div>
+
+                        <button class="add-to-cart">THÊM VÀO GIỎ</button>
+                        <button type="button" class="buy-now">MUA NGAY</button>
+                    </div>
+                </div>
+
+                <div class="product-item2" data-product-id="35">
+                    <a href="motasanpham.html?id=35">
+                    <div class="product-image">
+                    <img src="images/vaynhungdenphoicobeo.jpg" alt="Váy nhung đen phối cổ bèo">
+                    </div>
+                    <div class="content">
+                        <h3>Váy Nhung Đen Phối Cổ Bèo</h3>
+                        <div class="money">
+                            <p class="prices">1.650.000đ</p>
+                        </div>
+
+                        <div class="rating" id="product-rating">
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                        </div>
+                    </a>
+
+                        <div class="size-group">
+                            <button class="size-btn">XS</button>
+                            <button class="size-btn">S</button>
+                            <button class="size-btn">M</button>
+                            <button class="size-btn">L</button>
+                        </div>
+
+                        <button class="add-to-cart">THÊM VÀO GIỎ</button>
+                        <button type="button" class="buy-now">MUA NGAY</button>
+                    </div>
+                </div>
+
+                <div class="product-item2" data-product-id="14">
+                    <a href="motasanpham.html?id=14">
+                    <div class="product-image">
+                    <img src="images/aokhoacvaithogio.jpg" alt="Áo khoác vải thô gió">
+                    </div>
+                    <div class="content">
+                        <h3>Áo Khoác Vải Thô Gió</h3>
+                        <div class="money">
+                            <p class="prices">360.000đ</p>
+                        </div>
+
+                        <div class="rating" id="product-rating">
+                           <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                        </div>
+                    </a>
+
+                        <div class="size-group">
+                            <button class="size-btn">XS</button>
+                            <button class="size-btn">S</button>
+                            <button class="size-btn">M</button>
+                            <button class="size-btn">L</button>
+                        </div>
+
+                        <button class="add-to-cart">THÊM VÀO GIỎ</button>
+                        <button type="button" class="buy-now">MUA NGAY</button>
+                    </div>
+                </div>  -->
+            </div>
+
+            <div class="product-list3" id="promotionProducts">
+                <!-- <div class="product-item3" data-product-id="9">
+                    <a href="motasanpham.html?id=9">
+                    <div class="product-image">
+                    <img src="images/aokhoaccotimphoivien.jpg" alt="Áo khoác có tim phối viền">
+                    </div>
+                    <div class="content">
+                        <h3>Áo Khoác Có Tim Phối Viền</h3>
+                        <div class="money">
+                            <p class="prices">720.000đ</p>
+                            <p class="price">790.000đ</p>
+                        </div>
+
+                        <div class="rating" id="product-rating">
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                        </div>
+                    </a>
+
+                        <div class="size-group">
+                            <button class="size-btn">XS</button>
+                            <button class="size-btn">S</button>
+                            <button class="size-btn">M</button>
+                            <button class="size-btn">L</button>
+                        </div>
+
+                        <button class="add-to-cart">THÊM VÀO GIỎ</button>
+                        <button type="button" class="buy-now">MUA NGAY</button>
+                    </div>
+                </div>
+
+                <div class="product-item3" data-product-id="11">
+                    <a href="motasanpham.html?id=11">
+                    <div class="product-image">
+                    <img src="images/aokhoacdangnganphoisomi.jpg" alt="Áo khoác dáng ngắn phối sơ mi">
+                    </div>
+                    <div class="content">
+                        <h3>Áo Khoác Ngắn Phối Sơ Mi</h3>
+                        <div class="money">
+                            <p class="prices">480.000đ</p>
+                            <p class="price">540.000đ</p>
+                        </div>
+
+                        <div class="rating" id="product-rating">
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                        </div>
+                    </a>
+
+                        <div class="size-group">
+                            <button class="size-btn">XS</button>
+                            <button class="size-btn">S</button>
+                            <button class="size-btn">M</button>
+                            <button class="size-btn">L</button>
+                        </div>
+
+                        <button class="add-to-cart">THÊM VÀO GIỎ</button>
+                        <button type="button" class="buy-now">MUA NGAY</button>
+                    </div>
+                </div>
+
+                <div class="product-item3" data-product-id="16">
+                    <a href="motasanpham.html?id=16">
+                    <div class="product-image">
+                    <img src="images/aophaocosomituiop.jpg" alt="Áo phao cổ sơ mi">
+                    </div>
+                    <div class="content">
+                        <h3>Áo Phao Cổ Sơ Mi</h3>
+                        <div class="money">
+                            <p class="prices">360.000đ</p>
+                            <p class="price">790.000đ</p>
+                        </div>
+
+                        <div class="rating" id="product-rating">
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                        </div>
+                    </a>
+
+                        <div class="size-group">
+                            <button class="size-btn">XS</button>
+                            <button class="size-btn">S</button>
+                            <button class="size-btn">M</button>
+                            <button class="size-btn">L</button>
+                        </div>
+
+                        <button class="add-to-cart">THÊM VÀO GIỎ</button>
+                        <button type="button" class="buy-now">MUA NGAY</button>
+                    </div>
+                </div>
+
+                <div class="product-item3" data-product-id="3">
+                    <a href="motasanpham.html?id=3">
+                    <div class="product-image">
+                    <img src="images/aorensatnachcobeo.jpg" alt="Áo ren sát nách cổ bèo">
+                    </div>
+                    <div class="content">
+                        <h3>Áo Ren Sát Nách Cổ Bèo</h3>
+                        <div class="money">
+                            <p class="prices">520.000đ</p>
+                            <p class="price">640.000đ</p>
+                        </div>
+
+                        <div class="rating" id="product-rating">
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                        </div>
+                    </a>
+
+                        <div class="size-group">
+                            <button class="size-btn">XS</button>
+                            <button class="size-btn">S</button>
+                            <button class="size-btn">M</button>
+                            <button class="size-btn">L</button>
+                        </div>
+
+                        <button class="add-to-cart">THÊM VÀO GIỎ</button>
+                        <button type="button" class="buy-now">MUA NGAY</button>
+                    </div>
+                </div>
+
+                <div class="product-item3" data-product-id="17">
+                    <a href="motasanpham.html?id=17">
+                    <div class="product-image">
+                    <img src="images/chanvayaphoihoanoi.jpg" alt="Chân váy a phối hoa nổi">
+                    </div>
+                    <div class="content">
+                        <h3>Chân Váy A Phối Hoa Nổi</h3>
+                        <div class="money">
+                            <p class="prices">480.000đ</p>
+                            <p class="price">560.000đ</p>
+                        </div>
+
+                        <div class="rating" id="product-rating">
+                           <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                        </div>
+                    </a>
+
+                        <div class="size-group">
+                            <button class="size-btn">XS</button>
+                            <button class="size-btn">S</button>
+                            <button class="size-btn">M</button>
+                            <button class="size-btn">L</button>
+                        </div>
+
+                       <button class="add-to-cart">THÊM VÀO GIỎ</button>
+                        <button type="button" class="buy-now">MUA NGAY</button>
+                    </div>
+                </div>
+
+
+                <div class="product-item3" data-product-id="30">
+                    <a href="motasanpham.html?id=30">
+                    <div class="product-image">
+                    <img src="images/quanongloe2tui.jpg" alt="Quần ống loe 2 túi">
+                    </div>
+                    <div class="content">
+                        <h3>Quần Ống Loe 2 Túi</h3>
+                        <div class="money">
+                            <p class="prices">390.000đ</p>
+                            <p class="price">470.000đ</p>
+                        </div>
+
+                        <div class="rating" id="product-rating">
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                        </div>
+                    </a>
+
+                        <div class="size-group">
+                            <button class="size-btn">XS</button>
+                            <button class="size-btn">S</button>
+                            <button class="size-btn">M</button>
+                            <button class="size-btn">L</button>
+                        </div>
+
+                        <button class="add-to-cart">THÊM VÀO GIỎ</button>
+                        <button type="button" class="buy-now">MUA NGAY</button>
+                    </div>
+                </div>
+
+                <div class="product-item3" data-product-id="32">
+                    <a href="motasanpham.html?id=32">
+                    <div class="product-image">
+                    <img src="images/quansuongcogantui.jpg" alt="Quần ống suông có gân túi">
+                    </div>
+                    <div class="content">
+                        <h3>Quần Ống Suông Có Gân Túi</h3>
+                        <div class="money">
+                            <p class="prices">350.000đ</p>
+                            <p class="price">430.000đ</p>
+                        </div>
+
+                        <div class="rating" id="product-rating">
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                        </div>
+                    </a>
+
+                        <div class="size-group">
+                            <button class="size-btn">XS</button>
+                            <button class="size-btn">S</button>
+                            <button class="size-btn">M</button>
+                            <button class="size-btn">L</button>
+                        </div>
+
+                        <button class="add-to-cart">THÊM VÀO GIỎ</button>
+                        <button type="button" class="buy-now">MUA NGAY</button>
+                    </div>
+                </div>
+
+                <div class="product-item3" data-product-id="36">
+                    <a href="motasanpham.html?id=36">
+                    <div class="product-image">
+                    <img src="images/vaysomidangdai.jpg" alt="Váy sơ mi dáng dài">
+                    </div>
+                    <div class="content">
+                        <h3>Váy Sơ Mi Dáng Dài</h3>
+                        <div class="money">
+                            <p class="prices">1.450.000đ</p>
+                            <p class="price">1.600.000đ</p>
+                        </div>
+
+                        <div class="rating" id="product-rating">
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                        </div>
+                    </a>
+
+                        <div class="size-group">
+                            <button class="size-btn">XS</button>
+                            <button class="size-btn">S</button>
+                            <button class="size-btn">M</button>
+                            <button class="size-btn">L</button>
+                        </div>
+
+                        <button class="add-to-cart">THÊM VÀO GIỎ</button>
+                        <button type="button" class="buy-now">MUA NGAY</button>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+        </div>
+    </div>
+
+</main>
+
+
+<div class="chat-icon" id="chatIcon">
+    <i class="fa-solid fa-comment"></i>
+</div>
+
+<div class="notice"></div>
+<div id="footer"></div>
+
+<script src="js/header.js"></script>
+<script src="js/discount.js"></script>
+<script src="js/profile.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/notice.js"></script>
+<script src="js/ratinghome.js"></script>
+<script src="js/notificationUser.js"></script>
+<script src="js/sanpham.js"></script>
+</body>
+</html>

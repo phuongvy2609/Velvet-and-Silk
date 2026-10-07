@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QUẢN LÝ ĐƠN HÀNG</title>
+    <link rel="stylesheet" href="../css/table.css">
+    <link rel="stylesheet" href="../css/qldonhang.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../css/notice.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div id="sidebar"></div>
+
+        <main class="main-content">
+            <div class="admin-header">
+                <h1 class="page-title">QUẢN LÝ ĐƠN HÀNG</h1>
+
+                <div class="notification-box">
+
+                    <button id="notificationBtn" class="notification-btn">
+                        <i class="fa-solid fa-bell"></i>
+
+                        <span id="notificationBadge" class="notification-badge">
+                            0
+                        </span>
+                    </button>
+
+                    <div id="notificationDropdown" class="notification-dropdown">
+
+                        <div class="notification-title">
+                            THÔNG BÁO
+                        </div>
+
+                        <div id="notificationList" class="notification-list">
+
+                            <div class="notification-empty">
+                                Không có thông báo mới
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div id="searchFilter"></div>
+
+            <div class="table-container">
+                <table class="order-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Khách Hàng</th>
+                            <th>Tên Sản Phẩm</th>
+                            <th>Tổng tiền</th>
+                            <th>Ngày Đặt Hàng</th>
+                            <th>Trạng Thái</th>
+                            <th>Hành Động</th>
+                        </tr>
+                    </thead>
+                    <tbody class="order-list">
+                        <!-- <tr>
+                            <td>39</td>
+                            <td>Nguyễn Ngọc Phương Vy</td>
+                            <td>Áo Cúp Ngực Trắng</td>
+                            <td>470.000đ</td>
+                            <td>20/05/2026</td>
+                            <td>
+                                <select class="form-select" aria-label="Trạng thái đơn hàng">
+                                    <option value="btn" disabled selected hidden>Trạng thái</option>
+                                    <option class="btn" value="cho">Chờ xử lý</option>
+                                    <option class="btn" value="dang">Đang xử lý</option>
+                                    <option class="btn" value="giao">Đang giao</option>
+                                    <option class="btn" value="xong">Hoàn thành</option>
+                                    <option class="btn" value="huy">Đã hủy</option>
+                                </select>
+                            </td>
+                            <td>
+                                <button class="see-btn">
+                                    <i class="fa-solid fa-eye"></i> Xem chi tiết
+                                </button>
+
+                                <button class="delete-btn"
+                                >
+                                    <i class="fa-solid fa-trash"></i> Xóa
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>39</td>
+                            <td>Nguyễn Ngọc Phương Vy</td>
+                            <td>Áo Cúp Ngực Trắng</td>
+                            <td>470.000đ</td>
+                            <td>20/05/2026</td>
+                            <td>
+                                <select class="form-select" aria-label="Trạng thái đơn hàng">
+                                    <option class="btn" value="" disabled selected hidden>Trạng thái</option>
+                                    <option class="btn" value="cho">Chờ xử lý</option>
+                                    <option class="btn" value="dang">Đang xử lý</option>
+                                    <option class="btn" value="giao">Đang giao</option>
+                                    <option class="btn" value="xong">Hoàn thành</option>
+                                    <option class="btn" value="huy">Đã hủy</option>
+                                </select>
+                            </td>
+                            <td>
+                                <button class="see-btn">
+                                    <i class="fa-solid fa-eye"></i> Xem chi tiết
+                                </button>
+
+                                <button class="delete-btn">
+                                    <i class="fa-solid fa-trash"></i> Xóa
+                                </button>
+                            </td>
+                        </tr> -->
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+
+
+<div class="order-detail-modal" id="orderDetailModal">
+
+    <div class="order-detail-box">
+
+        <button type="button" class="close-order-detail" id="closeOrderDetail" title="Đóng">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+
+
+        <h2>CHI TIẾT ĐƠN HÀNG</h2>
+
+        <div class="order-info">
+
+            <h3>Thông tin đơn hàng</h3>
+
+            <div class="info-grid">
+
+                <p>
+                    <strong>Mã đơn hàng:</strong>
+                    <span id="detailOrderId"></span>
+                </p>
+
+                <p>
+                    <strong>Người nhận:</strong>
+                    <span id="detailName"></span>
+                </p>
+
+                <p>
+                    <strong>Email:</strong>
+                    <span id="detailEmail"></span>
+                </p>
+
+                <p>
+                    <strong>Số điện thoại:</strong>
+                    <span id="detailPhone"></span>
+                </p>
+                
+                 <p>
+                    <strong>Phương thức thanh toán:</strong>
+                    <span id="detailPayment"></span>
+                </p>
+
+                 <p>
+                    <strong>Mã giảm giá:</strong>
+                    <span id="detailDiscount"></span>
+                </p>
+
+                 <p>
+                    <strong>Phương thức vận chuyển:</strong>
+                    <span id="detailShippingMethod"></span>
+                </p>
+
+                 <p>
+                    <strong>Ghi chú:</strong>
+                    <span id="detailNote"></span>
+                </p>
+
+                <p>
+                    <strong>Địa chỉ:</strong>
+                    <span id="detailAddress"></span>
+                </p>
+
+                <p>
+                    <strong>Thời gian:</strong>
+                    <span id="detailDate"></span>
+                </p>
+
+                <p>
+                    <strong>Trạng thái:</strong>
+                    <span id="detailStatus"></span>
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="order-products">
+
+            <h3>Sản phẩm</h3>
+
+            <div id="detailProducts">
+    
+            </div>
+
+        </div>
+
+        <div class="order-total">
+
+            <span>Tổng tiền:</span>
+
+            <strong id="detailTotal">
+                0đ
+            </strong>
+
+        </div>
+
+    </div>
+
+</div>
+    <div class="notice"></div>
+
+    <script src="../js/qldonhang.js"></script>
+    <script src="../js/dangxuatAdmin.js"></script>
+    <script src="../js/sidebar.js"></script>
+    <script src="../js/timkiemvaloc.js"></script>
+    <script src="../js/notice.js"></script>
+    <script src="../js/notifcation.js"></script>
+</body>
+</html>

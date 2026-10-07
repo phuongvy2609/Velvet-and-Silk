@@ -1,0 +1,2258 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #eaf4f2;
+    min-height: 100vh;
+    margin: 0;
+}
+
+/* =========================
+   KHUNG TIN NHẮN
+========================= */
+
+.mess-container {
+    width: calc(100% - 350px);
+    max-width: 1200px;
+    height: calc(100vh - 120px);
+    margin-left: 280px;
+    margin-top: 70px;
+    display: flex;
+    box-sizing: border-box;
+    transition: margin-left 0.3s ease, width 0.3s ease;
+}
+
+/* =========================
+   KHI THU GỌN SIDEBAR
+========================= */
+
+body.sidebar-collapsed .mess-container {
+    width: calc(100% - 190px);
+    max-width: 1200px;
+    margin-left: 150px;
+}
+
+/* =========================
+   DANH SÁCH KHÁCH HÀNG
+========================= */
+
+.customer-list {
+    width: 300px;
+    min-width: 300px;
+    background: #ffffff;
+    border: 1px solid #c8ded9;
+    border-right: none;
+    border-radius: 22px 0 0 22px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 12px 35px rgba(20, 90, 80, 0.12);
+}
+
+.list-header {
+    height: 70px;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #d8e9e5;
+    background: #ffffff;
+}
+
+.list-header h2 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #087f72;
+    font-size: 19px;
+    font-weight: 700;
+}
+
+.list-header h2 i {
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 11px;
+    background: #d9f2ed;
+    color: #087f72;
+    font-size: 18px;
+}
+
+/* =========================
+   TÌM KIẾM KHÁCH HÀNG
+========================= */
+
+.search-customer {
+    height: 40px;
+    margin: 14px;
+    padding: 0 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid #bfd8d3;
+    border-radius: 13px;
+    background: #f4faf9;
+    transition: 0.2s;
+}
+
+.search-customer:hover {
+    border-color: #78b8ad;
+}
+
+.search-customer:focus-within {
+    border-color: #159b8c;
+    background: #ffffff;
+    box-shadow: 0 0 0 4px rgba(21, 155, 140, 0.10);
+}
+
+.search-customer i {
+    color: #4c9388;
+    font-size: 15px;
+}
+
+.search-customer input {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #244640;
+    font-size: 14px;
+}
+
+.search-customer input::placeholder {
+    color: #75918c;
+    font-size: 14px;
+}
+
+/* =========================
+   DANH SÁCH CUSTOMER
+========================= */
+
+.customer-items {
+    flex: 1;
+    overflow-y: auto;
+    padding: 5px 8px 12px;
+}
+
+.customer-items::-webkit-scrollbar,
+.detail-body::-webkit-scrollbar {
+    width: 6px;
+}
+
+.customer-items::-webkit-scrollbar-track,
+.detail-body::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.customer-items::-webkit-scrollbar-thumb {
+    background: #a9cec7;
+    border-radius: 10px;
+}
+
+.customer-items::-webkit-scrollbar-thumb:hover {
+    background: #82b8ae;
+}
+
+.customer-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin: 4px 4px;
+    padding: 12px 11px;
+    cursor: pointer;
+    border-radius: 14px;
+    color: black;
+    transition: 0.2s;
+}
+
+.customer-item:hover {
+    background: #c7faee;
+}
+
+.customer-item.active {
+    background: linear-gradient(
+        135deg,
+        #cdece6,
+        #e3f6f2
+    );
+    box-shadow: inset 4px 0 0 #079481;
+}
+
+.customer-avatar {
+    width: 45px;
+    height: 45px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: linear-gradient(
+        135deg,
+        #078f7e,
+        #35b9a7
+    );
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: bold;
+    box-shadow: 0 4px 12px rgba(7, 143, 126, 0.22);
+}
+
+.customer-info {
+    min-width: 0;
+    flex: 1;
+}
+
+.customer-info h4 {
+    margin-bottom: 5px;
+    color: black;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.customer-info p {
+    color: black;
+    font-size: 11px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.customer-name {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.customer-badge {
+    min-width: 20px;
+    height: 20px;
+    padding: 0 6px;
+    margin-left: 8px;
+    border-radius: 10px;
+    background: #f43333;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: bold;
+    line-height: 20px;
+    flex-shrink: 0;
+}
+
+/* =========================
+   KHUNG CHAT
+========================= */
+
+.chat-box {
+    flex: 1;
+    min-width: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+    border: 1px solid #c8ded9;
+    border-radius: 0 22px 22px 0;
+    overflow: hidden;
+    box-shadow: 0 15px 40px rgba(20, 90, 80, 0.13);
+}
+
+/* =========================
+   HEADER CHAT
+========================= */
+
+.chat-header {
+    height: 70px;
+    padding: 0 22px;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(
+        135deg,
+        #006f63,
+        #008f80 50%,
+        #12a995
+    );
+    color: #ffffff;
+    box-shadow: 0 4px 14px rgba(0, 111, 99, 0.22);
+    z-index: 2;
+    flex-shrink: 0;
+}
+
+.back-chat {
+    width: 42px;
+    height: 42px;
+    margin-right: 14px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.16);
+    color: #ffffff;
+    font-size: 18px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.back-chat:hover {
+    background: rgba(255, 255, 255, 0.28);
+    transform: translateX(-2px);
+}
+
+.shop-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.shop-avatar {
+    width: 46px;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #ffffff;
+    color: #087f72;
+    font-size: 14px;
+    font-weight: bold;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.shop-name h3 {
+    margin-bottom: 4px;
+    font-size: 17px;
+    font-weight: 580;
+}
+
+.shop-name span {
+    font-size: 12px;
+    opacity: 0.97;
+}
+
+.shop-name span i {
+    margin-right: 5px;
+    color: #7ff3ba;
+    font-size: 8px;
+}
+
+/* =========================
+   NÚT TƯ VẤN XONG
+========================= */
+
+#finishChat {
+    margin-left: auto;
+    padding: 8px 15px;
+    border: 1px solid rgb(4, 142, 166);
+    border-radius: 11px;
+    background: #c9eaf4;
+    color: rgb(3, 136, 180);
+    font-size: 14px;
+    font-weight: 550;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: 0.2s ease-in-out;
+    transform: scale(1);
+}
+
+#finishChat:hover {
+    transform: scale(1.02);
+    background: #fddadb;
+    color: rgb(253, 34, 34);
+    border-color: rgb(245, 17, 28);
+}
+
+#finishChat:active {
+    transform: translateY(0);
+}
+
+/* =========================
+   NỘI DUNG CHAT
+========================= */
+
+.chat-content {
+    flex: 1;
+    min-height: 0;
+    padding: 25px 5%;
+    background:
+        radial-gradient(
+            circle at top right,
+            rgba(25, 169, 149, 0.16),
+            transparent 35%
+        ),
+        #edf7f5;
+    overflow-y: auto;
+}
+
+.chat-content::-webkit-scrollbar {
+    width: 7px;
+}
+
+.chat-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.chat-content::-webkit-scrollbar-thumb {
+    background: #a9cec7;
+    border-radius: 10px;
+}
+
+.chat-content::-webkit-scrollbar-thumb:hover {
+    background: #82b8ae;
+}
+
+/* =========================
+   TIN NHẮN
+========================= */
+
+.message-row {
+    display: flex;
+    align-items: flex-end;
+    gap: 9px;
+    margin-bottom: 20px;
+    animation: messageShow 0.2s ease;
+}
+
+.message-row:not(.user-message) {
+    justify-content: flex-start;
+}
+
+.message-row.user-message {
+    justify-content: flex-end;
+}
+
+.message-avatar {
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: linear-gradient(
+        135deg,
+        #078f7e,
+        #3abca9
+    );
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: bold;
+    box-shadow: 0 3px 9px rgba(7, 143, 126, 0.18);
+}
+
+.user-message .message-avatar {
+    background: linear-gradient(
+        135deg,
+        #607d78,
+        #8aa49f
+    );
+}
+
+.message-content {
+    max-width: 65%;
+}
+
+.chat-message {
+    padding: 10px 14px;
+    background: #ffffff;
+    color: black;
+    font-size: 14px;
+    line-height: 1.5;
+    border-radius: 15px 15px 15px 5px;
+    border: 1px solid #c9dfda;
+    box-shadow: 0 4px 12px rgba(20, 90, 80, 0.08);
+}
+
+.user-message .chat-message {
+    background: linear-gradient(
+        135deg,
+        #008f80,
+        #16aa97
+    );
+    color: #ffffff;
+    border: none;
+    border-radius: 15px 15px 5px 15px;
+    box-shadow: 0 5px 15px rgba(0, 143, 128, 0.22);
+}
+
+.message-time {
+    margin-top: 5px;
+    color: #718781;
+    font-size: 10px;
+}
+
+.user-message .message-time {
+    text-align: right;
+    margin-top: 5px;
+    color: #647772;
+    font-size: 10px;
+}
+
+/* =========================
+   THANH NHẬP CHAT
+========================= */
+
+.chat-bottom {
+    position: relative;
+    padding: 8px 5% 13px;
+    background: #ffffff;
+    border-top: 1px solid #cfe2de;
+    box-shadow: 0 -4px 15px rgba(20, 90, 80, 0.06);
+    flex-shrink: 0;
+}
+
+.chat-tools {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 4px;
+}
+
+.chat-tools button {
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    color: #62817b;
+    font-size: 19px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.chat-tools button:hover {
+    background: #dff3ef;
+    color: #008f80;
+    transform: translateY(-1px);
+}
+
+.chat-tools button:active {
+    transform: scale(0.92);
+}
+
+.chat-input {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.chat-input input {
+    flex: 1;
+    min-width: 0;
+    height: 40px;
+    padding: 0 18px;
+    border: 1px solid #bcd8d2;
+    border-radius: 25px;
+    outline: none;
+    background: #f5faf9;
+    color: #294a44;
+    font-size: 14px;
+    transition: 0.25s;
+}
+
+.chat-input input::placeholder {
+    color: #78918c;
+    font-size: 13px;
+}
+
+.chat-input input:hover {
+    border-color: #7eb8ae;
+}
+
+.chat-input input:focus {
+    border-color: #0b9b8a;
+    background: #ffffff;
+    box-shadow: 0 0 0 4px rgba(11, 155, 138, 0.10);
+}
+
+.chat-input button {
+    width: 46px;
+    height: 46px;
+    flex-shrink: 0;
+    border: none;
+    border-radius: 50%;
+    background: linear-gradient(
+        135deg,
+        #007d70,
+        #12a995
+    );
+    color: #ffffff;
+    font-size: 17px;
+    cursor: pointer;
+    box-shadow: 0 5px 13px rgba(0, 125, 112, 0.23);
+    transition: 0.2s;
+}
+
+.chat-input button:hover {
+    background: linear-gradient(
+        135deg,
+        #00685e,
+        #008f80
+    );
+    transform: scale(1.05);
+    box-shadow: 0 7px 17px rgba(0, 125, 112, 0.30);
+}
+
+.chat-input button:active {
+    transform: scale(0.94);
+}
+
+/* =========================
+   EMOJI
+========================= */
+
+.emoji-box {
+    position: absolute;
+    left: 5%;
+    bottom: 100%;
+    width: 360px;
+    height: 420px;
+    padding: 8px;
+    display: none;
+    background: #ffffff;
+    border: 1px solid #c8ded9;
+    border-radius: 16px;
+    box-shadow: 0 15px 35px rgba(20, 90, 80, 0.18);
+    z-index: 20;
+    overflow: hidden;
+    transform: translateY(-16px);
+}
+
+/* =========================
+   ẢNH
+========================= */
+
+.chat-image {
+    display: block;
+    max-width: 300px;
+    max-height: 300px;
+    border-radius: 14px;
+    object-fit: cover;
+    border: 1px solid #c9dfda;
+    box-shadow: 0 5px 15px rgba(20, 90, 80, 0.10);
+}
+
+/* =========================
+   FILE
+========================= */
+
+.file-message {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    padding: 11px 14px;
+    background: #ffffff;
+    border: 1px solid #c9dfda;
+    border-radius: 12px;
+    color: #294a44;
+    font-size: 13px;
+    line-height: 1.5;
+    text-decoration: none;
+    word-break: break-word;
+    box-shadow: 0 3px 10px rgba(20, 90, 80, 0.06);
+    transition: 0.2s;
+}
+
+.file-message:hover {
+    background: #edf8f6;
+    border-color: #8dc0b7;
+}
+
+.file-message i {
+    color: #008f80;
+    font-size: 21px;
+}
+
+/* =========================
+   KHÔNG CÓ KHÁCH HÀNG
+========================= */
+
+.no-customer {
+    padding: 20px;
+    margin: 10px;
+    text-align: center;
+    color: #718781;
+    font-size: 13px;
+    background: #f4faf9;
+    border: 1px solid #d6e8e4;
+    border-radius: 13px;
+}
+
+/* =========================
+   NGÀY TRONG CHAT
+========================= */
+
+.chat-date-divider {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.chat-date-divider span {
+    padding: 6px 14px;
+    background: #fde4e4;
+    color: #f42525;
+    border: 1px solid #f38686;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+
+/* ========================================
+   RESPONSIVE 1440PX
+======================================== */
+
+@media screen and (min-width: 1201px) {
+
+    .mess-container {
+        width: calc(100% - 350px);
+        max-width: 1200px;
+        margin-left: 280px;
+        height: calc(100vh - 120px);
+    }
+
+    body.sidebar-collapsed .mess-container {
+        width: calc(100% - 190px);
+        margin-left: 150px;
+    }
+
+    .customer-list {
+        width: 300px;
+        min-width: 300px;
+    }
+
+    .chat-header {
+        padding: 0 22px;
+    }
+
+    .chat-content {
+        padding: 25px 5%;
+    }
+
+}
+
+
+/* ========================================
+   RESPONSIVE 1024PX
+======================================== */
+
+@media screen and (min-width: 993px) and (max-width: 1024px) {
+
+    .mess-container {
+        width: calc(100% - 270px);
+        max-width: none;
+        height: calc(100vh - 100px);
+        margin-left: 250px;
+        margin-top: 60px;
+    }
+
+    body.sidebar-collapsed .mess-container {
+        width: calc(100% - 110px);
+        margin-left: 90px;
+    }
+
+    .customer-list {
+        width: 260px;
+        min-width: 260px;
+    }
+
+    .list-header {
+        padding: 0 14px;
+    }
+
+    .list-header h2 {
+        font-size: 17px;
+    }
+
+    .customer-item {
+        gap: 8px;
+        padding: 10px 8px;
+    }
+
+    .customer-avatar {
+        width: 40px;
+        height: 40px;
+    }
+
+    .chat-header {
+        padding: 0 15px;
+    }
+
+    .shop-avatar {
+        width: 42px;
+        height: 42px;
+    }
+
+    .shop-name h3 {
+        font-size: 15px;
+    }
+
+    #finishChat {
+        padding: 7px 10px;
+        font-size: 12px;
+    }
+
+    .chat-content {
+        padding: 20px 4%;
+    }
+
+    .message-content {
+        max-width: 70%;
+    }
+
+    .chat-bottom {
+        padding: 8px 4% 12px;
+    }
+
+    .emoji-box {
+        width: 320px;
+        height: 380px;
+    }
+
+}
+
+
+/* ========================================
+   RESPONSIVE 901PX - 992PX
+======================================== */
+
+@media screen and (min-width: 901px) and (max-width: 992px) {
+
+    .mess-container {
+        width: calc(100% - 250px);
+        max-width: none;
+        height: calc(100vh - 90px);
+        margin-left: 230px;
+        margin-top: 55px;
+    }
+
+    body.sidebar-collapsed .mess-container {
+        width: calc(100% - 110px);
+        margin-left: 90px;
+    }
+
+    .customer-list {
+        width: 230px;
+        min-width: 230px;
+    }
+
+    .list-header {
+        padding: 0 12px;
+    }
+
+    .list-header h2 {
+        font-size: 16px;
+        gap: 7px;
+    }
+
+    .list-header h2 i {
+        width: 34px;
+        height: 34px;
+        font-size: 16px;
+    }
+
+    .search-customer {
+        margin: 10px;
+        padding: 0 10px;
+    }
+
+    .customer-item {
+        gap: 7px;
+        padding: 9px 7px;
+    }
+
+    .customer-avatar {
+        width: 38px;
+        height: 38px;
+    }
+
+    .customer-info h4 {
+        font-size: 12px;
+    }
+
+    .customer-info p {
+        font-size: 10px;
+    }
+
+    .chat-header {
+        padding: 0 12px;
+    }
+
+    .back-chat {
+        width: 36px;
+        height: 36px;
+        margin-right: 9px;
+    }
+
+    .shop-info {
+        gap: 8px;
+    }
+
+    .shop-avatar {
+        width: 38px;
+        height: 38px;
+    }
+
+    .shop-name h3 {
+        font-size: 14px;
+    }
+
+    .shop-name span {
+        font-size: 11px;
+    }
+
+    #finishChat {
+        padding: 7px 9px;
+        font-size: 11px;
+    }
+
+    .chat-content {
+        padding: 18px 3%;
+    }
+
+    .message-content {
+        max-width: 72%;
+    }
+
+    .chat-message {
+        padding: 9px 12px;
+        font-size: 13px;
+    }
+
+    .chat-bottom {
+        padding: 8px 3% 11px;
+    }
+
+    .emoji-box {
+        width: 300px;
+        height: 360px;
+    }
+
+}
+
+
+/* ========================================
+   RESPONSIVE 821PX - 900PX
+======================================== */
+
+@media screen and (min-width: 821px) and (max-width: 900px) {
+
+    .mess-container {
+        width: calc(100% - 220px);
+        max-width: none;
+        height: calc(100vh - 80px);
+        margin-left: 200px;
+        margin-top: 50px;
+    }
+
+    body.sidebar-collapsed .mess-container {
+        width: calc(100% - 100px);
+        margin-left: 80px;
+    }
+
+    .customer-list {
+        width: 210px;
+        min-width: 210px;
+    }
+
+    .list-header {
+        padding: 0 10px;
+    }
+
+    .list-header h2 {
+        font-size: 15px;
+        gap: 6px;
+    }
+
+    .list-header h2 i {
+        width: 32px;
+        height: 32px;
+        font-size: 15px;
+    }
+
+    .search-customer {
+        margin: 9px;
+        padding: 0 9px;
+    }
+
+    .customer-item {
+        gap: 6px;
+        padding: 8px 6px;
+    }
+
+    .customer-avatar {
+        width: 35px;
+        height: 35px;
+        font-size: 12px;
+    }
+
+    .customer-info h4 {
+        font-size: 11px;
+    }
+
+    .customer-info p {
+        font-size: 9px;
+    }
+
+    .customer-badge {
+        min-width: 18px;
+        height: 18px;
+        font-size: 10px;
+        line-height: 18px;
+    }
+
+    .chat-header {
+        padding: 0 10px;
+    }
+
+    .back-chat {
+        width: 34px;
+        height: 34px;
+        margin-right: 7px;
+        font-size: 15px;
+    }
+
+    .shop-info {
+        gap: 7px;
+    }
+
+    .shop-avatar {
+        width: 35px;
+        height: 35px;
+        font-size: 12px;
+    }
+
+    .shop-name h3 {
+        font-size: 13px;
+    }
+
+    .shop-name span {
+        font-size: 10px;
+    }
+
+    #finishChat {
+        padding: 6px 7px;
+        font-size: 10px;
+    }
+
+    .chat-content {
+        padding: 15px 3%;
+    }
+
+    .message-row {
+        gap: 7px;
+        margin-bottom: 15px;
+    }
+
+    .message-avatar {
+        width: 32px;
+        height: 32px;
+    }
+
+    .message-content {
+        max-width: 75%;
+    }
+
+    .chat-message {
+        padding: 8px 11px;
+        font-size: 12px;
+    }
+
+    .chat-bottom {
+        padding: 7px 3% 10px;
+    }
+
+    .chat-input {
+        gap: 7px;
+    }
+
+    .chat-input input {
+        height: 38px;
+        padding: 0 12px;
+        font-size: 12px;
+    }
+
+    .chat-input button {
+        width: 40px;
+        height: 40px;
+    }
+
+    .emoji-box {
+        width: 280px;
+        height: 340px;
+    }
+
+}
+
+
+/* ========================================
+   RESPONSIVE 769PX - 820PX
+======================================== */
+
+@media screen and (min-width: 769px) and (max-width: 820px) {
+
+    .mess-container {
+        width: calc(100% - 190px);
+        max-width: none;
+        height: calc(100vh - 70px);
+        margin-left: 180px;
+        margin-top: 45px;
+    }
+
+    body.sidebar-collapsed .mess-container {
+        width: calc(100% - 100px);
+        margin-left: 80px;
+    }
+
+    .customer-list {
+        width: 190px;
+        min-width: 190px;
+    }
+
+    .list-header {
+        padding: 0 8px;
+    }
+
+    .list-header h2 {
+        font-size: 14px;
+        gap: 5px;
+    }
+
+    .list-header h2 i {
+        width: 30px;
+        height: 30px;
+        font-size: 14px;
+    }
+
+    .search-customer {
+        margin: 8px;
+        padding: 0 8px;
+    }
+
+    .search-customer input,
+    .search-customer input::placeholder {
+        font-size: 12px;
+    }
+
+    .customer-item {
+        gap: 5px;
+        padding: 8px 5px;
+    }
+
+    .customer-avatar {
+        width: 32px;
+        height: 32px;
+        font-size: 11px;
+    }
+
+    .customer-info h4 {
+        font-size: 10px;
+    }
+
+    .customer-info p {
+        font-size: 8px;
+    }
+
+    .chat-header {
+        padding: 0 8px;
+    }
+
+    .back-chat {
+        width: 30px;
+        height: 30px;
+        margin-right: 6px;
+        font-size: 14px;
+    }
+
+    .shop-info {
+        gap: 6px;
+    }
+
+    .shop-avatar {
+        width: 32px;
+        height: 32px;
+        font-size: 11px;
+    }
+
+    .shop-name h3 {
+        font-size: 12px;
+    }
+
+    .shop-name span {
+        font-size: 9px;
+    }
+
+    #finishChat {
+        padding: 6px;
+        font-size: 9px;
+    }
+
+    .chat-content {
+        padding: 12px 2%;
+    }
+
+    .message-row {
+        gap: 6px;
+        margin-bottom: 13px;
+    }
+
+    .message-avatar {
+        width: 29px;
+        height: 29px;
+        font-size: 9px;
+    }
+
+    .message-content {
+        max-width: 78%;
+    }
+
+    .chat-message {
+        padding: 7px 9px;
+        font-size: 11px;
+    }
+
+    .chat-bottom {
+        padding: 6px 2% 9px;
+    }
+
+    .chat-tools button {
+        width: 32px;
+        height: 32px;
+        font-size: 17px;
+    }
+
+    .chat-input {
+        gap: 6px;
+    }
+
+    .chat-input input {
+        height: 35px;
+        padding: 0 10px;
+        font-size: 11px;
+    }
+
+    .chat-input button {
+        width: 36px;
+        height: 36px;
+        font-size: 14px;
+    }
+
+    .emoji-box {
+        width: 260px;
+        height: 320px;
+    }
+
+}
+
+
+/* ========================================
+   RESPONSIVE 768PX
+======================================== */
+
+@media screen and (max-width: 768px) {
+
+    body {
+        overflow-x: hidden;
+    }
+
+    .mess-container {
+        width: calc(100% - 110px);
+        max-width: none;
+        height: calc(100vh - 100px);
+        min-width: 0;
+        margin-left: 100px;
+        margin-top: 50px;
+    }
+
+    body.sidebar-collapsed .mess-container {
+        width: calc(100% - 110px);
+        margin-left: 90px;
+    }
+
+    .customer-list {
+        width: 190px;
+        min-width: 190px;
+        border-radius: 15px 0 0 15px;
+    }
+
+    .list-header {
+        height: 60px;
+        padding: 0 10px;
+    }
+
+    .list-header h2 {
+        font-size: 15px;
+        gap: 7px;
+    }
+
+    .list-header h2 i {
+        width: 32px;
+        height: 32px;
+        font-size: 15px;
+    }
+
+    .search-customer {
+        height: 36px;
+        margin: 9px;
+        padding: 0 9px;
+    }
+
+    .customer-item {
+        gap: 7px;
+        padding: 9px 6px;
+    }
+
+    .customer-avatar {
+        width: 35px;
+        height: 35px;
+    }
+
+    .customer-info h4 {
+        font-size: 11px;
+    }
+
+    .customer-info p {
+        font-size: 9px;
+    }
+
+    .chat-box {
+        border-radius: 0 15px 15px 0;
+    }
+
+    .chat-header {
+        height: 60px;
+        padding: 0 10px;
+    }
+
+    .back-chat {
+        width: 32px;
+        height: 32px;
+        margin-right: 7px;
+        font-size: 15px;
+    }
+
+    .shop-info {
+        gap: 7px;
+    }
+
+    .shop-avatar {
+        width: 35px;
+        height: 35px;
+        font-size: 12px;
+    }
+
+    .shop-name h3 {
+        font-size: 13px;
+    }
+
+    .shop-name span {
+        font-size: 10px;
+    }
+
+    #finishChat {
+        padding: 6px 8px;
+        font-size: 10px;
+    }
+
+    .chat-content {
+        padding: 15px 3%;
+    }
+
+    .message-row {
+        gap: 7px;
+        margin-bottom: 15px;
+    }
+
+    .message-avatar {
+        width: 32px;
+        height: 32px;
+    }
+
+    .message-content {
+        max-width: 75%;
+    }
+
+    .chat-message {
+        padding: 8px 11px;
+        font-size: 12px;
+    }
+
+    .chat-bottom {
+        padding: 7px 3% 10px;
+    }
+
+    .chat-tools button {
+        width: 33px;
+        height: 33px;
+        font-size: 17px;
+    }
+
+    .chat-input {
+        gap: 7px;
+    }
+
+    .chat-input input {
+        height: 37px;
+        padding: 0 12px;
+        font-size: 12px;
+    }
+
+    .chat-input button {
+        width: 40px;
+        height: 40px;
+        font-size: 15px;
+    }
+
+    .emoji-box {
+        width: 280px;
+        height: 340px;
+        max-width: 90%;
+    }
+
+    .chat-image {
+        max-width: 220px;
+        max-height: 220px;
+    }
+
+}
+
+
+/* ========================================
+   RESPONSIVE 480PX
+======================================== */
+
+@media screen and (max-width: 480px) {
+
+    .mess-container {
+        width: calc(100% - 100px);
+        height: calc(100vh - 85px);
+        margin-left: 90px;
+        margin-top: 45px;
+    }
+
+    body.sidebar-collapsed .mess-container {
+        width: calc(100% - 100px);
+        margin-left: 85px;
+    }
+
+    .customer-list {
+        width: 145px;
+        min-width: 145px;
+        border-radius: 12px 0 0 12px;
+    }
+
+    .list-header {
+        height: 52px;
+        padding: 0 7px;
+    }
+
+    .list-header h2 {
+        font-size: 12px;
+        gap: 5px;
+    }
+
+    .list-header h2 i {
+        width: 27px;
+        height: 27px;
+        border-radius: 8px;
+        font-size: 12px;
+    }
+
+    .search-customer {
+        height: 32px;
+        margin: 7px;
+        padding: 0 7px;
+        gap: 5px;
+    }
+
+    .search-customer i {
+        font-size: 12px;
+    }
+
+    .search-customer input,
+    .search-customer input::placeholder {
+        font-size: 10px;
+    }
+
+    .customer-items {
+        padding: 4px 5px 8px;
+    }
+
+    .customer-item {
+        gap: 5px;
+        margin: 3px 2px;
+        padding: 7px 4px;
+    }
+
+    .customer-avatar {
+        width: 29px;
+        height: 29px;
+        font-size: 9px;
+    }
+
+    .customer-info h4 {
+        font-size: 10px;
+        margin-bottom: 3px;
+    }
+
+    .customer-info p {
+        font-size: 8px;
+    }
+
+    .customer-badge {
+        min-width: 16px;
+        height: 16px;
+        padding: 0 4px;
+        margin-left: 3px;
+        font-size: 9px;
+        line-height: 16px;
+    }
+
+    .chat-box {
+        border-radius: 0 12px 12px 0;
+    }
+
+    .chat-header {
+        height: 52px;
+        padding: 0 6px;
+    }
+
+    .back-chat {
+        width: 27px;
+        height: 27px;
+        margin-right: 5px;
+        font-size: 12px;
+    }
+
+    .shop-info {
+        gap: 5px;
+        min-width: 0;
+    }
+
+    .shop-avatar {
+        width: 29px;
+        height: 29px;
+        font-size: 9px;
+    }
+
+    .shop-name {
+        min-width: 0;
+    }
+
+    .shop-name h3 {
+        font-size: 11px;
+        margin-bottom: 2px;
+    }
+
+    .shop-name span {
+        font-size: 8px;
+    }
+
+    #finishChat {
+        padding: 5px 6px;
+        border-radius: 8px;
+        font-size: 8px;
+    }
+
+    .chat-content {
+        padding: 12px 2%;
+    }
+
+    .message-row {
+        gap: 5px;
+        margin-bottom: 12px;
+    }
+
+    .message-avatar {
+        width: 26px;
+        height: 26px;
+        font-size: 8px;
+    }
+
+    .message-content {
+        max-width: 78%;
+    }
+
+    .chat-message {
+        padding: 7px 9px;
+        font-size: 10px;
+        border-radius: 11px 11px 11px 4px;
+    }
+
+    .message-time,
+    .user-message .message-time {
+        font-size: 8px;
+    }
+
+    .chat-bottom {
+        padding: 5px 2% 8px;
+    }
+
+    .chat-tools {
+        margin-bottom: 2px;
+    }
+
+    .chat-tools button {
+        width: 29px;
+        height: 29px;
+        font-size: 15px;
+    }
+
+    .chat-input {
+        gap: 5px;
+    }
+
+    .chat-input input {
+        height: 33px;
+        padding: 0 9px;
+        font-size: 10px;
+    }
+
+    .chat-input input::placeholder {
+        font-size: 9px;
+    }
+
+    .chat-input button {
+        width: 34px;
+        height: 34px;
+        font-size: 13px;
+    }
+
+    .emoji-box {
+        width: 240px;
+        height: 300px;
+        padding: 6px;
+        border-radius: 12px;
+    }
+
+    .chat-image {
+        max-width: 170px;
+        max-height: 170px;
+    }
+
+    .file-message {
+        gap: 7px;
+        padding: 8px 9px;
+        font-size: 10px;
+    }
+
+    .file-message i {
+        font-size: 17px;
+    }
+
+    .chat-date-divider {
+        margin: 14px 0;
+    }
+
+    .chat-date-divider span {
+        padding: 5px 10px;
+        font-size: 9px;
+    }
+
+}
+
+
+/* ========================================
+   RESPONSIVE 425PX
+======================================== */
+
+@media screen and (max-width: 425px) {
+
+    .mess-container {
+        width: calc(100% - 95px);
+        height: calc(100vh - 80px);
+        margin-left: 85px;
+        margin-top: 40px;
+    }
+
+    body.sidebar-collapsed .mess-container {
+        width: calc(100% - 95px);
+        margin-left: 80px;
+    }
+
+    .customer-list {
+        width: 130px;
+        min-width: 130px;
+    }
+
+    .list-header {
+        padding: 0 5px;
+    }
+
+    .list-header h2 {
+        font-size: 11px;
+        gap: 4px;
+    }
+
+    .list-header h2 i {
+        width: 25px;
+        height: 25px;
+        font-size: 11px;
+    }
+
+    .search-customer {
+        margin: 6px;
+        padding: 0 6px;
+    }
+
+    .customer-item {
+        gap: 4px;
+        padding: 7px 3px;
+    }
+
+    .customer-avatar {
+        width: 27px;
+        height: 27px;
+        font-size: 8px;
+    }
+
+    .customer-info h4 {
+        font-size: 9px;
+    }
+
+    .customer-info p {
+        font-size: 7px;
+    }
+
+    .chat-header {
+        padding: 0 5px;
+    }
+
+    .back-chat {
+        width: 25px;
+        height: 25px;
+        margin-right: 4px;
+    }
+
+    .shop-info {
+        gap: 4px;
+    }
+
+    .shop-avatar {
+        width: 26px;
+        height: 26px;
+        font-size: 8px;
+    }
+
+    .shop-name h3 {
+        font-size: 10px;
+    }
+
+    .shop-name span {
+        font-size: 7px;
+    }
+
+    #finishChat {
+        padding: 5px;
+        font-size: 7px;
+    }
+
+    .chat-content {
+        padding: 10px 2%;
+    }
+
+    .message-content {
+        max-width: 80%;
+    }
+
+    .chat-message {
+        padding: 6px 8px;
+        font-size: 9px;
+    }
+
+    .chat-input input {
+        height: 31px;
+        padding: 0 7px;
+    }
+
+    .chat-input button {
+        width: 32px;
+        height: 32px;
+    }
+
+    .emoji-box {
+        width: 220px;
+        height: 280px;
+    }
+
+}
+
+
+/* ========================================
+   RESPONSIVE 375PX
+======================================== */
+
+@media screen and (max-width: 375px) {
+
+    .mess-container {
+        width: calc(100% - 90px);
+        height: calc(100vh - 75px);
+        margin-left: 80px;
+        margin-top: 38px;
+    }
+
+    body.sidebar-collapsed .mess-container {
+        width: calc(100% - 90px);
+        margin-left: 75px;
+    }
+
+    .customer-list {
+        width: 115px;
+        min-width: 115px;
+    }
+
+    .list-header {
+        height: 46px;
+        padding: 0 4px;
+    }
+
+    .list-header h2 {
+        font-size: 10px;
+        gap: 3px;
+    }
+
+    .list-header h2 i {
+        width: 22px;
+        height: 22px;
+        font-size: 10px;
+    }
+
+    .search-customer {
+        height: 29px;
+        margin: 5px;
+        padding: 0 5px;
+        gap: 4px;
+    }
+
+    .search-customer i {
+        font-size: 10px;
+    }
+
+    .search-customer input,
+    .search-customer input::placeholder {
+        font-size: 9px;
+    }
+
+    .customer-item {
+        gap: 3px;
+        margin: 2px;
+        padding: 6px 2px;
+    }
+
+    .customer-avatar {
+        width: 24px;
+        height: 24px;
+        font-size: 7px;
+    }
+
+    .customer-info h4 {
+        font-size: 8px;
+    }
+
+    .customer-info p {
+        font-size: 6px;
+    }
+
+    .customer-badge {
+        min-width: 14px;
+        height: 14px;
+        padding: 0 3px;
+        margin-left: 2px;
+        font-size: 8px;
+        line-height: 14px;
+    }
+
+    .chat-header {
+        height: 46px;
+        padding: 0 4px;
+    }
+
+    .back-chat {
+        width: 22px;
+        height: 22px;
+        margin-right: 3px;
+        font-size: 10px;
+    }
+
+    .shop-info {
+        gap: 3px;
+    }
+
+    .shop-avatar {
+        width: 23px;
+        height: 23px;
+        font-size: 7px;
+    }
+
+    .shop-name h3 {
+        font-size: 9px;
+    }
+
+    .shop-name span {
+        font-size: 6px;
+    }
+
+    #finishChat {
+        padding: 4px;
+        font-size: 6px;
+        border-radius: 6px;
+    }
+
+    .chat-content {
+        padding: 8px 2%;
+    }
+
+    .message-row {
+        gap: 4px;
+        margin-bottom: 10px;
+    }
+
+    .message-avatar {
+        width: 22px;
+        height: 22px;
+        font-size: 7px;
+    }
+
+    .message-content {
+        max-width: 82%;
+    }
+
+    .chat-message {
+        padding: 6px 7px;
+        font-size: 8px;
+    }
+
+    .message-time,
+    .user-message .message-time {
+        font-size: 7px;
+    }
+
+    .chat-bottom {
+        padding: 4px 2% 7px;
+    }
+
+    .chat-tools button {
+        width: 26px;
+        height: 26px;
+        font-size: 13px;
+    }
+
+    .chat-input {
+        gap: 4px;
+    }
+
+    .chat-input input {
+        height: 29px;
+        padding: 0 6px;
+        font-size: 9px;
+    }
+
+    .chat-input button {
+        width: 29px;
+        height: 29px;
+        font-size: 11px;
+    }
+
+    .emoji-box {
+        width: 200px;
+        height: 260px;
+        padding: 5px;
+    }
+
+    .chat-image {
+        max-width: 140px;
+        max-height: 140px;
+    }
+
+    .file-message {
+        gap: 5px;
+        padding: 6px 7px;
+        font-size: 9px;
+    }
+
+    .file-message i {
+        font-size: 15px;
+    }
+
+    .chat-date-divider {
+        margin: 11px 0;
+    }
+
+    .chat-date-divider span {
+        padding: 4px 8px;
+        font-size: 8px;
+    }
+
+}
+
+
+/* ========================================
+   RESPONSIVE 320PX
+======================================== */
+
+@media screen and (max-width: 320px) {
+
+    body {
+        overflow-x: hidden;
+    }
+
+    .mess-container {
+        width: calc(100% - 110px);
+        min-width: 0;
+        height: calc(100vh - 70px);
+        margin-left: 80px;
+        margin-top: 35px;
+        overflow: hidden;
+    }
+
+    body.sidebar-collapsed .mess-container {
+        width: calc(100% - 110px);
+        margin-left: 75px;
+    }
+
+    .customer-list {
+        width: 100px;
+        min-width: 100px;
+        border-radius: 10px 0 0 10px;
+    }
+
+    .list-header {
+        height: 42px;
+        padding: 0 3px;
+    }
+
+    .list-header h2 {
+        font-size: 9px;
+        gap: 3px;
+    }
+
+    .list-header h2 i {
+        width: 20px;
+        height: 20px;
+        font-size: 9px;
+        border-radius: 6px;
+    }
+
+    .search-customer {
+        height: 27px;
+        margin: 4px;
+        padding: 0 4px;
+        gap: 3px;
+        border-radius: 8px;
+    }
+
+    .search-customer i {
+        font-size: 9px;
+    }
+
+    .search-customer input,
+    .search-customer input::placeholder {
+        font-size: 8px;
+    }
+
+    .customer-items {
+        padding: 3px 3px 6px;
+    }
+
+    .customer-item {
+        gap: 3px;
+        margin: 2px 1px;
+        padding: 5px 2px;
+        border-radius: 8px;
+    }
+
+    .customer-avatar {
+        width: 21px;
+        height: 21px;
+        font-size: 6px;
+    }
+
+    .customer-info h4 {
+        font-size: 7px;
+        margin-bottom: 2px;
+    }
+
+    .customer-info p {
+        font-size: 6px;
+    }
+
+    .customer-badge {
+        min-width: 13px;
+        height: 13px;
+        padding: 0 2px;
+        margin-left: 1px;
+        font-size: 7px;
+        line-height: 13px;
+    }
+
+    .chat-box {
+        border-radius: 0 10px 10px 0;
+    }
+
+    .chat-header {
+        height: 42px;
+        padding: 0 3px;
+    }
+
+    .back-chat {
+        width: 20px;
+        height: 20px;
+        margin-right: 2px;
+        font-size: 9px;
+    }
+
+    .shop-info {
+        gap: 2px;
+        min-width: 0;
+    }
+
+    .shop-avatar {
+        width: 20px;
+        height: 20px;
+        font-size: 6px;
+    }
+
+    .shop-name {
+        min-width: 0;
+    }
+
+    .shop-name h3 {
+        font-size: 8px;
+        margin-bottom: 1px;
+    }
+
+    .shop-name span {
+        font-size: 5px;
+    }
+
+    .shop-name span i {
+        margin-right: 2px;
+        font-size: 5px;
+    }
+
+    #finishChat {
+        padding: 4px 3px;
+        font-size: 5px;
+        border-radius: 5px;
+    }
+
+    .chat-content {
+        padding: 7px 2%;
+    }
+
+    .message-row {
+        gap: 3px;
+        margin-bottom: 8px;
+    }
+
+    .message-avatar {
+        width: 19px;
+        height: 19px;
+        font-size: 6px;
+    }
+
+    .message-content {
+        max-width: 84%;
+        min-width: 0;
+    }
+
+    .chat-message {
+        padding: 5px 6px;
+        font-size: 7px;
+        line-height: 1.4;
+        border-radius: 9px 9px 9px 3px;
+    }
+
+    .message-time,
+    .user-message .message-time {
+        margin-top: 3px;
+        font-size: 6px;
+    }
+
+    .chat-bottom {
+        padding: 4px 2% 6px;
+    }
+
+    .chat-tools {
+        gap: 2px;
+        margin-bottom: 2px;
+    }
+
+    .chat-tools button {
+        width: 23px;
+        height: 23px;
+        font-size: 11px;
+    }
+
+    .chat-input {
+        gap: 3px;
+    }
+
+    .chat-input input {
+        height: 27px;
+        padding: 0 5px;
+        font-size: 8px;
+    }
+
+    .chat-input input::placeholder {
+        font-size: 7px;
+    }
+
+    .chat-input button {
+        width: 26px;
+        height: 26px;
+        font-size: 10px;
+    }
+
+    .emoji-box {
+        left: 2%;
+        width: 180px;
+        max-width: 96%;
+        height: 230px;
+        padding: 4px;
+        border-radius: 9px;
+        transform: translateY(-8px);
+    }
+
+    .chat-image {
+        max-width: 110px;
+        max-height: 110px;
+        border-radius: 8px;
+    }
+
+    .file-message {
+        gap: 4px;
+        padding: 5px;
+        font-size: 7px;
+        border-radius: 8px;
+    }
+
+    .file-message i {
+        font-size: 12px;
+    }
+
+    .no-customer {
+        padding: 10px 5px;
+        margin: 5px;
+        font-size: 8px;
+    }
+
+    .chat-date-divider {
+        margin: 8px 0;
+    }
+
+    .chat-date-divider span {
+        padding: 3px 7px;
+        font-size: 7px;
+    }
+
+}

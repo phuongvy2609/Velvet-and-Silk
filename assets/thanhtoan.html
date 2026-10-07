@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THANH TOÁN - Velvet & Silk</title>
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/thanhtoan.css">
+    <link rel="stylesheet" href="css/notice.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <div id="header"></div>
+
+    <main>
+        <div class="checkout">
+            <div class="steps">
+                <div class="step"><span class="circlee active">1</span> THÔNG TIN</div>
+                <div class="line"></div>
+                <div class="step"><span class="circle1">2</span> VẬN CHUYỂN</div>
+                <div class="line"></div>
+                <div class="step"><span class="circle2">3</span> THANH TOÁN</div>
+            </div>
+
+            <div class="main-content">
+                <div class="tt">
+                    <h2>Thông Tin Giao Hàng</h2>
+                    <p class="subtitle">Vui lòng điền đầy đủ thông tin để chúng tôi giao hàng đúng địa chỉ.</p>
+                </div>
+
+            <div class="tong">
+                <form class="checkout-form" id="checkoutForm">    
+                    <div class="row">
+                        <div class="group">
+                            <label>Họ</label>
+                            <input type="text" id="ho" name="ho" placeholder="Nguyễn">
+                        </div>
+                        <div class="group">
+                            <label>Tên</label>
+                            <input type="text" id="ten" name="ten" placeholder="Thị B">
+                        </div>
+                    </div>
+
+                    <div class="group">
+                        <label>Email</label>
+                        <input type="email" id="email" name="email" placeholder="example@email.com">
+                    </div>
+
+                    <div class="group">
+                        <label>Số điện thoại</label>
+                        <input type="text" id="phone" name="phone" placeholder="0901 234 567">
+                    </div>
+
+                    <div class="group">
+                        <label>Địa chỉ</label>
+
+                        <div class="address-input-row">
+
+                            <input
+                                type="text"
+                                id="address"
+                                name="address"
+                                placeholder="Số nhà, tên đường, phường/xã"
+                            >
+
+                            <button
+                                type="button"
+                                id="changeAddressBtn"
+                                class="change-address-btn"
+                            >
+                                Đổi địa chỉ
+                            </button>
+
+                        </div>
+
+                        <div id="savedAddressesCheckout"></div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="group">
+                            <label for="city">Tỉnh/ Thành phố</label>
+
+                            <select id="city" name="city" class="tp" required>
+                                <option value="" disabled selected hidden>
+                                    -- Chọn Tỉnh/ Thành phố --
+                                </option>
+                            </select>
+                        </div>
+                        <div class="group">
+                            <label for="district">Phường/ Xã</label> 
+                            <select id="district" name="district" class="tp" required> 
+                                <option value="">-- Chọn Phường/ Xã --</option> 
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="group">
+                        <label>Ghi chú đơn hàng (Không bắt buộc)</label>
+                        <textarea id="note" name="note" placeholder="Nhận hàng giờ hành chính, gọi trước khi giao..."></textarea>
+                    </div>
+                    
+                    <button type="button" class="btn-next">Tiếp tục &rarr;</button>
+                </form>
+
+                <div class="checkout-right">
+                    <div class="summary-card">
+                        <div class="summary-header">
+                            <h3>Đơn hàng của bạn</h3>
+                            <span class="badge">1</span>
+                        </div>
+
+                        <div class="product-list">
+                            <!-- <div class="product-item">
+                                <div class="img-box">
+                                    <img src="images/aocupnguctrang.jpg" alt="product">
+                                    <span class="qty">1</span>
+                                </div>
+                                <div class="info">
+                                    <h4>Áo Cúp Ngực Trắng</h4>
+                                    <p>Số lượng: 1</p>
+                                </div>
+                                <div class="price">470.000đ</div>
+                            </div> -->
+                            </div>
+
+                    
+                        <div class="totals">
+                            <div class="total-row grand-total">
+                                <span class="total">Tổng cộng: </span>
+                                <span class="gold-text">470.000đ</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="voucher-card-checkout" id="voucherCheckout">
+                        <div class="voucher-section-checkout">
+                            <h3>Voucher giảm giá</h3>
+                            <div id="voucherListCheckout"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <div class="main-content1">
+            <div class="tt">
+                <h2>Phương Thức Vận Chuyển</h2>
+                <p class="subtitlee">Chọn hình thức giao hàng phù hợp với bạn.</p>
+            </div>
+
+            <div class="total">
+                <div class="ship">
+                    <label class="option">
+                        <input type="radio" name="ship" checked>
+                        <div class="option-info">
+                            <span class="name">Giao hàng tiêu chuẩn</span>
+                            <span class="time">Dự kiến 3 - 5 ngày làm việc</span>
+                        </div>
+                        <span class="price">Miễn phí</span>
+                    </label>
+
+                    <label class="option">
+                        <input type="radio" name="ship">
+                        <div class="option-info">
+                            <span class="name">Giao hàng nhanh</span>
+                            <span class="time">Dự kiến 1 - 2 ngày làm việc</span>
+                        </div>
+                        <span class="price">50.000đ</span>
+                    </label>
+
+                    <label class="option">
+                        <input type="radio" name="ship">
+                        <div class="option-info">
+                            <span class="name">Giao hàng hỏa tốc</span>
+                            <span class="time">Trong ngày</span>
+                        </div>
+                        <span class="price">150.000đ</span>
+                    </label>
+
+                    <div class="ship-policy">
+                        <h4>Chính sách vận chuyển</h4>                        
+                        <p>Miễn phí giao hàng cho đơn hàng từ <b>2.000.000đ</b>. Đơn hàng được đóng gói cẩn thận, có thể theo dõi qua mã vận đơn gửi qua email.</p>
+                    </div>
+                </div>
+
+                <div class="summary-card">
+                    <div class="summary-header">
+                        <h3>Đơn hàng của bạn</h3>
+                        <span class="badge">1</span>
+                    </div>
+
+                    <div class="product-list">
+                        <!-- <div class="product-item">
+                            <div class="img-box">
+                                <img src="images/aocupnguctrang.jpg" alt="product">                                    
+                                <span class="qty">1</span>
+                            </div>
+                            <div class="info">
+                                <h4>Áo Cúp Ngực Trắng</h4>
+                                <p>Số lượng: 1</p>
+                            </div>
+                            <div class="price">470.000đ</div>
+                        </div> -->
+                    </div>
+
+
+                    <div class="totals">
+                        <div class="total-row grand-total">
+                            <span class="total">Tổng cộng: </span>
+                            <span class="gold-text">470.000đ</span>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                    <div class="navigation-btn">
+                        <button class="btn-back"><i class="fas fa-arrow-left"></i> Quay lại</button>
+                        <button type="button" class="btn-nextt">Tiếp tục <i class="fas fa-arrow-right"></i></button>
+                    </div>
+            </div>
+        </div>
+
+            <div class="main-content3">
+                <div class="tt">
+                    <h2>Phương Thức Thanh Toán</h2>
+                    <p class="subtitle">Chọn hình thức thanh toán phù hợp với bạn</p>
+                </div>
+
+                <div class="payment-tabs">
+                    <button class="tab active"><i class="fa-solid fa-money-check-dollar"></i></i> Thanh toán COD</button>
+                    <button class="tabb"><i class="fa-solid fa-qrcode"></i> Chuyển khoản QR</button>
+                </div>
+                
+                <div class="pttt-cod active">
+                    <div class="payment-box">
+                            <div class="cod">
+                                <button class="cod-box">COD</button>
+                                <h3>Thanh toán khi nhận hàng</h3>
+                            </div>
+
+                            <div class="number">
+                                <ul>
+                                    <li>Xác nhận đơn → chúng tôi xử lý & đóng gói ngay.</li>
+                                    <li>Shipper liên hệ trước khi giao, dư kiến 2-5 ngày.</li>
+                                    <li>Nhận hàng & thanh toán tiền mặt cho shipper.</li>
+                                </ul>
+                            </div>
+
+                            <div class="codd">
+                                <p>
+                                    Chuẩn bị tiền mặt (Đã bao gồm phí vận chuyển):
+                                    <span class="cod-total">0đ</span>
+                                </p>
+                            </div>
+
+                            <div class="cod-warnming">
+                                <p><i class="fa-solid fa-triangle-exclamation"></i> Vui lòng chuẩn bị đúng số tiền và đảm bảo có người nhận hàng tại địa chỉ. Nếu từ chối nhận hàng 2 lần, đơn hàng sẽ bị hủy.</p>
+                            </div>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="summary-header">
+                            <h3>Đơn hàng của bạn</h3>
+                            <span class="badge">1</span>
+                        </div>
+
+                        <div class="product-list">
+                            <!-- <div class="product-item">
+                                <div class="img-box">
+                                    <img src="images/aocupnguctrang.jpg" alt="product">
+                                    <span class="qty">1</span>
+                                </div>
+                                <div class="info">
+                                    <h4>Áo Cúp Ngực Trắng</h4>
+                                    <p>Số lượng: 1</p>
+                                </div>
+                                <div class="price">470.000đ</div>
+                            </div> -->
+                        </div>
+
+
+                        <div class="totals">
+                            <div class="total-row grand-total">
+                                <span class="total">Tổng cộng: </span>
+                                <span class="gold-text">470.000đ</span>
+                            </div>
+                        </div>
+                    </div>           
+                </div>
+
+
+                <div class="pttt">
+                    <div class="payment-box">
+                            <div class="status">
+                                <span class="dot"></span>
+                                AGRIBANK - Đang chờ thanh toán
+                            </div>
+
+                            <div class="qr-box">
+                                <img src="images/qr.jpg" alt="QR Code">
+                            </div>
+
+                            <div class="bank-info">
+                                <h2>🏦 Ngân hàng AGRIBANK</h2>
+                                <h1>6708254128948</h1>
+                                <p>NGUYỄN NGỌC PHƯƠNG VY</p>
+                            </div>
+
+                            <div class="money-box">
+                                <span>Số tiền chuyển khoản</span>
+                                <strong class="bank-total">0₫</strong>
+                            </div>
+
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="summary-header">
+                            <h3>Đơn hàng của bạn</h3>
+                            <span class="badge">1</span>
+                        </div>
+
+                        <div class="product-list">
+                            <!-- <div class="product-item">
+                                <div class="img-box">
+                                    <img src="images/aocupnguctrang.jpg" alt="product">
+                                    <span class="qty">1</span>
+                                </div>
+                                <div class="info">
+                                    <h4>Áo Cúp Ngực Trắng</h4>
+                                    <p>Số lượng: 1</p>
+                                </div>
+                                <div class="price">470.000đ</div>
+                            </div> -->
+                        </div>
+
+                        <div class="totals">
+                            <div class="total-row grand-total">
+                                <span class="total">Tổng cộng</span>
+                                <span class="gold-text">470.000đ</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="payment">
+                    <button class="btn-backkk"><i class="fas fa-arrow-left"></i> Quay lại</button>
+                    <button type="button" class="done-btn">Đặt hàng ngay</button>
+                </div>
+            </div>
+    </main>
+    <div class="notice"></div>
+    <div id="footer"></div>
+
+<script src="js/header.js"></script>
+<script src="js/thanhtoan.js"></script>
+<script src="js/notice.js"></script>
+<script src="js/notificationUser.js"></script>
+</body>
+</html>
