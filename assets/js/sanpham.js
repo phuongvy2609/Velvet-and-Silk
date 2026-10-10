@@ -203,25 +203,23 @@ function renderProduct(product) {
                             alt="ảnh"
                         >
 
-                        ${
-                            Number(product.discount_percent) > 0
-                                ? `
+                        ${Number(product.discount_percent) > 0
+            ? `
                                     <span class="sale-tag">
                                         -${product.discount_percent}%
                                     </span>
                                 `
-                                : ""
-                        }
+            : ""
+        }
 
-                        ${
-                            Number(product.stock_quantity) <= 0
-                                ? `
+                        ${Number(product.stock_quantity) <= 0
+            ? `
                                     <div class="out-of-stock-tag">
                                         HẾT HÀNG
                                     </div>
                                 `
-                                : ""
-                        }
+            : ""
+        }
 
                         </div>
 
@@ -235,21 +233,20 @@ function renderProduct(product) {
 
                             <p class="prices3">
                                 ${formatPrice(
-                                    product.price
-                                )}
+            product.price
+        )}
                             </p>
 
-                            ${
-                                product.price_old
-                                    ? `
+                            ${product.price_old
+            ? `
                                         <p class="price3">
                                             ${formatPrice(
-                                                product.price_old
-                                            )}
+                product.price_old
+            )}
                                         </p>
                                     `
-                                    : ""
-                            }
+            : ""
+        }
 
                         </div>
 
@@ -264,11 +261,10 @@ function renderProduct(product) {
                             </div> 
 
                             <div class="stock-quantity"> 
-                                ${
-                                    Number(product.stock_quantity) > 0
-                                        ? `Còn ${product.stock_quantity} sản phẩm`
-                                        : ""
-                                }
+                                ${Number(product.stock_quantity) > 0
+            ? `Còn ${product.stock_quantity} sản phẩm`
+            : ""
+        }
                             </div>
 
                         </div>
@@ -323,7 +319,7 @@ function renderProduct(product) {
         productHTML
     );
 
-    
+
 
     const productItem =
         productList.querySelector(

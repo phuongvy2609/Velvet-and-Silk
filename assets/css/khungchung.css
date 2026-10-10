@@ -191,13 +191,13 @@
 .product-item .out-of-stock-tag {
     position: absolute;
     left: 50%;
-    bottom: 14px;
-    transform: translateX(-50%);
+    bottom: 10px;
+    transform: translateX(-35px);
     background-color: red;
     color: white;
     border-radius: 5px;
-    padding: 8px 14px;
-    font-size: 15px;
+    padding: 4px 6px;
+    font-size: 12px;
     font-weight: bold;
     white-space: nowrap;
     z-index: 10;
@@ -229,6 +229,21 @@
 
     .size-btn {
         width: 50px;
+    }
+
+    .product-item .out-of-stock-tag {
+        position: absolute;
+        left: 50%;
+        bottom: 10px;
+        transform: translateX(-35px);
+        background-color: red;
+        color: white;
+        border-radius: 5px;
+        padding: 4px 6px;
+        font-size: 12px;
+        font-weight: bold;
+        white-space: nowrap;
+        z-index: 10;
     }
 }
 
@@ -287,6 +302,21 @@
     .buy-now3,
     .add-to-cart3 {
         margin-right: 5px;
+    }
+
+    .product-item .out-of-stock-tag {
+        position: absolute;
+        left: 50%;
+        bottom: 10px;
+        transform: translateX(-35px);
+        background-color: red;
+        color: white;
+        border-radius: 5px;
+        padding: 4px 6px;
+        font-size: 12px;
+        font-weight: bold;
+        white-space: nowrap;
+        z-index: 10;
     }
 }
 
@@ -353,6 +383,21 @@
         font-size: 11px;
         margin: 0 3px 8px 0;
     }
+
+    .product-item .out-of-stock-tag {
+        position: absolute;
+        left: 50%;
+        bottom: 10px;
+        transform: translateX(-35px);
+        background-color: red;
+        color: white;
+        border-radius: 5px;
+        padding: 4px 6px;
+        font-size: 12px;
+        font-weight: bold;
+        white-space: nowrap;
+        z-index: 10;
+    }
 }
 
 @media (max-width: 425px) {
@@ -412,7 +457,22 @@
         font-size: 9px;
         margin: 0 2px 7px 15px;
         border-radius: 9px;
-        padding: 3px;
+        padding: 2px;
+    }
+
+    .product-item .out-of-stock-tag {
+        position: absolute;
+        left: 50%;
+        bottom: 10px;
+        transform: translateX(-35px);
+        background-color: red;
+        color: white;
+        border-radius: 5px;
+        padding: 4px 6px;
+        font-size: 12px;
+        font-weight: bold;
+        white-space: nowrap;
+        z-index: 10;
     }
 }
 
@@ -457,8 +517,27 @@
         height: 10px;
         font-size: 7px;
         border-radius: 7px;
-        margin: 0 2px 7px 5px;
+        margin: 0 2px 7px 14px;
         padding: 3px;
-         background: yellow;
+    }
+
+    .product-item .add-to-cart {
+        position: relative;
+        left: 6px;
+    }
+
+    .product-item .out-of-stock-tag {
+        position: absolute;
+        left: 50%;
+        bottom: 10px;
+        transform: translateX(-35px);
+        background-color: red;
+        color: white;
+        border-radius: 5px;
+        padding: 4px 6px;
+        font-size: 12px;
+        font-weight: bold;
+        white-space: nowrap;
+        z-index: 10;
     }
 }

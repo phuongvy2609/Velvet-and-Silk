@@ -25,6 +25,7 @@
 }
 
 @keyframes autoSlide {
+
     0%,
     25% {
         transform: translateX(0);
@@ -490,6 +491,7 @@ h1 {
 }
 
 @keyframes chatColor {
+
     0%,
     25% {
         background-color: #dbeafe;
@@ -786,7 +788,7 @@ h1 {
         margin-bottom: 40px;
         width: 300px;
     }
-    
+
     .btn {
         position: absolute;
         bottom: 100px;
@@ -924,7 +926,7 @@ h1 {
         padding: 8px 18px;
         margin-bottom: 20px;
     }
-    
+
     .btn {
         position: absolute;
         bottom: 30px;
@@ -934,6 +936,7 @@ h1 {
         font-size: 12px;
         padding: 7px 14px;
     }
+
     .service {
         max-width: 850px;
         gap: 40px 50px;
@@ -1032,8 +1035,7 @@ h1 {
         transform: translateY(2px);
     }
 
-    .product-item3 
-    .rating-stock .stock-quantity {
+    .product-item3 .rating-stock .stock-quantity {
         font-size: 14px;
         transform: translateX(10px);
     }
@@ -1065,8 +1067,7 @@ h1 {
         margin-bottom: 25px;
     }
 
-    .product-item3 
-    .btn-km .add-to-cart {
+    .product-item3 .btn-km .add-to-cart {
         transform: translateX(2px);
     }
 
@@ -1111,7 +1112,7 @@ h1 {
         padding: 8px 18px;
         margin-bottom: 20px;
     }
-    
+
     .btn {
         position: absolute;
         bottom: 30px;
@@ -1295,7 +1296,7 @@ h1 {
         padding: 8px 18px;
         margin-bottom: 20px;
     }
-    
+
     .btn {
         position: absolute;
         bottom: 30px;
@@ -1466,8 +1467,7 @@ h1 {
         margin-right: 180px;
     }
 
-    .product-item3 
-    .rating-stock .stock-quantity {
+    .product-item3 .rating-stock .stock-quantity {
         transform: translateX(8px);
         margin-left: 30px;
     }
@@ -1497,8 +1497,7 @@ h1 {
         margin-bottom: 25px;
     }
 
-    .product-item3 
-    .btn-km .add-to-cart {
+    .product-item3 .btn-km .add-to-cart {
         transform: translateX(2px);
     }
 
@@ -1543,7 +1542,7 @@ h1 {
     .banner-img img {
         height: 190px;
     }
-    
+
     .btn {
         position: absolute;
         bottom: 20px;
@@ -1958,5 +1957,10 @@ h1 {
         height: 19px;
         font-size: 10px;
         border-width: 1px;
+    }
+
+    .product-item .add-to-cart {
+        position: relative;
+        left: 5px;
     }
 }

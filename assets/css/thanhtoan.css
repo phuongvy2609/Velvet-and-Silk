@@ -702,14 +702,19 @@ textarea {
     border: 2px solid #2d6cff;
     border-radius: 14px;
     box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background: white;
 }
 
 .qr-box img {
+    display: block;
     width: 100%;
     height: 100%;
-    border-radius: 9px;
-    background: white;
-    object-fit: cover;
+    border-radius: 8px;
+    object-fit: contain;
 }
 
 .bank-info {
@@ -874,7 +879,7 @@ textarea {
 
 .checkout-address-name i {
     margin-left: 0;
-} 
+}
 
 .checkout-address-name {
     font-size: 18px;
@@ -909,6 +914,12 @@ textarea {
     color: green;
     margin-left: 15px;
 }
+
+/* =========================
+   VOUCHER THANH TOÁN
+   ĐỒNG BỘ VỚI VOUCHER GIỎ HÀNG
+========================= */
+
 .voucher-card-checkout {
     width: 100%;
     height: 400px;
@@ -946,6 +957,8 @@ textarea {
     box-sizing: border-box;
 }
 
+/* THANH CUỘN VOUCHER */
+
 #voucherListCheckout::-webkit-scrollbar {
     width: 7px;
 }
@@ -964,6 +977,8 @@ textarea {
     background: #aaa;
 }
 
+/* MỖI VOUCHER */
+
 .voucher-item-checkout {
     width: 100%;
     min-height: 80px;
@@ -971,6 +986,7 @@ textarea {
     align-items: center;
     justify-content: space-between;
     padding: 14px 15px;
+    gap: 12px;
     background: #fff;
     border: 1px solid #e5e7eb;
     border-radius: 10px;
@@ -984,6 +1000,8 @@ textarea {
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
 }
 
+/* THÔNG TIN VOUCHER */
+
 .voucher-item-checkout div {
     flex: 1;
     min-width: 0;
@@ -996,6 +1014,7 @@ textarea {
     font-weight: 700;
     color: #2563eb;
     letter-spacing: 0.3px;
+    overflow-wrap: anywhere;
 }
 
 .voucher-item-checkout p {
@@ -1006,15 +1025,21 @@ textarea {
     color: black;
 }
 
+/* GIÁ TRỊ GIẢM */
+
 .voucher-item-checkout p:first-of-type {
     color: #f01645;
     font-weight: 600;
 }
 
+/* THỜI HẠN VOUCHER */
+
 .voucher-item-checkout .date {
     color: #666;
     font-weight: normal;
 }
+
+/* NÚT CHỌN VOUCHER */
 
 .select-voucher-checkout {
     flex-shrink: 0;
@@ -1030,7 +1055,8 @@ textarea {
     transition: all 0.2s ease;
 }
 
-.select-voucher-checkout:hover {
+.select-voucher-checkout:hover,
+.select-voucher-checkout.selected {
     background: #2563eb;
     color: #fff;
 }
@@ -1039,12 +1065,9 @@ textarea {
     transform: scale(0.97);
 }
 
-.select-voucher-checkout.selected {
-    background: #2563eb;
-    color: #fff;
-}
+/* KHÔNG CÓ VOUCHER */
 
-#voucherListCheckout p {
+#voucherListCheckout>p {
     width: 100%;
     margin: 0;
     padding: 15px;

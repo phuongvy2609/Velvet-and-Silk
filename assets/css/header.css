@@ -133,6 +133,7 @@ header {
 .icons .notification-box i,
 .icons .kl,
 .icons .user-box .u {
+    font-size: 20px;
     width: 48px;
     height: 48px;
     padding: 10px;
@@ -159,7 +160,6 @@ header {
     border: 1px solid red;
     border-radius: 50%;
     color: red;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .icons .cart-icon:hover i,
@@ -167,18 +167,6 @@ header {
 .icons .notification-icon:hover i,
 .icons .user-box:hover .u {
     color: red;
-}
-
-.user-box {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    cursor: pointer;
-    min-width: 0;
-}
-
-.user-box .u {
-    font-size: 22px;
 }
 
 #username {
@@ -222,17 +210,26 @@ header {
     font-size: 18px;
     font-weight: bold;
     line-height: 35px;
+    transition: 0.4s ease-in-out;
+    transform: scale(1);
 }
 
 .user ul li a:hover {
     background-color: #e4d77a;
     border-radius: 5px;
     padding: 5px;
-    transform: scale(1.02);
 }
 
 .user ul li a i {
     color: blue;
+
+}
+
+.user ul li a i:hover {
+    background-color: #e4d77a;
+    border-radius: 5px;
+    padding: 5px;
+    transform: scale(1.01);
 }
 
 .linee {
@@ -381,7 +378,7 @@ header {
 
 .notification-icon i {
     cursor: pointer;
-    font-size: 23px;
+    font-size: 24px;
 }
 
 .notification-dropdown {
@@ -715,6 +712,35 @@ header {
     .cart-dropdown {
         width: 280px;
     }
+
+    #cart-count,
+    #cartCount {
+        top: -3px;
+        right: -8px;
+        min-width: 15px;
+        height: 15px;
+        padding: 0 3px;
+        font-size: 9px;
+        line-height: 15px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #notificationCount {
+        top: -3px;
+        right: -5px;
+        min-width: 15px;
+        height: 15px;
+        padding: 0 3px;
+        font-size: 9px;
+        line-height: 15px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 }
 
 
@@ -801,6 +827,35 @@ header {
     .cart-dropdown {
         width: 270px;
         max-width: calc(100vw - 20px);
+    }
+
+    #cart-count,
+    #cartCount {
+        top: -3px;
+        right: -8px;
+        min-width: 15px;
+        height: 15px;
+        padding: 0 3px;
+        font-size: 9px;
+        line-height: 15px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #notificationCount {
+        top: -3px;
+        right: -5px;
+        min-width: 15px;
+        height: 15px;
+        padding: 0 3px;
+        font-size: 9px;
+        line-height: 15px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 }
 
@@ -995,6 +1050,35 @@ header {
         max-width: none;
         z-index: 100001;
     }
+
+    #cart-count,
+    #cartCount {
+        top: -3px;
+        right: -8px;
+        min-width: 15px;
+        height: 15px;
+        padding: 0 3px;
+        font-size: 9px;
+        line-height: 15px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #notificationCount {
+        top: -3px;
+        right: -5px;
+        min-width: 15px;
+        height: 15px;
+        padding: 0 3px;
+        font-size: 9px;
+        line-height: 15px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 }
 
 
@@ -1068,21 +1152,31 @@ header {
 
     #cart-count,
     #cartCount {
-        top: -4px;
-        right: -4px;
-        min-width: 16px;
-        height: 16px;
-        padding: 1px 4px;
+        top: -3px;
+        right: -8px;
+        min-width: 15px;
+        height: 15px;
+        padding: 0 3px;
         font-size: 9px;
+        line-height: 15px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     #notificationCount {
-        top: -4px;
-        right: -4px;
-        min-width: 16px;
-        height: 16px;
-        padding: 1px 2px;
+        top: -3px;
+        right: -5px;
+        min-width: 15px;
+        height: 15px;
+        padding: 0 3px;
         font-size: 9px;
+        line-height: 15px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 }
 
@@ -1174,6 +1268,7 @@ header {
     .notification-item .notification-time {
         font-size: 9px;
     }
+
     #cart-count,
     #cartCount {
         top: -4px;
@@ -1189,7 +1284,7 @@ header {
         right: -6px;
         min-width: 14px;
         height: 14px;
-        padding: 2px 4px;
+        padding: 0 4px;
         font-size: 8px;
     }
 }

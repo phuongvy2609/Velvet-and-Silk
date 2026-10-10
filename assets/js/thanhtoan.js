@@ -185,6 +185,22 @@ function calculateTotal() {
 
         });
 
+    // ========================================
+    // CẬP NHẬT MÃ QR THANH TOÁN MB BANK
+    // ========================================
+
+    const paymentQR = document.getElementById("paymentQR");
+
+    if (paymentQR && total > 0) {
+        const amount = Math.round(total);
+
+        const transferContent = "THANHTOAN VELVET SILK";
+
+        paymentQR.src =
+            `https://img.vietqr.io/image/MB-0383577505-compact2.png?amount=${amount}&addInfo=${encodeURIComponent(transferContent)}&accountName=${encodeURIComponent("NGUYEN NGOC PHUONG VY")}`;
+    }
+
+
 
     // ========================================
     // HIỂN THỊ GIẢM GIÁ
@@ -2834,15 +2850,15 @@ function loadCheckoutVouchers() {
                         <p>
                             Đơn tối thiểu:
                             ${Number(
-                                voucher.min_order
-                            ).toLocaleString("vi-VN")}đ
+                    voucher.min_order
+                ).toLocaleString("vi-VN")}đ
                         </p>
 
                         <p class="date">
                             HSD:
                             ${formatVoucherDate(
-                                voucher.end_date
-                            )}
+                    voucher.end_date
+                )}
                         </p>
 
                     </div>
