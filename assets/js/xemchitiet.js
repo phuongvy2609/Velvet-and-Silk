@@ -50,13 +50,12 @@ if (order_id) {
         .then(data => {
 
             if (!data || data.length === 0) {
-
                 show(`Không tìm thấy đơn hàng.`);
-
                 return;
             }
 
             const order = data[0];
+
 
 
             // ========================================
@@ -277,7 +276,7 @@ if (order_id) {
 
                             <span class="gia-cu-number">
                                 ${Number(product.price_old)
-                                    .toLocaleString("vi-VN")}đ
+                            .toLocaleString("vi-VN")}đ
                             </span>
 
                         </div>
@@ -321,7 +320,7 @@ if (order_id) {
 
                         <div class="product-price">
                             ${productTotal
-                                .toLocaleString("vi-VN")}đ
+                        .toLocaleString("vi-VN")}đ
                         </div>
 
                     </div>

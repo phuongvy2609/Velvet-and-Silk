@@ -288,7 +288,8 @@ const createOrder = async (req, res) => {
                 subtotal,
                 discount,
                 voucher_code,
-                total
+                total,
+                payment_status
             )
 
             OUTPUT INSERTED.order_id
@@ -309,13 +310,14 @@ const createOrder = async (req, res) => {
                 ${subtotal},
                 ${discount},
                 ${voucher_code || null},
-                ${total}
+                ${total},
+                N'Chưa thanh toán'
             )
 
         `;
         // TRỪ TỒN KHO
-        
-          for (const item of orderProducts) {
+
+        for (const item of orderProducts) {
 
             await sql.query`
                 UPDATE products
