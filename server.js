@@ -1,10 +1,6 @@
-
 const express = require('express');
 const session = require('express-session');
 const app = express();
-
-// KẾT NỐI MYSQL
-const { connectDB } = require('./config/db');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -69,30 +65,13 @@ app.use('/', notificationRouter);
 const notificationUserRouter = require('./routers/notificationUserRouter');
 app.use('/', notificationUserRouter);
 
+
 // ========================================
-// KHỞI ĐỘNG SERVER SAU KHI KẾT NỐI MYSQL
+// KHỞI ĐỘNG SERVER
 // ========================================
 
 const PORT = process.env.PORT || 3000;
 
-async function startServer() {
-
-    try {
-
-        await connectDB();
-
-        app.listen(PORT, () => {
-
-            console.log(`Server đã sẵn sàng tại cổng ${PORT}`);
-
-        });
-
-    } catch (error) {
-
-        console.log("Không thể khởi động server!");
-
-    }
-
-}
-
-startServer();
+app.listen(PORT, () => {
+    console.log(`Server đã sẵn sàng tại cổng ${PORT}`);
+});
