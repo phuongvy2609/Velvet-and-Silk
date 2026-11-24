@@ -1,4 +1,5 @@
-const { sql } = require("../config/db");
+
+const { db } = require("../config/db");
 
 const {
     createContactNotification
@@ -16,7 +17,6 @@ const nodemailer = require("nodemailer");
 // ========================================
 
 const sendContact = async (req, res) => {
-
     const {
         name,
         email,
@@ -24,49 +24,28 @@ const sendContact = async (req, res) => {
     } = req.body;
 
     try {
-
-        await sql.query`
-
-            INSERT INTO contact
+        await db.query(
+            `INSERT INTO contact
             (
                 name,
                 email,
                 mess,
                 status
             )
-
-            VALUES
-            (
-                ${name},
-                ${email},
-                ${mess},
-                N'Chưa đọc'
-            )
-
-        `;
-
+            VALUES (?, ?, ?, ?)`,
+            [name, email, mess, 'Chưa đọc']
+        );
 
         await createContactNotification({
-
             name: name,
-
             email: email
-
         });
-
 
         res.send("ok");
 
+    } catch (err) {
+        res.status(500).send(err.message);
     }
-
-    catch (err) {
-
-        res
-            .status(500)
-            .send(err.message);
-
-    }
-
 };
 
 
@@ -75,32 +54,16 @@ const sendContact = async (req, res) => {
 // ========================================
 
 const getContact = async (req, res) => {
-
     try {
-
-        const kq =
-            await sql.query`
-
-                SELECT *
-                FROM contact
-
-            `;
-
-
-        res.json(
-            kq.recordset
+        const [kq] = await db.query(
+            `SELECT * FROM contact`
         );
 
+        res.json(kq);
+
+    } catch (err) {
+        res.status(500).send(err.message);
     }
-
-    catch (err) {
-
-        res
-            .status(500)
-            .send(err.message);
-
-    }
-
 };
 
 
@@ -109,34 +72,20 @@ const getContact = async (req, res) => {
 // ========================================
 
 const deleteContact = async (req, res) => {
-
-    const {
-        id
-    } = req.body;
+    const { id } = req.body;
 
     try {
-
-        await sql.query`
-
-            DELETE FROM contact
-
-            WHERE id = ${id}
-
-        `;
-
+        await db.query(
+            `DELETE FROM contact
+             WHERE id = ?`,
+            [id]
+        );
 
         res.send("ok");
 
+    } catch (err) {
+        res.status(500).send(err.message);
     }
-
-    catch (err) {
-
-        res
-            .status(500)
-            .send(err.message);
-
-    }
-
 };
 
 
@@ -145,36 +94,21 @@ const deleteContact = async (req, res) => {
 // ========================================
 
 const readContact = async (req, res) => {
-
-    const {
-        id
-    } = req.body;
+    const { id } = req.body;
 
     try {
-
-        await sql.query`
-
-            UPDATE contact
-
-            SET status = N'Đã đọc'
-
-            WHERE id = ${id}
-
-        `;
-
+        await db.query(
+            `UPDATE contact
+             SET status = ?
+             WHERE id = ?`,
+            ['Đã đọc', id]
+        );
 
         res.send("ok");
 
+    } catch (err) {
+        res.status(500).send(err.message);
     }
-
-    catch (err) {
-
-        res
-            .status(500)
-            .send(err.message);
-
-    }
-
 };
 
 
@@ -183,7 +117,6 @@ const readContact = async (req, res) => {
 // ========================================
 
 const sendMail = async (req, res) => {
-
     const {
         to,
         subject,
@@ -191,113 +124,71 @@ const sendMail = async (req, res) => {
     } = req.body;
 
     try {
-
         if (!to) {
-
-            return res
-                .status(400)
-                .send("Thiếu email người nhận");
-
+            return res.status(400).send("Thiếu email người nhận");
         }
 
-        const transporter =
-            nodemailer.createTransport({
-
-                service: "gmail",
-
-                auth: {
-
-                    user:
-                        "velvetandsilk26@gmail.com",
-
-                    pass:
-                        "zoubdrutlbpnusnn"
-
-                }
-
-            });
-
-
-        await transporter.sendMail({
-
-            from:
-                "Velvet & Silk <velvetandsilk26@gmail.com>",
-
-            to:
-                to,
-
-            subject:
-                subject,
-
-            text:
-                text
-
+        const transporter = nodemailer.createTransport({
+            service: "gmail",
+            auth: {
+                user: process.env.EMAIL_USER,
+                pass: process.env.EMAIL_PASSWORD
+            }
         });
 
-        // ========================================
+        await transporter.sendMail({
+            from: `Velvet & Silk <${process.env.EMAIL_USER}>`,
+            to: to,
+            subject: subject,
+            text: text
+        });
+
+
         // TÌM USER THEO EMAIL
-        // ========================================
+        const [userResult] = await db.query(
+            `SELECT id
+             FROM Users
+             WHERE email = ?`,
+            [to]
+        );
 
-        const userResult =
-            await sql.query`
-
-                SELECT
-                    id
-
-                FROM Users
-
-                WHERE email = ${to}
-
-            `;
-
-
-        if (
-            userResult.recordset.length > 0
-        ) {
-
-            const userId =
-                userResult.recordset[0].id;
-
+        if (userResult.length > 0) {
+            const userId = userResult[0].id;
 
             await createUserContactNotification(
                 userId,
-                "Từ mail: velvetandsilk26@gmail.com"
+                `Từ mail: ${process.env.EMAIL_USER}`
             );
-
         }
 
-        res
-            .status(200)
-            .send("Gửi mail thành công");
+        res.status(200).send("Gửi mail thành công");
 
+    } catch (err) {
+        res.status(500).send(err.message);
     }
-
-    catch (err) {
-
-        res
-            .status(500)
-            .send(err.message);
-
-    }
-
 };
 
+
+// ========================================
+// TẠO THÔNG BÁO PHẢN HỒI LIÊN HỆ
+// ========================================
 
 const createContactReplyNotification = async (req, res) => {
     try {
         const { email } = req.body;
 
-        const userResult = await sql.query`
-            SELECT id
-            FROM Users
-            WHERE email = ${email}
-        `;
+        const [userResult] = await db.query(
+            `SELECT id
+             FROM Users
+             WHERE email = ?`,
+            [email]
+        );
 
-        if (userResult.recordset.length === 0) {
+        if (userResult.length === 0) {
             return res.status(404).send("Không tìm thấy user");
         }
 
-        const userId = userResult.recordset[0].id;
+        const userId = userResult[0].id;
 
         await createUserContactNotification(
             userId,
@@ -305,22 +196,22 @@ const createContactReplyNotification = async (req, res) => {
         );
 
         res.status(200).send("Đã tạo thông báo");
+
     } catch (error) {
         res.status(500).send("Lỗi tạo thông báo");
     }
 };
+
 
 // ========================================
 // EXPORT
 // ========================================
 
 module.exports = {
-
     sendContact,
     getContact,
     deleteContact,
     readContact,
     sendMail,
     createContactReplyNotification
-
 };

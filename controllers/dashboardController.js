@@ -1,4 +1,4 @@
-const { sql } = require('../config/db');
+const { db } = require('../config/db');
 
 const getDashboard = async (req, res) => {
 
@@ -8,40 +8,40 @@ const getDashboard = async (req, res) => {
         // 1. TỔNG SẢN PHẨM
         // =========================
 
-        const products = await sql.query`
+        const [products] = await db.query(`
             SELECT COUNT(*) AS total
             FROM Products
-        `;
+        `);
 
 
         // =========================
         // 2. TỔNG ĐƠN HÀNG
         // =========================
 
-        const orders = await sql.query`
+        const [orders] = await db.query(`
             SELECT COUNT(*) AS total
             FROM Orders
-        `;
+        `);
 
 
         // =========================
         // 3. TỔNG ĐÁNH GIÁ
         // =========================
 
-        const reviews = await sql.query`
+        const [reviews] = await db.query(`
             SELECT COUNT(*) AS total
             FROM Reviews
-        `;
+        `);
 
 
         // =========================
         // 4. TỔNG PHẢN HỒI
         // =========================
 
-        const contacts = await sql.query`
+        const [contacts] = await db.query(`
             SELECT COUNT(*) AS total
             FROM contact
-        `;
+        `);
 
 
         // =========================
@@ -50,37 +50,37 @@ const getDashboard = async (req, res) => {
         // Chỉ tính những đơn đã hoàn thành
         // trong năm hiện tại
 
-        const revenue = await sql.query`
+        const [revenue] = await db.query(`
             SELECT
                 MONTH(created_at) AS month,
                 SUM(total) AS revenue
             FROM Orders
-            WHERE status = N'Hoàn thành'
-            AND YEAR(created_at) = YEAR(GETDATE())
+            WHERE status = 'Hoàn thành'
+            AND YEAR(created_at) = YEAR(CURDATE())
             GROUP BY MONTH(created_at)
             ORDER BY MONTH(created_at)
-        `;
+        `);
 
 
         // =========================
         // 6. THỐNG KÊ TRẠNG THÁI ĐƠN HÀNG
         // =========================
 
-        const orderStatus = await sql.query`
+        const [orderStatus] = await db.query(`
             SELECT
                 status,
                 COUNT(*) AS total
             FROM Orders
             GROUP BY status
-        `;
+        `);
 
 
         // =========================
         // 7. SẢN PHẨM BÁN CHẠY
         // =========================
 
-        const topProducts = await sql.query`
-            SELECT TOP 5
+        const [topProducts] = await db.query(`
+            SELECT
                 product_name,
                 image,
                 SUM(quantity) AS sold,
@@ -91,7 +91,8 @@ const getDashboard = async (req, res) => {
                 product_name,
                 image
             ORDER BY SUM(quantity) DESC
-        `;
+            LIMIT 5
+        `);
 
 
         // =========================
@@ -100,27 +101,30 @@ const getDashboard = async (req, res) => {
 
         res.json({
 
-            products: products.recordset[0].total,
+            products: products[0].total,
 
-            orders: orders.recordset[0].total,
+            orders: orders[0].total,
 
-            reviews: reviews.recordset[0].total,
+            reviews: reviews[0].total,
 
-            contacts: contacts.recordset[0].total,
+            contacts: contacts[0].total,
 
-            revenue: revenue.recordset,
+            revenue: revenue,
 
-            orderStatus: orderStatus.recordset,
+            orderStatus: orderStatus,
 
-            topProducts: topProducts.recordset
+            topProducts: topProducts
 
         });
 
     }
 
     catch (err) {
+
         res.status(500).send(err.message);
+
     }
+
 };
 
 

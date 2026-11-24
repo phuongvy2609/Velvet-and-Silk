@@ -2,7 +2,7 @@
 // KẾT NỐI DATABASE
 // ========================================
 
-const { sql } = require("../config/db");
+const { db } = require("../config/db");
 
 
 // ========================================
@@ -10,9 +10,7 @@ const { sql } = require("../config/db");
 // ========================================
 
 const addVoucher = async (req, res) => {
-
     try {
-
         const {
             voucher_code,
             voucher_type,
@@ -24,29 +22,21 @@ const addVoucher = async (req, res) => {
             status
         } = req.body;
 
+        const startDate = start_date ? start_date.split("T")[0] : null;
+        const endDate = end_date ? end_date.split("T")[0] : null;
 
-        // ========================================
-        // ĐỔI DATETIME-LOCAL SANG DATETIME SQL SERVER
-        // ========================================
+        // Kiểm tra mã voucher đã tồn tại
+        const [check] = await db.query(
+            "SELECT voucher_id FROM Vouchers WHERE voucher_code = ?",
+            [voucher_code]
+        );
 
-        const startDate =
-            start_date
-                ? start_date.replace("T", " ")
-                : null;
+        if (check.length > 0) {
+            return res.status(400).send("Mã voucher này đã tồn tại, vui lòng chọn mã khác!");
+        }
 
-
-        const endDate =
-            end_date
-                ? end_date.replace("T", " ")
-                : null;
-
-
-        // ========================================
-        // THÊM VOUCHER
-        // ========================================
-
-        await sql.query(`
-
+        // Thêm voucher
+        await db.query(`
             INSERT INTO Vouchers
             (
                 voucher_code,
@@ -58,32 +48,23 @@ const addVoucher = async (req, res) => {
                 quantity,
                 status
             )
-
-            VALUES
-            (
-                '${voucher_code}',
-                '${voucher_type}',
-                ${Number(voucher_value)},
-                ${Number(min_order)},
-                '${startDate}',
-                '${endDate}',
-                ${Number(quantity)},
-                '${status}'
-            )
-
-        `);
-
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        `, [
+            voucher_code,
+            voucher_type,
+            Number(voucher_value),
+            Number(min_order),
+            startDate,
+            endDate,
+            Number(quantity),
+            status
+        ]);
 
         res.send("ok");
 
+    } catch (error) {
+        res.status(500).send(error.sqlMessage || error.message);
     }
-
-    catch (error) {
-
-        res.status(500).send(error.message);
-
-    }
-
 };
 
 
@@ -95,7 +76,7 @@ const getVouchers = async (req, res) => {
 
     try {
 
-        const result = await sql.query(`
+        const [result] = await db.query(`
 
             SELECT *
             FROM Vouchers
@@ -104,16 +85,12 @@ const getVouchers = async (req, res) => {
         `);
 
 
-        res.json(
-            result.recordset
-        );
+        res.json(result);
 
     }
 
     catch (error) {
-
-        res.status(500).send(error.message);
-
+        res.status(500).send(error.sqlMessage || error.message);
     }
 
 };
@@ -127,8 +104,7 @@ const updateVoucher = async (req, res) => {
 
     try {
 
-        const id =
-            req.params.id;
+        const id = req.params.id;
 
 
         const {
@@ -143,51 +119,51 @@ const updateVoucher = async (req, res) => {
         } = req.body;
 
 
-        // ========================================
-        // ĐỔI DATETIME-LOCAL SANG DATETIME SQL SERVER
-        // ========================================
+        // ĐỔI DATETIME-LOCAL SANG DATETIME MYSQL
 
-        const startDate =
-            start_date
-                ? start_date.replace("T", " ")
-                : null;
+        const startDate = start_date ? start_date.split("T")[0] : null;
+        const endDate = end_date ? end_date.split("T")[0] : null;
 
 
-        const endDate =
-            end_date
-                ? end_date.replace("T", " ")
-                : null;
-
-
-        // ========================================
         // CẬP NHẬT VOUCHER
-        // ========================================
 
-        await sql.query(`
+        await db.query(`
 
             UPDATE Vouchers
 
             SET
 
-                voucher_code = '${voucher_code}',
+                voucher_code = ?,
 
-                voucher_type = '${voucher_type}',
+                voucher_type = ?,
 
-                voucher_value = ${Number(voucher_value)},
+                voucher_value = ?,
 
-                min_order = ${Number(min_order)},
+                min_order = ?,
 
-                start_date = '${startDate}',
+                start_date = ?,
 
-                end_date = '${endDate}',
+                end_date = ?,
 
-                quantity = ${Number(quantity)},
+                quantity = ?,
 
-                status = '${status}'
+                status = ?
 
-            WHERE voucher_id = ${id}
+            WHERE voucher_id = ?
 
-        `);
+        `, [
+
+            voucher_code,
+            voucher_type,
+            Number(voucher_value),
+            Number(min_order),
+            startDate,
+            endDate,
+            Number(quantity),
+            status,
+            id
+
+        ]);
 
 
         res.send("ok");
@@ -195,9 +171,7 @@ const updateVoucher = async (req, res) => {
     }
 
     catch (error) {
-
-        res.status(500).send(error.message);
-
+        res.status(500).send(error.sqlMessage || error.message);
     }
 
 };
@@ -211,17 +185,16 @@ const deleteVoucher = async (req, res) => {
 
     try {
 
-        const id =
-            req.params.id;
+        const id = req.params.id;
 
 
-        await sql.query(`
+        await db.query(`
 
             DELETE FROM Vouchers
 
-            WHERE voucher_id = ${id}
+            WHERE voucher_id = ?
 
-        `);
+        `, [id]);
 
 
         res.send("ok");
@@ -229,9 +202,7 @@ const deleteVoucher = async (req, res) => {
     }
 
     catch (error) {
-
-        res.status(500).send(error.message);
-
+        res.status(500).send(error.sqlMessage || error.message);
     }
 
 };
@@ -250,9 +221,7 @@ const decreaseVoucherQuantity = async (req, res) => {
         } = req.body;
 
 
-        // ========================================
         // KHÔNG CÓ VOUCHER
-        // ========================================
 
         if (!voucher_code) {
 
@@ -263,21 +232,19 @@ const decreaseVoucherQuantity = async (req, res) => {
         }
 
 
-        // ========================================
         // TRỪ 1 VOUCHER
-        // ========================================
 
-        await sql.query(`
+        await db.query(`
 
             UPDATE Vouchers
 
             SET quantity = quantity - 1
 
-            WHERE voucher_code = '${voucher_code}'
+            WHERE voucher_code = ?
 
             AND quantity > 0
 
-        `);
+        `, [voucher_code]);
 
 
         res.send("ok");
@@ -285,9 +252,7 @@ const decreaseVoucherQuantity = async (req, res) => {
     }
 
     catch (error) {
-
-        res.status(500).send(error.message);
-
+        res.status(500).send(error.sqlMessage || error.message);
     }
 
 };

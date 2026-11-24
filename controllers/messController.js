@@ -1,10 +1,13 @@
-const { sql, connectDB } = require("../config/db");
+const { db } = require("../config/db");
 
 const multer = require("multer");
 const fs = require("fs");
 const path = require("path");
 
-connectDB();
+
+// =================================
+// TẠO THƯ MỤC UPLOAD
+// =================================
 
 const uploadPath = path.join(
     __dirname,
@@ -18,6 +21,11 @@ if (!fs.existsSync(uploadPath)) {
     });
 
 }
+
+
+// =================================
+// CẤU HÌNH UPLOAD
+// =================================
 
 const storage = multer.diskStorage({
 
@@ -40,6 +48,7 @@ const storage = multer.diskStorage({
 
 });
 
+
 const upload = multer({
     storage: storage
 });
@@ -54,12 +63,12 @@ const getChatCustomers = async (req, res) => {
 
     try {
 
-        const result = await sql.query(`
+        const [result] = await db.query(`
             SELECT 
                 u.id,
                 u.fullname,
 
-                ISNULL(
+                IFNULL(
                     SUM(
                         CASE
                             WHEN m.sender = 'user'
@@ -86,7 +95,7 @@ const getChatCustomers = async (req, res) => {
                 u.fullname ASC
         `);
 
-        res.json(result.recordset);
+        res.json(result);
 
     } catch (error) {
 
@@ -107,7 +116,7 @@ const getUnreadMessageCount = async (req, res) => {
 
     try {
 
-        const result = await sql.query(`
+        const [result] = await db.query(`
             SELECT
                 COUNT(*) AS total
             FROM Messages
@@ -116,7 +125,7 @@ const getUnreadMessageCount = async (req, res) => {
         `);
 
         res.json({
-            total: result.recordset[0].total
+            total: result[0].total
         });
 
     } catch (error) {
@@ -138,16 +147,17 @@ const markMessagesAsRead = async (req, res) => {
 
     try {
 
-        const user_id =
-            req.params.user_id;
+        const user_id = req.params.user_id;
 
-        await sql.query(`
+
+        await db.query(`
             UPDATE Messages
             SET is_read = 1
-            WHERE user_id = ${user_id}
+            WHERE user_id = ?
             AND sender = 'user'
             AND is_read = 0
-        `);
+        `, [user_id]);
+
 
         res.send("ok");
 
@@ -170,17 +180,18 @@ const getAdminMessages = async (req, res) => {
 
     try {
 
-        const user_id =
-            req.params.user_id;
+        const user_id = req.params.user_id;
 
-        const result = await sql.query(`
+
+        const [result] = await db.query(`
             SELECT *
             FROM Messages
-            WHERE user_id = ${user_id}
+            WHERE user_id = ?
             ORDER BY created_at ASC
-        `);
+        `, [user_id]);
 
-        res.json(result.recordset);
+
+        res.json(result);
 
     } catch (error) {
 
@@ -201,13 +212,12 @@ const adminSendMessage = async (req, res) => {
 
     try {
 
-        const user_id =
-            req.body.user_id;
+        const user_id = req.body.user_id;
 
-        const message =
-            req.body.message;
+        const message = req.body.message;
 
-        await sql.query(`
+
+        await db.query(`
             INSERT INTO Messages
             (
                 user_id,
@@ -219,14 +229,15 @@ const adminSendMessage = async (req, res) => {
             )
             VALUES
             (
-                ${user_id},
+                ?,
                 'admin',
                 'text',
-                N'${message}',
+                ?,
                 1,
-                DATEADD(HOUR, 7, GETUTCDATE())
+                DATE_ADD(UTC_TIMESTAMP(), INTERVAL 7 HOUR)
             )
-        `);
+        `, [user_id, message]);
+
 
         res.send("ok");
 
@@ -253,11 +264,10 @@ const adminSendImage = [
 
         try {
 
-            const user_id =
-                req.body.user_id;
+            const user_id = req.body.user_id;
 
-            const file =
-                req.file;
+            const file = req.file;
+
 
             if (!file) {
 
@@ -269,11 +279,13 @@ const adminSendImage = [
 
             }
 
+
             const file_url =
                 "/uploads/chat/" +
                 file.filename;
 
-            await sql.query(`
+
+            await db.query(`
                 INSERT INTO Messages
                 (
                     user_id,
@@ -286,20 +298,29 @@ const adminSendImage = [
                 )
                 VALUES
                 (
-                    ${user_id},
+                    ?,
                     'admin',
                     'image',
-                    '${file_url}',
-                    N'${file.originalname}',
+                    ?,
+                    ?,
                     1,
-                    DATEADD(HOUR, 7, GETUTCDATE())
+                    DATE_ADD(UTC_TIMESTAMP(), INTERVAL 7 HOUR)
                 )
-            `);
+            `, [
+                user_id,
+                file_url,
+                file.originalname
+            ]);
+
 
             res.json({
+
                 success: true,
+
                 file_url: file_url,
+
                 file_name: file.originalname
+
             });
 
         } catch (error) {
@@ -327,11 +348,10 @@ const adminSendFile = [
 
         try {
 
-            const user_id =
-                req.body.user_id;
+            const user_id = req.body.user_id;
 
-            const file =
-                req.file;
+            const file = req.file;
+
 
             if (!file) {
 
@@ -343,11 +363,13 @@ const adminSendFile = [
 
             }
 
+
             const file_url =
                 "/uploads/chat/" +
                 file.filename;
 
-            await sql.query(`
+
+            await db.query(`
                 INSERT INTO Messages
                 (
                     user_id,
@@ -360,20 +382,29 @@ const adminSendFile = [
                 )
                 VALUES
                 (
-                    ${user_id},
+                    ?,
                     'admin',
                     'file',
-                    '${file_url}',
-                    N'${file.originalname}',
+                    ?,
+                    ?,
                     1,
-                    DATEADD(HOUR, 7, GETUTCDATE())
+                    DATE_ADD(UTC_TIMESTAMP(), INTERVAL 7 HOUR)
                 )
-            `);
+            `, [
+                user_id,
+                file_url,
+                file.originalname
+            ]);
+
 
             res.json({
+
                 success: true,
+
                 file_url: file_url,
+
                 file_name: file.originalname
+
             });
 
         } catch (error) {
@@ -389,19 +420,23 @@ const adminSendFile = [
 ];
 
 
+// =================================
+// KẾT THÚC TƯ VẤN
+// =================================
 
 const finishChat = async (req, res) => {
 
     try {
 
-        const user_id =
-            req.params.user_id;
+        const user_id = req.params.user_id;
 
-        await sql.query(`
+
+        await db.query(`
             UPDATE Users
             SET chat_status = 0
-            WHERE id = ${user_id}
-        `);
+            WHERE id = ?
+        `, [user_id]);
+
 
         res.send("ok");
 
@@ -414,6 +449,11 @@ const finishChat = async (req, res) => {
     }
 
 };
+
+
+// =================================
+// EXPORT
+// =================================
 
 module.exports = {
 
@@ -430,6 +470,7 @@ module.exports = {
     getUnreadMessageCount,
 
     markMessagesAsRead,
+
     finishChat
 
 };

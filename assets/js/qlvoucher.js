@@ -284,46 +284,46 @@ if (saveVoucherBtn) {
                 }
             )
 
-            .then(function (res) {
+                .then(function (res) {
 
-                return res.text();
+                    return res.text();
 
-            })
+                })
 
-            .then(function (data) {
+                .then(function (data) {
 
-                if (data === "ok") {
+                    if (data === "ok") {
+
+                        show(
+                            `Sửa voucher "${id}" thành công!`
+                        );
+
+                        addVoucherOverlay.style.display =
+                            "none";
+
+                        document.getElementById(
+                            "editVoucherId"
+                        ).value = "";
+
+                        loadVouchers();
+
+                    } else {
+
+                        show(
+                            `Sửa voucher "${id}" thất bại!`
+                        );
+
+                    }
+
+                })
+
+                .catch(function () {
 
                     show(
-                        `Sửa voucher "${id}" thành công!`
+                        `Không thể kết nối đến máy chủ khi sửa voucher!`
                     );
 
-                    addVoucherOverlay.style.display =
-                        "none";
-
-                    document.getElementById(
-                        "editVoucherId"
-                    ).value = "";
-
-                    loadVouchers();
-
-                } else {
-
-                    show(
-                        `Sửa voucher "${id}" thất bại!`
-                    );
-
-                }
-
-            })
-
-            .catch(function () {
-
-                show(
-                    `Không thể kết nối đến máy chủ khi sửa voucher!`
-                );
-
-            });
+                });
 
         }
 
@@ -333,7 +333,7 @@ if (saveVoucherBtn) {
         // ========================================
 
         else {
-
+            console.log("Mã voucher đang nhập:", data.voucher_code);
             fetch(
                 "/addvoucher",
                 {
@@ -351,59 +351,59 @@ if (saveVoucherBtn) {
                 }
             )
 
-            .then(function (res) {
+                .then(function (res) {
 
-                return res.text()
-                    .then(function (text) {
+                    return res.text()
+                        .then(function (text) {
 
-                        return {
+                            return {
 
-                            status:
-                                res.status,
+                                status:
+                                    res.status,
 
-                            text:
-                                text
+                                text:
+                                    text
 
-                        };
+                            };
 
-                    });
+                        });
 
-            })
+                })
 
-            .then(function (result) {
+                .then(function (result) {
 
-                if (
-                    result.status >= 200 &&
-                    result.status < 300 &&
-                    result.text === "ok"
-                ) {
+                    if (
+                        result.status >= 200 &&
+                        result.status < 300 &&
+                        result.text === "ok"
+                    ) {
+
+                        show(
+                            `Thêm voucher "${data.voucher_code}" thành công!`
+                        );
+
+                        addVoucherOverlay.style.display =
+                            "none";
+
+                        loadVouchers();
+
+                    } else {
+
+                        show(
+                            `Thêm voucher "${data.voucher_code}" thất bại! ${result.text}`
+                        );
+
+                    }
+
+                })
+
+                .catch(function () {
 
                     show(
-                        `Thêm voucher "${data.voucher_code}" thành công!`
+                        `Không thể kết nối đến máy chủ khi thêm voucher!`
                     );
 
-                    addVoucherOverlay.style.display =
-                        "none";
-
-                    loadVouchers();
-
-                } else {
-
-                    show(
-                        `Thêm voucher "${data.voucher_code}" thất bại! ${result.text}`
-                    );
-
-                }
-
-            })
-
-            .catch(function () {
-
-                show(
-                    `Không thể kết nối đến máy chủ khi thêm voucher!`
-                );
-
-            });
+                });
 
         }
 
@@ -498,14 +498,14 @@ function renderVouchers(data) {
 
                 <td>
                     ${formatDate(
-                        voucher.start_date
-                    )}
+            voucher.start_date
+        )}
                 </td>
 
                 <td>
                     ${formatDate(
-                        voucher.end_date
-                    )}
+            voucher.end_date
+        )}
                 </td>
 
                 <td>
@@ -587,39 +587,39 @@ function deleteVoucher(id) {
         }
     )
 
-    .then(function (res) {
+        .then(function (res) {
 
-        return res.text();
+            return res.text();
 
-    })
+        })
 
-    .then(function (data) {
+        .then(function (data) {
 
-        if (data === "ok") {
+            if (data === "ok") {
+
+                show(
+                    `Xóa voucher "${id}" thành công!`
+                );
+
+                loadVouchers();
+
+            } else {
+
+                show(
+                    `Xóa voucher "${id}" thất bại!`
+                );
+
+            }
+
+        })
+
+        .catch(function () {
 
             show(
-                `Xóa voucher "${id}" thành công!`
+                `Không thể kết nối đến máy chủ khi xóa voucher "${id}"!`
             );
 
-            loadVouchers();
-
-        } else {
-
-            show(
-                `Xóa voucher "${id}" thất bại!`
-            );
-
-        }
-
-    })
-
-    .catch(function () {
-
-        show(
-            `Không thể kết nối đến máy chủ khi xóa voucher "${id}"!`
-        );
-
-    });
+        });
 
 }
 
@@ -1074,17 +1074,17 @@ function searchAndFilterVouchers() {
                     voucherStatus
 
                 ]
-                .map(
-                    function (value) {
+                    .map(
+                        function (value) {
 
-                        return String(
-                            value ?? ""
-                        );
+                            return String(
+                                value ?? ""
+                            );
 
-                    }
-                )
-                .join(" ")
-                .toLowerCase();
+                        }
+                    )
+                    .join(" ")
+                    .toLowerCase();
 
 
                 // ========================================
@@ -1109,7 +1109,7 @@ function searchAndFilterVouchers() {
                     filterValue === "" ||
 
                     voucherStatus ===
-                        filterValue;
+                    filterValue;
 
 
                 // ========================================

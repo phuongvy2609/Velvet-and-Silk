@@ -1,4 +1,5 @@
-const { sql } = require("../config/db");
+
+const { db } = require("../config/db");
 
 
 // ========================================
@@ -6,41 +7,30 @@ const { sql } = require("../config/db");
 // ========================================
 
 const getUserNotifications = async (req, res) => {
-
     try {
+        const userId = req.session.user?.id || 0;
 
-        const userId =
-            req.session.user?.id || 0;
+        const [result] = await db.query(
+            `SELECT
+                notification_id,
+                notification_type,
+                notification_title,
+                notification_content,
+                order_id,
+                is_read,
+                created_at,
+                user_id
+            FROM Notifications
+            WHERE user_id = ?
+            ORDER BY created_at DESC`,
+            [userId]
+        );
 
-        const result =
-            await sql.query`
-
-                SELECT
-                    notification_id,
-                    notification_type,
-                    notification_title,
-                    notification_content,
-                    order_id,
-                    is_read,
-                    created_at,
-                    user_id
-
-                FROM Notifications
-
-                WHERE user_id = ${userId}
-
-                ORDER BY created_at DESC
-
-            `;
-
-        res.json(result.recordset);
+        res.json(result);
 
     } catch (error) {
-
         res.status(500).json([]);
-
     }
-
 };
 
 
@@ -49,39 +39,27 @@ const getUserNotifications = async (req, res) => {
 // ========================================
 
 const readUserNotification = async (req, res) => {
-
     try {
+        const notificationId = req.params.id;
+        const userId = req.session.user?.id || 0;
 
-        const notificationId =
-            req.params.id;
-
-        const userId =
-            req.session.user?.id || 0;
-
-        await sql.query`
-
-            UPDATE Notifications
-
-            SET is_read = 1
-
-            WHERE notification_id = ${notificationId}
-
-            AND user_id = ${userId}
-
-        `;
+        await db.query(
+            `UPDATE Notifications
+             SET is_read = 1
+             WHERE notification_id = ?
+             AND user_id = ?`,
+            [notificationId, userId]
+        );
 
         res.json({
             success: true
         });
 
     } catch (error) {
-
         res.status(500).json({
             success: false
         });
-
     }
-
 };
 
 
@@ -90,37 +68,26 @@ const readUserNotification = async (req, res) => {
 // ========================================
 
 const deleteUserNotification = async (req, res) => {
-
     try {
+        const notificationId = req.params.id;
+        const userId = req.session.user?.id || 0;
 
-        const notificationId =
-            req.params.id;
-
-        const userId =
-            req.session.user?.id || 0;
-
-        await sql.query`
-
-            DELETE FROM Notifications
-
-            WHERE notification_id = ${notificationId}
-
-            AND user_id = ${userId}
-
-        `;
+        await db.query(
+            `DELETE FROM Notifications
+             WHERE notification_id = ?
+             AND user_id = ?`,
+            [notificationId, userId]
+        );
 
         res.json({
             success: true
         });
 
     } catch (error) {
-
         res.status(500).json({
             success: false
         });
-
     }
-
 };
 
 
@@ -129,34 +96,25 @@ const deleteUserNotification = async (req, res) => {
 // ========================================
 
 const readAllUserNotifications = async (req, res) => {
-
     try {
+        const userId = req.session.user?.id || 0;
 
-        const userId =
-            req.session.user?.id || 0;
-
-        await sql.query`
-
-            UPDATE Notifications
-
-            SET is_read = 1
-
-            WHERE user_id = ${userId}
-
-        `;
+        await db.query(
+            `UPDATE Notifications
+             SET is_read = 1
+             WHERE user_id = ?`,
+            [userId]
+        );
 
         res.json({
             success: true
         });
 
     } catch (error) {
-
         res.status(500).json({
             success: false
         });
-
     }
-
 };
 
 
@@ -169,21 +127,15 @@ const createUserOrderNotification = async (
     orderId,
     status
 ) => {
-
     try {
-
-        const notificationType =
-            "order";
-
-        const notificationTitle =
-            "Cập nhật đơn hàng";
+        const notificationType = "order";
+        const notificationTitle = "Cập nhật đơn hàng";
 
         const notificationContent =
             `Đơn hàng #${orderId} đã được cập nhật trạng thái: ${status}`;
 
-        await sql.query`
-
-            INSERT INTO Notifications
+        await db.query(
+            `INSERT INTO Notifications
             (
                 notification_type,
                 notification_title,
@@ -193,24 +145,19 @@ const createUserOrderNotification = async (
                 created_at,
                 user_id
             )
-
-            VALUES
-            (
-                ${notificationType},
-                ${notificationTitle},
-                ${notificationContent},
-                ${orderId},
+            VALUES (?, ?, ?, ?, ?, NOW(), ?)`,
+            [
+                notificationType,
+                notificationTitle,
+                notificationContent,
+                orderId,
                 0,
-                GETDATE(),
-                ${userId}
-            )
-
-        `;
+                userId
+            ]
+        );
 
     } catch (error) {
-
     }
-
 };
 
 
@@ -223,12 +170,9 @@ const createUserContactNotification = async (
     userId,
     content
 ) => {
-
     try {
-
-        await sql.query`
-
-            INSERT INTO Notifications
+        await db.query(
+            `INSERT INTO Notifications
             (
                 notification_type,
                 notification_title,
@@ -238,24 +182,17 @@ const createUserContactNotification = async (
                 created_at,
                 user_id
             )
-
-            VALUES
-            (
-                'contact',
-                N'Shop đã phản hồi liên hệ cho bạn',
-                ${content},
-                NULL,
-                0,
-                GETDATE(),
-                ${userId}
-            )
-
-        `;
+            VALUES (?, ?, ?, NULL, 0, NOW(), ?)`,
+            [
+                "contact",
+                "Shop đã phản hồi liên hệ cho bạn",
+                content,
+                userId
+            ]
+        );
 
     } catch (error) {
-
     }
-
 };
 
 
@@ -268,12 +205,9 @@ const createUserReviewNotification = async (
     userId,
     content
 ) => {
-
     try {
-
-        await sql.query`
-
-            INSERT INTO Notifications
+        await db.query(
+            `INSERT INTO Notifications
             (
                 notification_type,
                 notification_title,
@@ -283,26 +217,18 @@ const createUserReviewNotification = async (
                 created_at,
                 user_id
             )
-
-            VALUES
-            (
-                'review',
-                N'Phản hồi đánh giá',
-                ${content},
-                NULL,
-                0,
-                GETDATE(),
-                ${userId}
-            )
-
-        `;
+            VALUES (?, ?, ?, NULL, 0, NOW(), ?)`,
+            [
+                "review",
+                "Phản hồi đánh giá",
+                content,
+                userId
+            ]
+        );
 
     } catch (error) {
-
     }
-
 };
-
 
 
 // ========================================
@@ -310,7 +236,6 @@ const createUserReviewNotification = async (
 // ========================================
 
 module.exports = {
-
     getUserNotifications,
     readUserNotification,
     deleteUserNotification,
@@ -318,5 +243,4 @@ module.exports = {
     createUserOrderNotification,
     createUserContactNotification,
     createUserReviewNotification
-
 };

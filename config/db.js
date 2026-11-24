@@ -1,28 +1,56 @@
 require('dotenv').config();
 
-const sql = require('mssql');
+const mysql = require('mysql2/promise');
 
-const config = {
+const db = mysql.createPool({
+
+    host: process.env.DB_SERVER || 'localhost',
+
+    port: Number(process.env.DB_PORT || 3306),
+
     user: process.env.DB_USER,
+
     password: process.env.DB_PASSWORD,
-    server: process.env.DB_SERVER,
+
     database: process.env.DB_DATABASE,
-    options: {
-        trustServerCertificate: true
-    }
-};
+
+    waitForConnections: true,
+
+    connectionLimit: 10,
+
+    queueLimit: 0,
+
+    timezone: '+07:00'
+
+});
+
+
+// ========================================
+// KIỂM TRA KẾT NỐI MYSQL
+// ========================================
 
 async function connectDB() {
 
     try {
-        await sql.connect(config);
-        console.log("Kết Nối Thành Công !");
-    }
 
-    catch (err) {
-        console.log("Lỗi", err);
+        const connection = await db.getConnection();
+
+        console.log("Kết Nối MySQL Thành Công!");
+
+        connection.release();
+
+    } catch (err) {
+
+        console.log("Lỗi kết nối MySQL:", err.message);
+
+        throw err;
+
     }
 
 }
 
-module.exports = { sql, connectDB };
+
+module.exports = {
+    db,
+    connectDB
+};

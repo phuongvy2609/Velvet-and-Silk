@@ -1,17 +1,14 @@
-const { sql } = require("../config/db");
 
+const { db } = require("../config/db");
 
 // ========================================
 // TẠO THÔNG BÁO ĐÁNH GIÁ
 // ========================================
 
 const createReviewNotification = async (review) => {
-
     try {
-
-        await sql.query`
-
-            INSERT INTO Notifications
+        await db.query(
+            `INSERT INTO Notifications
             (
                 notification_type,
                 notification_title,
@@ -20,31 +17,18 @@ const createReviewNotification = async (review) => {
                 is_read,
                 created_at
             )
-
-            VALUES
-            (
-                ${"review"},
-                ${`Có Đánh Giá ${review.product_name || "Sản phẩm"} Mới`},
-                ${`Từ ${review.customer_name || "Khách hàng"} - ${review.rating || 0} sao`},
-                ${null},
-                ${0},
-                GETDATE()
-            )
-
-        `;
-
-    } catch (error) {
-
-        console.log(
-            "LỖI TẠO THÔNG BÁO ĐÁNH GIÁ:",
-            error.message
+            VALUES (?, ?, ?, ?, ?, NOW())`,
+            [
+                "review",
+                `Có Đánh Giá ${review.product_name || "Sản phẩm"} Mới`,
+                `Từ ${review.customer_name || "Khách hàng"} - ${review.rating || 0} sao`,
+                null,
+                0
+            ]
         );
-
+    } catch (error) {
     }
-
 };
-
-
 
 
 // ========================================
@@ -52,12 +36,9 @@ const createReviewNotification = async (review) => {
 // ========================================
 
 const createContactNotification = async (contact) => {
-
     try {
-
-        await sql.query`
-
-            INSERT INTO Notifications
+        await db.query(
+            `INSERT INTO Notifications
             (
                 notification_type,
                 notification_title,
@@ -66,32 +47,18 @@ const createContactNotification = async (contact) => {
                 is_read,
                 created_at
             )
-
-            VALUES
-            (
-                ${"contact"},
-                ${"Có Phản Hồi Liên Hệ Mới"},
-                ${`Từ ${contact.name || "Khách hàng"} - Email: ${contact.email || ""}`},
-                ${null},
-                ${0},
-                GETDATE()
-            )
-
-        `;
-
-    } catch (error) {
-
-        console.log(
-            "LỖI TẠO THÔNG BÁO LIÊN HỆ:",
-            error.message
+            VALUES (?, ?, ?, ?, ?, NOW())`,
+            [
+                "contact",
+                "Có Phản Hồi Liên Hệ Mới",
+                `Từ ${contact.name || "Khách hàng"} - Email: ${contact.email || ""}`,
+                null,
+                0
+            ]
         );
-
+    } catch (error) {
     }
-
 };
-
-
-
 
 
 // ========================================
@@ -99,12 +66,9 @@ const createContactNotification = async (contact) => {
 // ========================================
 
 const createRegisterNotification = async (user) => {
-
     try {
-
-        await sql.query`
-
-            INSERT INTO Notifications
+        await db.query(
+            `INSERT INTO Notifications
             (
                 notification_type,
                 notification_title,
@@ -113,32 +77,18 @@ const createRegisterNotification = async (user) => {
                 is_read,
                 created_at
             )
-
-            VALUES
-            (
-                ${"register"},
-                ${"Có Khách Hàng Mới Đăng Ký"},
-                ${`${user.fullname || "Khách hàng"} - Email: ${user.email || ""}`},
-                ${null},
-                ${0},
-                GETDATE()
-            )
-
-        `;
-
-    } catch (error) {
-
-        console.log(
-            "LỖI TẠO THÔNG BÁO ĐĂNG KÝ:",
-            error.message
+            VALUES (?, ?, ?, ?, ?, NOW())`,
+            [
+                "register",
+                "Có Khách Hàng Mới Đăng Ký",
+                `${user.fullname || "Khách hàng"} - Email: ${user.email || ""}`,
+                null,
+                0
+            ]
         );
-
+    } catch (error) {
     }
-
 };
-
-
-
 
 
 // ========================================
@@ -146,12 +96,9 @@ const createRegisterNotification = async (user) => {
 // ========================================
 
 const getNotifications = async (req, res) => {
-
     try {
-
-        const result = await sql.query`
-
-            SELECT
+        const [result] = await db.query(
+            `SELECT
                 notification_id,
                 notification_type,
                 notification_title,
@@ -159,21 +106,16 @@ const getNotifications = async (req, res) => {
                 order_id,
                 is_read,
                 created_at
-
             FROM Notifications
             WHERE user_id IS NULL
-            ORDER BY notification_id DESC
+            ORDER BY notification_id DESC`
+        );
 
-        `;
-
-        res.json(result.recordset);
+        res.json(result);
 
     } catch (error) {
-
         res.status(500).send(error.message);
-
     }
-
 };
 
 
@@ -182,32 +124,21 @@ const getNotifications = async (req, res) => {
 // ========================================
 
 const getUnreadNotificationCount = async (req, res) => {
-
     try {
-
-        const result = await sql.query`
-
-            SELECT COUNT(*) AS total
-
+        const [result] = await db.query(
+            `SELECT COUNT(*) AS total
             FROM Notifications
-
             WHERE is_read = 0
-            AND user_id IS NULL
-
-        `;
+            AND user_id IS NULL`
+        );
 
         res.json({
-
-            total: result.recordset[0].total
-
+            total: result[0].total
         });
 
     } catch (error) {
-
         res.status(500).send(error.message);
-
     }
-
 };
 
 
@@ -216,34 +147,23 @@ const getUnreadNotificationCount = async (req, res) => {
 // ========================================
 
 const readNotification = async (req, res) => {
-
     try {
+        const notificationId = Number(req.params.id);
 
-        const notificationId =
-            Number(req.params.id);
-
-
-        await sql.query`
-
-            UPDATE Notifications
-
+        await db.query(
+            `UPDATE Notifications
             SET is_read = 1
-
-            WHERE notification_id = ${notificationId}
-            AND user_id IS NULL
-        `;
+            WHERE notification_id = ?
+            AND user_id IS NULL`,
+            [notificationId]
+        );
 
         res.send("ok");
 
     } catch (error) {
-
         res.status(500).send(error.message);
-
     }
-
 };
-
-
 
 
 // ========================================
@@ -251,40 +171,32 @@ const readNotification = async (req, res) => {
 // ========================================
 
 const deleteNotification = async (req, res) => {
-
     try {
+        const notificationId = Number(req.params.id);
 
-        const notificationId =
-            Number(req.params.id);
-
-
-        await sql.query`
-
-            DELETE FROM Notifications
-
-            WHERE notification_id = ${notificationId}
-            AND user_id IS NULL
-        `;
-
+        await db.query(
+            `DELETE FROM Notifications
+            WHERE notification_id = ?
+            AND user_id IS NULL`,
+            [notificationId]
+        );
 
         res.send("ok");
 
     } catch (error) {
-
         res.status(500).send(error.message);
-
     }
-
 };
 
 
+// ========================================
+// TẠO THÔNG BÁO ĐƠN HÀNG
+// ========================================
+
 const createOrderNotification = async (order) => {
-
     try {
-
-        await sql.query`
-
-            INSERT INTO Notifications
+        await db.query(
+            `INSERT INTO Notifications
             (
                 notification_type,
                 notification_title,
@@ -294,24 +206,18 @@ const createOrderNotification = async (order) => {
                 created_at,
                 user_id
             )
-
-            VALUES
-            (
-                'order',
-                N'Có đơn hàng mới',
-                ${`Đơn hàng #${order.order_id} vừa được đặt`},
-                ${order.order_id},
+            VALUES (?, ?, ?, ?, ?, NOW(), ?)`,
+            [
+                "order",
+                "Có đơn hàng mới",
+                `Đơn hàng #${order.order_id} vừa được đặt`,
+                order.order_id,
                 0,
-                GETDATE(),
-                NULL
-            )
-
-        `;
-
+                null
+            ]
+        );
     } catch (error) {
-
     }
-
 };
 
 
@@ -320,17 +226,12 @@ const createOrderNotification = async (order) => {
 // ========================================
 
 module.exports = {
-
     createReviewNotification,
     createContactNotification,
     createRegisterNotification,
-
     getNotifications,
-
     getUnreadNotificationCount,
-
     readNotification,
     deleteNotification,
     createOrderNotification
-
 };

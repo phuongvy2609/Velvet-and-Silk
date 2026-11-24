@@ -1,4 +1,10 @@
-const { sql } = require('../config/db');
+
+const { db } = require('../config/db');
+
+
+// ========================================
+// THÊM ĐỊA CHỈ
+// ========================================
 
 const createAddress = async (req, res) => {
 
@@ -19,18 +25,16 @@ const createAddress = async (req, res) => {
         // NẾU CHỌN ĐỊA CHỈ MẶC ĐỊNH
         if (is_default) {
 
-            const checkDefault = await sql.query`
+            const [checkDefault] = await db.query(`
                 SELECT address_id
                 FROM user_addresses
-                WHERE user_id = ${user_id}
+                WHERE user_id = ?
                 AND is_default = 1
-            `;
+            `, [user_id]);
 
-            if (checkDefault.recordset.length > 0) {
+            if (checkDefault.length > 0) {
 
-                return res.send(
-                    'Have'
-                );
+                return res.send('Have');
 
             }
 
@@ -38,7 +42,7 @@ const createAddress = async (req, res) => {
 
 
         // THÊM ĐỊA CHỈ
-        await sql.query`
+        await db.query(`
             INSERT INTO user_addresses
             (
                 user_id,
@@ -49,17 +53,16 @@ const createAddress = async (req, res) => {
                 address,
                 is_default
             )
-            VALUES
-            (
-                ${user_id},
-                ${fullname},
-                ${phone},
-                ${province_name},
-                ${ward_name},
-                ${address},
-                ${is_default ? 1 : 0}
-            )
-        `;
+            VALUES (?, ?, ?, ?, ?, ?, ?)
+        `, [
+            user_id,
+            fullname,
+            phone,
+            province_name,
+            ward_name,
+            address,
+            is_default ? 1 : 0
+        ]);
 
 
         res.send("ok");
@@ -73,6 +76,9 @@ const createAddress = async (req, res) => {
 };
 
 
+// ========================================
+// LẤY DANH SÁCH ĐỊA CHỈ
+// ========================================
 
 // ========================================
 // LẤY DANH SÁCH ĐỊA CHỈ
@@ -82,9 +88,14 @@ const getAddresses = async (req, res) => {
 
     try {
 
+        // KIỂM TRA ĐĂNG NHẬP
+        if (!req.session.user) {
+            return res.status(401).send('Vui lòng đăng nhập');
+        }
+
         const user_id = req.session.user.id;
 
-        const result = await sql.query`
+        const [result] = await db.query(`
             SELECT
                 address_id,
                 user_id,
@@ -95,11 +106,11 @@ const getAddresses = async (req, res) => {
                 address,
                 is_default
             FROM user_addresses
-            WHERE user_id = ${user_id}
+            WHERE user_id = ?
             ORDER BY is_default DESC, address_id DESC
-        `;
+        `, [user_id]);
 
-        res.json(result.recordset);
+        res.json(result);
 
     } catch (error) {
 
@@ -108,8 +119,6 @@ const getAddresses = async (req, res) => {
     }
 
 };
-
-
 
 // ========================================
 // SỬA ĐỊA CHỈ
@@ -133,54 +142,41 @@ const updateAddress = async (req, res) => {
         } = req.body;
 
 
-        // ========================================
         // KIỂM TRA ĐỊA CHỈ CÓ THUỘC USER KHÔNG
-        // ========================================
-
-        const checkAddress = await sql.query`
-
+        const [checkAddress] = await db.query(`
             SELECT address_id
-
             FROM user_addresses
+            WHERE address_id = ?
+            AND user_id = ?
+        `, [
+            address_id,
+            user_id
+        ]);
 
-            WHERE address_id = ${address_id}
 
-            AND user_id = ${user_id}
+        if (checkAddress.length === 0) {
 
-        `;
-
-
-        if (checkAddress.recordset.length === 0) {
-
-            return res.send(
-                'Địa chỉ không tồn tại'
-            );
+            return res.send('Địa chỉ không tồn tại');
 
         }
 
 
-        // ========================================
         // NẾU CHỌN MẶC ĐỊNH
-        // ========================================
-
         if (is_default) {
 
-            const checkDefault = await sql.query`
-
+            const [checkDefault] = await db.query(`
                 SELECT address_id
-
                 FROM user_addresses
-
-                WHERE user_id = ${user_id}
-
+                WHERE user_id = ?
                 AND is_default = 1
+                AND address_id <> ?
+            `, [
+                user_id,
+                address_id
+            ]);
 
-                AND address_id <> ${address_id}
 
-            `;
-
-
-            if (checkDefault.recordset.length > 0) {
+            if (checkDefault.length > 0) {
 
                 return res.send(
                     'Không được phép tạo địa chỉ mặc định khác!'
@@ -191,27 +187,28 @@ const updateAddress = async (req, res) => {
         }
 
 
-        // ========================================
         // CẬP NHẬT
-        // ========================================
-
-        await sql.query`
-
+        await db.query(`
             UPDATE user_addresses
-
             SET
-                fullname = ${fullname},
-                phone = ${phone},
-                province_name = ${province_name},
-                ward_name = ${ward_name},
-                address = ${address},
-                is_default = ${is_default ? 1 : 0}
-
-            WHERE address_id = ${address_id}
-
-            AND user_id = ${user_id}
-
-        `;
+                fullname = ?,
+                phone = ?,
+                province_name = ?,
+                ward_name = ?,
+                address = ?,
+                is_default = ?
+            WHERE address_id = ?
+            AND user_id = ?
+        `, [
+            fullname,
+            phone,
+            province_name,
+            ward_name,
+            address,
+            is_default ? 1 : 0,
+            address_id,
+            user_id
+        ]);
 
 
         res.send('ok');
@@ -223,7 +220,6 @@ const updateAddress = async (req, res) => {
     }
 
 };
-
 
 
 // ========================================
@@ -240,17 +236,20 @@ const deleteAddress = async (req, res) => {
 
 
         // KIỂM TRA ĐỊA CHỈ CÓ THUỘC USER KHÔNG
-        const checkAddress = await sql.query`
+        const [checkAddress] = await db.query(`
             SELECT
                 address_id,
                 is_default
             FROM user_addresses
-            WHERE address_id = ${address_id}
-            AND user_id = ${user_id}
-        `;
+            WHERE address_id = ?
+            AND user_id = ?
+        `, [
+            address_id,
+            user_id
+        ]);
 
 
-        if (checkAddress.recordset.length === 0) {
+        if (checkAddress.length === 0) {
 
             res.status(404).send('Địa chỉ không tồn tại');
 
@@ -259,7 +258,7 @@ const deleteAddress = async (req, res) => {
 
 
         // KHÔNG CHO XÓA ĐỊA CHỈ MẶC ĐỊNH
-        if (Number(checkAddress.recordset[0].is_default) === 1) {
+        if (Number(checkAddress[0].is_default) === 1) {
 
             res.status(400).send(
                 'Không thể xóa địa chỉ mặc định'
@@ -270,15 +269,17 @@ const deleteAddress = async (req, res) => {
 
 
         // XÓA ĐỊA CHỈ
-        await sql.query`
+        await db.query(`
             DELETE FROM user_addresses
-            WHERE address_id = ${address_id}
-            AND user_id = ${user_id}
-        `;
+            WHERE address_id = ?
+            AND user_id = ?
+        `, [
+            address_id,
+            user_id
+        ]);
 
 
         res.send('ok');
-
 
     } catch (error) {
 

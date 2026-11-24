@@ -163,7 +163,7 @@ fetch('/profile')
             emailInput.value = data.email || '';
         }
 
-        
+
         // ========================================
         // HIỂN THỊ AVATAR
         // ========================================
@@ -492,55 +492,54 @@ if (btnCancelAddress) {
 }
 
 
+
 // ========================================
 // LẤY TỈNH / THÀNH PHỐ
 // ========================================
 
 if (city) {
 
-    fetch('https://34tinhthanh.com/api/provinces')
+    fetch('https://www.tinhthanhpho.com/api/v1/new-provinces?limit=100')
 
         .then(res => {
 
             if (!res.ok) {
-
-                return null;
-
+                throw new Error('Không thể tải danh sách tỉnh/thành phố');
             }
 
             return res.json();
 
         })
 
-        .then(data => {
+        .then(result => {
 
-            if (!data) {
-                return;
-            }
+            const data = result.data;
 
             if (!Array.isArray(data)) {
-                return;
+                throw new Error('Dữ liệu tỉnh/thành phố không hợp lệ');
             }
-
 
             data.forEach(item => {
 
-                const option =
-                    document.createElement('option');
+                const option = document.createElement('option');
 
-                option.value =
-                    item.province_code;
-
-                option.textContent =
-                    item.name;
+                option.value = item.code;
+                option.textContent = item.name;
 
                 city.appendChild(option);
 
             });
 
+        })
+
+        .catch(error => {
+
+            show('Không tải được danh sách tỉnh/thành phố');
+
         });
 
 }
+
 
 
 // ========================================
@@ -553,109 +552,73 @@ function loadWards(provinceCode, selectedWardName = '') {
         return;
     }
 
-
     ward.innerHTML = `
-        <option value="">
-            -- Chọn Phường / Xã --
-        </option>
+        <option value="">Đang tải Phường / Xã...</option>
     `;
 
-
     if (!provinceCode) {
+
+        ward.innerHTML = `
+            <option value="">-- Chọn Phường / Xã --</option>
+        `;
+
         return;
     }
 
-
-    ward.innerHTML = `
-        <option value="">
-            Đang tải Phường / Xã...
-        </option>
-    `;
-
-
     fetch(
-        `https://34tinhthanh.com/api/wards?province_code=${provinceCode}`
+        `https://www.tinhthanhpho.com/api/v1/new-provinces/${provinceCode}/wards?limit=200`
     )
 
         .then(res => {
 
             if (!res.ok) {
-
-                return null;
-
+                throw new Error('Không thể tải danh sách phường/xã');
             }
 
             return res.json();
 
         })
 
-        .then(data => {
+        .then(result => {
 
-            if (!data) {
-                return;
+            const wardData = result.data;
+
+            if (!Array.isArray(wardData)) {
+                throw new Error('Dữ liệu phường/xã không hợp lệ');
             }
-
-
-            let wardData = [];
-
-
-            if (Array.isArray(data)) {
-
-                wardData = data;
-
-            }
-
-            else if (
-                data &&
-                Array.isArray(data.data)
-            ) {
-
-                wardData = data.data;
-
-            }
-
 
             ward.innerHTML = `
-                <option value="">
-                    -- Chọn Phường / Xã --
-                </option>
+                <option value="">-- Chọn Phường / Xã --</option>
             `;
-
 
             wardData.forEach(item => {
 
-                const option =
-                    document.createElement('option');
+                const option = document.createElement('option');
 
-
-                option.value =
-                    item.ward_code ||
-                    item.code ||
-                    item.id ||
-                    '';
-
-
-                option.textContent =
-                    item.name ||
-                    item.ward_name ||
-                    '';
-
+                option.value = item.code;
+                option.textContent = item.name;
 
                 // Tự chọn phường cũ khi sửa
                 if (
                     selectedWardName &&
-                    option.textContent.trim() ===
-                    selectedWardName.trim()
+                    option.textContent.trim() === selectedWardName.trim()
                 ) {
-
                     option.selected = true;
-
                 }
-
 
                 ward.appendChild(option);
 
             });
+
+        })
+
+        .catch(error => {
+
+            ward.innerHTML = `
+                <option value="">Không tải được Phường / Xã</option>
+            `;
+
+            show('Không tải được danh sách Phường / Xã');
 
         });
 
@@ -1094,16 +1057,15 @@ function loadAddresses() {
                             ${item.province_name || ''}
                         </div>
 
-                        ${
-                            Number(item.is_default) === 1
-                            ? `
+                        ${Number(item.is_default) === 1
+                        ? `
                                 <span class="address-default-label">
                                     <i class="fa-solid fa-house-circle-check"></i>
                                     Mặc định
                                 </span>
                             `
-                            : ''
-                        }
+                        : ''
+                    }
 
                     </div>
 

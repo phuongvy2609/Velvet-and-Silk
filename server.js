@@ -1,57 +1,60 @@
+
 const express = require('express');
 const session = require('express-session');
 const app = express();
-const { sql, connectDB } = require('./config/db'); 
-connectDB();
 
+// KẾT NỐI MYSQL
+const { connectDB } = require('./config/db');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Cấu hình Session: Lưu thông tin người dùng vào bộ nhớ Server
+// CẤU HÌNH SESSION
 app.use(session({
-    secret: 'secret-key', 
+    secret: 'secret-key',
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
 }));
 
 // KIỂM TRA USER ĐANG ĐĂNG NHẬP
 app.get('/get-user', (req, res) => {
     res.json({
-        user: req.session.user || null //req.session.user → lấy user đã login || null → nếu không có thì trả null
+        user: req.session.user || null
     });
 });
 
+// THƯ MỤC UPLOAD ẢNH
 app.use("/uploads", express.static("uploads"));
 
-// Chỉ định thư mục chứa file HTML, CSS, JS của bạn
+// THƯ MỤC FRONTEND
 app.use(express.static('assets'));
 
-const authRouter = require('./routers/authRouter'); // Đăng ký router cho authRouter
+// KHAI BÁO ROUTER
+const authRouter = require('./routers/authRouter');
 app.use('/', authRouter);
 
-const productRouter = require ('./routers/productsRouter'); // Đăng ký router cho productRouter
+const productRouter = require('./routers/productsRouter');
 app.use('/', productRouter);
 
-const contactRouter = require('./routers/contactRouter'); // Đăng ký router cho contactRouter
-app.use('/',contactRouter);
+const contactRouter = require('./routers/contactRouter');
+app.use('/', contactRouter);
 
-const reviewRouter = require('./routers/reviewRouter'); // Đăng ký router cho reviewRouter
+const reviewRouter = require('./routers/reviewRouter');
 app.use('/', reviewRouter);
 
-const orderRouter = require('./routers/orderRouter');   // Đăng ký router cho orderRouter
+const orderRouter = require('./routers/orderRouter');
 app.use('/', orderRouter);
 
-const cartRouter = require('./routers/cartRouter'); // Đăng ký router cho cartRouter
+const cartRouter = require('./routers/cartRouter');
 app.use('/', cartRouter);
 
-const dashboardRouter = require('./routers/dashboardRouter'); 
+const dashboardRouter = require('./routers/dashboardRouter');
 app.use('/', dashboardRouter);
 
 const chatRouter = require('./routers/chatRouter');
 app.use('/', chatRouter);
 
-const messRouter = require("./routers/messRouter");
+const messRouter = require('./routers/messRouter');
 app.use('/chat', messRouter);
 
 const voucherRouter = require('./routers/voucherRouter');
@@ -66,8 +69,30 @@ app.use('/', notificationRouter);
 const notificationUserRouter = require('./routers/notificationUserRouter');
 app.use('/', notificationUserRouter);
 
+// ========================================
+// KHỞI ĐỘNG SERVER SAU KHI KẾT NỐI MYSQL
+// ========================================
 
-// Chạy Server
-app.listen(3000, () => {
-    console.log('🚀 Server đã sẵn sàng tại: http://localhost:3000');
-});
+const PORT = process.env.PORT || 3000;
+
+async function startServer() {
+
+    try {
+
+        await connectDB();
+
+        app.listen(PORT, () => {
+
+            console.log(`Server đã sẵn sàng tại cổng ${PORT}`);
+
+        });
+
+    } catch (error) {
+
+        console.log("Không thể khởi động server!");
+
+    }
+
+}
+
+startServer();

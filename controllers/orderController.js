@@ -1,4 +1,5 @@
-const { sql } = require('../config/db');
+
+const { db } = require('../config/db');
 
 const {
     createOrderNotification
@@ -9,117 +10,69 @@ const {
 } = require("./notificationUserController");
 
 
-
-
 // ========================================
 // TỰ ĐỘNG CẬP NHẬT HẠNG THÀNH VIÊN
 // ========================================
 
 const updateMembershipRank = async (userId) => {
 
-    // ========================================
     // KIỂM TRA QUYỀN CỦA TÀI KHOẢN
-    // ========================================
-
-    const userResult = await sql.query`
-
+    const [userResult] = await db.query(`
         SELECT role
-
         FROM users
+        WHERE id = ?
+    `, [userId]);
 
-        WHERE id = ${userId}
-
-    `;
-
-    if (userResult.recordset.length === 0) {
+    if (userResult.length === 0) {
         return;
     }
 
-    const role = userResult.recordset[0].role;
+    const role = userResult[0].role;
 
-    // ========================================
     // ADMIN KHÔNG CÓ HẠNG THÀNH VIÊN
-    // ========================================
-
     if (role && role.toLowerCase() === 'admin') {
 
-        await sql.query`
-
+        await db.query(`
             UPDATE users
-
             SET membership_rank = NULL
-
-            WHERE id = ${userId}
-
-        `;
+            WHERE id = ?
+        `, [userId]);
 
         return;
     }
 
-    // ========================================
-    // TÍNH SỐ ĐƠN HOÀN THÀNH CỦA USER
-    // ========================================
-
-    const result = await sql.query`
-
+    // TÍNH SỐ ĐƠN HOÀN THÀNH
+    const [result] = await db.query(`
         SELECT COUNT(*) AS completedOrders
-
         FROM Orders
+        WHERE user_id = ?
+        AND status = 'Hoàn thành'
+    `, [userId]);
 
-        WHERE user_id = ${userId}
+    const completedOrders = Number(result[0].completedOrders || 0);
 
-        AND status = N'Hoàn thành'
-
-    `;
-
-    const completedOrders =
-        Number(
-            result.recordset[0].completedOrders || 0
-        );
-
-    // ========================================
     // XẾP HẠNG
-    // ========================================
-
     let membershipRank = 'Hạng Đồng';
 
     if (completedOrders >= 20) {
-
         membershipRank = 'Hạng Kim Cương';
-
     }
-
     else if (completedOrders >= 15) {
-
         membershipRank = 'Hạng Vàng';
-
     }
-
     else if (completedOrders >= 10) {
-
         membershipRank = 'Hạng Bạc';
-
     }
-
     else {
-
         membershipRank = 'Hạng Đồng';
-
     }
 
-    // ========================================
     // LƯU HẠNG
-    // ========================================
-
-    await sql.query`
-
+    await db.query(`
         UPDATE users
-
-        SET membership_rank = ${membershipRank}
-
-        WHERE id = ${userId}
-
-    `;
+        SET membership_rank = ?
+        WHERE id = ?
+    `, [membershipRank, userId]);
 
 };
 
@@ -175,7 +128,6 @@ const createOrder = async (req, res) => {
         } = req.body;
 
 
-
         // ========================================
         // LẤY SẢN PHẨM CẦN MUA
         // ========================================
@@ -186,20 +138,16 @@ const createOrder = async (req, res) => {
 
             const buyNow = req.session.buyNow;
 
-            const productResult = await sql.query`
-
+            const [productResult] = await db.query(`
                 SELECT
                     product_id,
                     product_name,
                     stock_quantity
-
                 FROM products
+                WHERE product_name = ?
+            `, [buyNow.product_name]);
 
-                WHERE product_name = ${buyNow.product_name}
-
-            `;
-
-            if (productResult.recordset.length === 0) {
+            if (productResult.length === 0) {
 
                 return res.status(404).send(
                     "Không tìm thấy sản phẩm"
@@ -208,18 +156,17 @@ const createOrder = async (req, res) => {
             }
 
             orderProducts.push({
-                product_id: productResult.recordset[0].product_id,
-                product_name: productResult.recordset[0].product_name,
+                product_id: productResult[0].product_id,
+                product_name: productResult[0].product_name,
                 quantity: Number(buyNow.quantity) || 1,
-                stock_quantity: Number(productResult.recordset[0].stock_quantity) || 0
+                stock_quantity: Number(productResult[0].stock_quantity) || 0
             });
 
         }
 
         else {
 
-            const cartResult = await sql.query`
-
+            const [cartResult] = await db.query(`
                 SELECT
                     Cart.cart_id,
                     Cart.product_name,
@@ -230,21 +177,15 @@ const createOrder = async (req, res) => {
                     Cart.size,
                     products.product_id,
                     products.stock_quantity
-
                 FROM Cart
-
                 INNER JOIN products
                     ON Cart.product_name = products.product_name
-
-                WHERE Cart.user_id = ${user_id}
-
+                WHERE Cart.user_id = ?
                 AND Cart.order_id IS NULL
-
                 ORDER BY Cart.cart_id ASC
+            `, [user_id]);
 
-            `;
-
-            if (cartResult.recordset.length === 0) {
+            if (cartResult.length === 0) {
 
                 return res.status(400).send(
                     "Giỏ hàng đang trống"
@@ -252,7 +193,7 @@ const createOrder = async (req, res) => {
 
             }
 
-            orderProducts = cartResult.recordset.map(function (item) {
+            orderProducts = cartResult.map(function (item) {
 
                 return {
                     cart_id: item.cart_id,
@@ -266,12 +207,12 @@ const createOrder = async (req, res) => {
 
         }
 
+
         // ========================================
         // LƯU ĐƠN HÀNG
         // ========================================
 
-        const result = await sql.query`
-
+        const [result] = await db.query(`
             INSERT INTO Orders (
                 user_id,
                 ho,
@@ -289,48 +230,52 @@ const createOrder = async (req, res) => {
                 discount,
                 voucher_code,
                 total,
-                payment_status
+                payment_status,
+                created_at,
+                status
             )
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), ?)
+        `, [
+            user_id,
+            ho,
+            ten,
+            email,
+            phone,
+            address,
+            city,
+            district,
+            note || null,
+            payment_method,
+            shipping_method,
+            shipping_fee,
+            subtotal,
+            discount,
+            voucher_code || null,
+            total,
+            'Chưa thanh toán',
+            'Chờ xử lý'
+        ]);
 
-            OUTPUT INSERTED.order_id
+        // LẤY ID ĐƠN HÀNG VỪA TẠO
+        const order_id = result.insertId;
 
-            VALUES (
-                ${user_id},
-                ${ho},
-                ${ten},
-                ${email},
-                ${phone},
-                ${address},
-                ${city},
-                ${district},
-                ${note || null},
-                ${payment_method},
-                ${shipping_method},
-                ${shipping_fee},
-                ${subtotal},
-                ${discount},
-                ${voucher_code || null},
-                ${total},
-                N'Chưa thanh toán'
-            )
 
-        `;
+        // ========================================
         // TRỪ TỒN KHO
+        // ========================================
 
         for (const item of orderProducts) {
 
-            await sql.query`
+            await db.query(`
                 UPDATE products
-                SET stock_quantity = stock_quantity - ${item.quantity}
-                WHERE product_id = ${item.product_id}
-            `;
+                SET stock_quantity = stock_quantity - ?
+                WHERE product_id = ?
+            `, [
+                item.quantity,
+                item.product_id
+            ]);
 
         }
-
-
-        const order_id =
-            result.recordset[0].order_id;
-
 
 
         // ========================================
@@ -341,12 +286,9 @@ const createOrder = async (req, res) => {
 
             // MUA NGAY
 
-            const buyNow =
-                req.session.buyNow;
+            const buyNow = req.session.buyNow;
 
-
-            await sql.query`
-
+            await db.query(`
                 INSERT INTO Cart (
                     user_id,
                     product_name,
@@ -357,23 +299,19 @@ const createOrder = async (req, res) => {
                     size,
                     order_id
                 )
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            `, [
+                user_id,
+                buyNow.product_name,
+                buyNow.quantity,
+                buyNow.image,
+                buyNow.price,
+                buyNow.price_old,
+                buyNow.size,
+                order_id
+            ]);
 
-                VALUES (
-                    ${user_id},
-                    ${buyNow.product_name},
-                    ${buyNow.quantity},
-                    ${buyNow.image},
-                    ${buyNow.price},
-                    ${buyNow.price_old},
-                    ${buyNow.size},
-                    ${order_id}
-                )
-
-            `;
-
-
-            // Xóa mua ngay khỏi session
-
+            // XÓA MUA NGAY KHỎI SESSION
             delete req.session.buyNow;
 
         }
@@ -382,20 +320,17 @@ const createOrder = async (req, res) => {
 
             // MUA TỪ GIỎ HÀNG
 
-            await sql.query`
-
+            await db.query(`
                 UPDATE Cart
-
-                SET order_id = ${order_id}
-
-                WHERE user_id = ${user_id}
-
+                SET order_id = ?
+                WHERE user_id = ?
                 AND order_id IS NULL
-
-            `;
+            `, [
+                order_id,
+                user_id
+            ]);
 
         }
-
 
 
         // ========================================
@@ -409,7 +344,6 @@ const createOrder = async (req, res) => {
             ten: ten,
             total: total
         });
-
 
 
         // ========================================
@@ -432,7 +366,6 @@ const createOrder = async (req, res) => {
 };
 
 
-
 // ========================================
 // LẤY THÔNG TIN ĐƠN HÀNG
 // ========================================
@@ -441,13 +374,9 @@ const getOrderById = async (req, res) => {
 
     try {
 
-        const {
-            order_id
-        } = req.params;
+        const { order_id } = req.params;
 
-
-        const result = await sql.query`
-
+        const [result] = await db.query(`
             SELECT
                 order_id,
                 user_id,
@@ -465,21 +394,14 @@ const getOrderById = async (req, res) => {
                 discount,
                 voucher_code,
                 payment_method,
-                created_at,
+                DATE_FORMAT(created_at, '%Y-%m-%d %H:%i:%s') AS created_at,
                 total,
                 status
-
             FROM Orders
+            WHERE order_id = ?
+        `, [order_id]);
 
-            WHERE order_id = ${order_id}
-
-        `;
-
-
-        res.json(
-            result.recordset
-        );
-
+        res.json(result);
 
     } catch (error) {
 
@@ -490,7 +412,6 @@ const getOrderById = async (req, res) => {
     }
 
 };
-
 
 
 // ========================================
@@ -501,29 +422,21 @@ const getAllOrders = async (req, res) => {
 
     try {
 
-        const result = await sql.query`
-
+        const [result] = await db.query(`
             SELECT
                 Orders.order_id,
                 Orders.ho,
                 Orders.ten,
-
-                STRING_AGG(
-                    Cart.product_name,
-                    N', '
+                GROUP_CONCAT(
+                    Cart.product_name
+                    SEPARATOR ', '
                 ) AS product_name,
-
                 Orders.total,
-
                 Orders.created_at AS order_date,
-
                 Orders.status
-
             FROM Orders
-
             LEFT JOIN Cart
                 ON Orders.order_id = Cart.order_id
-
             GROUP BY
                 Orders.order_id,
                 Orders.ho,
@@ -531,17 +444,11 @@ const getAllOrders = async (req, res) => {
                 Orders.total,
                 Orders.created_at,
                 Orders.status
-
             ORDER BY
                 Orders.created_at DESC
+        `);
 
-        `;
-
-
-        res.json(
-            result.recordset
-        );
-
+        res.json(result);
 
     } catch (error) {
 
@@ -552,7 +459,6 @@ const getAllOrders = async (req, res) => {
     }
 
 };
-
 
 
 // ========================================
@@ -563,13 +469,9 @@ const getOrderProducts = async (req, res) => {
 
     try {
 
-        const {
-            order_id
-        } = req.params;
+        const { order_id } = req.params;
 
-
-        const result = await sql.query`
-
+        const [result] = await db.query(`
             SELECT
                 Cart.cart_id,
                 Cart.product_name,
@@ -580,23 +482,14 @@ const getOrderProducts = async (req, res) => {
                 Cart.size,
                 Cart.discount,
                 Orders.order_id
-
             FROM Cart
-
             INNER JOIN Orders
                 ON Cart.order_id = Orders.order_id
-
-            WHERE Cart.order_id = ${order_id}
-
+            WHERE Cart.order_id = ?
             ORDER BY Cart.cart_id ASC
+        `, [order_id]);
 
-        `;
-
-
-        res.json(
-            result.recordset
-        );
-
+        res.json(result);
 
     } catch (error) {
 
@@ -609,7 +502,6 @@ const getOrderProducts = async (req, res) => {
 };
 
 
-
 // ========================================
 // LẤY LỊCH SỬ ĐẶT HÀNG
 // ========================================
@@ -618,13 +510,9 @@ const getOrderHistory = async (req, res) => {
 
     try {
 
-        const {
-            user_id
-        } = req.params;
+        const { user_id } = req.params;
 
-
-        const result = await sql.query`
-
+        const [result] = await db.query(`
             SELECT
                 order_id,
                 user_id,
@@ -645,20 +533,12 @@ const getOrderHistory = async (req, res) => {
                 total,
                 status,
                 note
-
             FROM Orders
-
-            WHERE user_id = ${user_id}
-
+            WHERE user_id = ?
             ORDER BY created_at DESC
+        `, [user_id]);
 
-        `;
-
-
-        res.json(
-            result.recordset
-        );
-
+        res.json(result);
 
     } catch (error) {
 
@@ -671,7 +551,6 @@ const getOrderHistory = async (req, res) => {
 };
 
 
-
 // ========================================
 // HỦY ĐƠN HÀNG
 // ========================================
@@ -680,32 +559,22 @@ const cancelOrder = async (req, res) => {
 
     try {
 
-        const {
-            order_id
-        } = req.params;
+        const { order_id } = req.params;
 
 
-        // ========================================
         // LẤY USER_ID
-        // ========================================
-
-        const result = await sql.query`
-
-            SELECT
-                user_id
-
+        const [result] = await db.query(`
+            SELECT user_id
             FROM Orders
+            WHERE order_id = ?
+            AND status = ?
+        `, [
+            order_id,
+            'Chờ xử lý'
+        ]);
 
-            WHERE order_id = ${order_id}
 
-            AND status = N'Chờ xử lý'
-
-        `;
-
-
-        if (
-            result.recordset.length === 0
-        ) {
+        if (result.length === 0) {
 
             return res.status(404).send(
                 "Không thể hủy đơn hàng"
@@ -714,33 +583,23 @@ const cancelOrder = async (req, res) => {
         }
 
 
-        const userId =
-            result.recordset[0].user_id;
+        const userId = result[0].user_id;
 
 
-
-        // ========================================
         // CẬP NHẬT TRẠNG THÁI
-        // ========================================
-
-        await sql.query`
-
+        await db.query(`
             UPDATE Orders
+            SET status = ?
+            WHERE order_id = ?
+            AND status = ?
+        `, [
+            'Đã hủy',
+            order_id,
+            'Chờ xử lý'
+        ]);
 
-            SET status = N'Đã hủy'
 
-            WHERE order_id = ${order_id}
-
-            AND status = N'Chờ xử lý'
-
-        `;
-
-
-
-        // ========================================
         // TẠO THÔNG BÁO
-        // ========================================
-
         await createUserOrderNotification(
             userId,
             order_id,
@@ -762,7 +621,6 @@ const cancelOrder = async (req, res) => {
 };
 
 
-
 // ========================================
 // CẬP NHẬT TRẠNG THÁI ĐƠN HÀNG - ADMIN
 // ========================================
@@ -771,18 +629,12 @@ const updateOrderStatus = async (req, res) => {
 
     try {
 
-        const orderId =
-            Number(req.params.order_id);
+        const orderId = Number(req.params.order_id);
 
-        const status =
-            req.body.status;
+        const status = req.body.status;
 
 
-
-        // ========================================
         // KIỂM TRA ID
-        // ========================================
-
         if (!orderId) {
 
             return res.status(400).send(
@@ -792,11 +644,7 @@ const updateOrderStatus = async (req, res) => {
         }
 
 
-
-        // ========================================
         // KIỂM TRA TRẠNG THÁI
-        // ========================================
-
         if (!status) {
 
             return res.status(400).send(
@@ -806,26 +654,15 @@ const updateOrderStatus = async (req, res) => {
         }
 
 
-
-        // ========================================
         // LẤY USER_ID
-        // ========================================
-
-        const orderResult = await sql.query`
-
-            SELECT
-                user_id
-
+        const [orderResult] = await db.query(`
+            SELECT user_id
             FROM Orders
-
-            WHERE order_id = ${orderId}
-
-        `;
+            WHERE order_id = ?
+        `, [orderId]);
 
 
-        if (
-            orderResult.recordset.length === 0
-        ) {
+        if (orderResult.length === 0) {
 
             return res.status(404).send(
                 "Không tìm thấy đơn hàng"
@@ -834,31 +671,24 @@ const updateOrderStatus = async (req, res) => {
         }
 
 
-        const userId =
-            orderResult.recordset[0].user_id;
+        const userId = orderResult[0].user_id;
 
 
-
-        // ========================================
         // CẬP NHẬT TRẠNG THÁI
-        // ========================================
-
-        await sql.query`
-
+        await db.query(`
             UPDATE Orders
+            SET status = ?
+            WHERE order_id = ?
+        `, [
+            status,
+            orderId
+        ]);
 
-            SET status = ${status}
-
-            WHERE order_id = ${orderId}
-
-        `;
 
         await updateMembershipRank(userId);
 
-        // ========================================
-        // TẠO THÔNG BÁO CHO USER
-        // ========================================
 
+        // TẠO THÔNG BÁO CHO USER
         await createUserOrderNotification(
             userId,
             orderId,
@@ -880,7 +710,6 @@ const updateOrderStatus = async (req, res) => {
 };
 
 
-
 // ========================================
 // XÓA ĐƠN HÀNG
 // ========================================
@@ -889,31 +718,21 @@ const deleteOrder = async (req, res) => {
 
     try {
 
-        const {
-            order_id
-        } = req.params;
+        const { order_id } = req.params;
 
 
-        // Xóa sản phẩm trong Cart trước
-
-        await sql.query`
-
+        // XÓA SẢN PHẨM TRONG CART TRƯỚC
+        await db.query(`
             DELETE FROM Cart
-
-            WHERE order_id = ${order_id}
-
-        `;
+            WHERE order_id = ?
+        `, [order_id]);
 
 
-        // Xóa đơn hàng
-
-        await sql.query`
-
+        // XÓA ĐƠN HÀNG
+        await db.query(`
             DELETE FROM Orders
-
-            WHERE order_id = ${order_id}
-
-        `;
+            WHERE order_id = ?
+        `, [order_id]);
 
 
         res.send("ok");
@@ -946,42 +765,68 @@ const getOrderOverview = async (req, res) => {
 
         }
 
-        const userId =
-            req.session.user.id;
+
+        const userId = req.session.user.id;
 
 
-        // ========================================
         // CẬP NHẬT HẠNG THÀNH VIÊN
-        // ========================================
-
         await updateMembershipRank(userId);
 
 
-        // ========================================
         // LẤY TỔNG QUAN
-        // ========================================
-
-        const result = await sql.query`
+        const [result] = await db.query(`
             SELECT
-                (SELECT COUNT(*) FROM Orders WHERE user_id = ${userId}) AS totalOrders,
-                (SELECT COUNT(*) FROM Orders WHERE user_id = ${userId} AND status = N'Hoàn thành') AS completedOrders,
-                (SELECT ISNULL(SUM(Cart.quantity), 0)
-                FROM Cart
-                INNER JOIN Orders ON Cart.order_id = Orders.order_id
-                WHERE Orders.user_id = ${userId}
-                AND Orders.status = N'Hoàn thành') AS totalProducts,
-                (SELECT ISNULL(SUM(total), 0)
-                FROM Orders
-                WHERE user_id = ${userId}
-                AND status = N'Hoàn thành') AS totalMoney,
-                (SELECT membership_rank FROM users WHERE id = ${userId}) AS membershipRank,
-                (SELECT role FROM users WHERE id = ${userId}) AS role
-        `;
+                (
+                    SELECT COUNT(*)
+                    FROM Orders
+                    WHERE user_id = ?
+                ) AS totalOrders,
+
+                (
+                    SELECT COUNT(*)
+                    FROM Orders
+                    WHERE user_id = ?
+                    AND status = 'Hoàn thành'
+                ) AS completedOrders,
+
+                (
+                    SELECT IFNULL(SUM(Cart.quantity), 0)
+                    FROM Cart
+                    INNER JOIN Orders
+                        ON Cart.order_id = Orders.order_id
+                    WHERE Orders.user_id = ?
+                    AND Orders.status = 'Hoàn thành'
+                ) AS totalProducts,
+
+                (
+                    SELECT IFNULL(SUM(total), 0)
+                    FROM Orders
+                    WHERE user_id = ?
+                    AND status = 'Hoàn thành'
+                ) AS totalMoney,
+
+                (
+                    SELECT membership_rank
+                    FROM users
+                    WHERE id = ?
+                ) AS membershipRank,
+
+                (
+                    SELECT role
+                    FROM users
+                    WHERE id = ?
+                ) AS role
+        `, [
+            userId,
+            userId,
+            userId,
+            userId,
+            userId,
+            userId
+        ]);
 
 
-        res.json(
-            result.recordset[0]
-        );
+        res.json(result[0]);
 
 
     } catch (error) {
@@ -993,7 +838,6 @@ const getOrderOverview = async (req, res) => {
     }
 
 };
-
 
 
 // ========================================

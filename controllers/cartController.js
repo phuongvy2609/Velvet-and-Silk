@@ -1,4 +1,4 @@
-const { sql } = require('../config/db');
+const { db } = require('../config/db');
 
 
 // ========================================
@@ -9,17 +9,11 @@ const addToCart = async (req, res) => {
 
     try {
 
-        // ========================================
         // LẤY USER ID TỪ SESSION
-        // ========================================
-
         const user_id = req.session.user.id;
 
 
-        // ========================================
         // LẤY DỮ LIỆU SẢN PHẨM
-        // ========================================
-
         const {
             product_name,
             quantity,
@@ -30,72 +24,55 @@ const addToCart = async (req, res) => {
         } = req.body;
 
 
-        // ========================================
         // KIỂM TRA SẢN PHẨM CÙNG SIZE ĐÃ CÓ CHƯA
-        // ========================================
+        const [result] = await db.query(
 
-        const result = await sql.query`
-
-            SELECT
+            `SELECT
                 cart_id,
                 quantity
-
             FROM Cart
+            WHERE user_id = ?
+            AND product_name = ?
+            AND size = ?
+            AND order_id IS NULL`,
 
-            WHERE user_id = ${user_id}
+            [user_id, product_name, size]
 
-            AND product_name = ${product_name}
-
-            AND size = ${size}
-
-            AND order_id IS NULL
-
-        `;
+        );
 
 
-        // ========================================
         // NẾU ĐÃ CÓ SẢN PHẨM CÙNG SIZE
         // THÌ CỘNG THÊM SỐ LƯỢNG
-        // ========================================
 
-        if (result.recordset.length > 0) {
+        if (result.length > 0) {
 
-            const cart_id =
-                result.recordset[0].cart_id;
+            const cart_id = result[0].cart_id;
 
-            const oldQuantity =
-                Number(
-                    result.recordset[0].quantity
-                );
+            const oldQuantity = Number(result[0].quantity);
 
-            const newQuantity =
-                oldQuantity +
-                Number(quantity);
+            const newQuantity = oldQuantity + Number(quantity);
 
 
-            await sql.query`
+            await db.query(
 
-                UPDATE Cart
+                `UPDATE Cart
+                SET quantity = ?
+                WHERE cart_id = ?
+                AND order_id IS NULL`,
 
-                SET quantity = ${newQuantity}
+                [newQuantity, cart_id]
 
-                WHERE cart_id = ${cart_id}
-
-                AND order_id IS NULL
-
-            `;
+            );
 
 
         } else {
 
-            // ========================================
             // NẾU CHƯA CÓ
             // THÌ THÊM SẢN PHẨM MỚI
-            // ========================================
 
-            await sql.query`
+            await db.query(
 
-                INSERT INTO Cart
+                `INSERT INTO Cart
                 (
                     user_id,
                     product_name,
@@ -105,27 +82,24 @@ const addToCart = async (req, res) => {
                     price_old,
                     size
                 )
+                VALUES (?, ?, ?, ?, ?, ?, ?)`,
 
-                VALUES
-                (
-                    ${user_id},
-                    ${product_name},
-                    ${quantity},
-                    ${image},
-                    ${price},
-                    ${price_old},
-                    ${size}
-                )
+                [
+                    user_id,
+                    product_name,
+                    quantity,
+                    image,
+                    price,
+                    price_old,
+                    size
+                ]
 
-            `;
+            );
 
         }
 
 
-        // ========================================
         // THÊM THÀNH CÔNG
-        // ========================================
-
         res.send("ok");
 
 
@@ -153,9 +127,10 @@ const getCart = async (req, res) => {
             return res.json([]);
         }
 
-        const result = await sql.query`
 
-            SELECT
+        const [result] = await db.query(
+
+            `SELECT
                 cart_id,
                 user_id,
                 product_name,
@@ -165,16 +140,17 @@ const getCart = async (req, res) => {
                 price_old,
                 size,
                 order_id
-
             FROM Cart
+            WHERE user_id = ?
+            AND order_id IS NULL`,
 
-            WHERE user_id = ${user.id}
+            [user.id]
 
-            AND order_id IS NULL
+        );
 
-        `;
 
-        res.json(result.recordset);
+        res.json(result);
+
 
     } catch (error) {
 
@@ -183,7 +159,6 @@ const getCart = async (req, res) => {
     }
 
 };
-
 
 
 // ========================================
@@ -206,24 +181,22 @@ const getCartCount = async (req, res) => {
         }
 
 
-        const result = await sql.query`
+        const [result] = await db.query(
 
-            SELECT
+            `SELECT
                 COUNT(DISTINCT product_name) AS total
-
             FROM Cart
+            WHERE user_id = ?
+            AND order_id IS NULL`,
 
-            WHERE user_id = ${user.id}
+            [user.id]
 
-            AND order_id IS NULL
-
-        `;
+        );
 
 
         res.json({
 
-            total:
-                result.recordset[0].total
+            total: result[0].total
 
         });
 
@@ -235,7 +208,6 @@ const getCartCount = async (req, res) => {
     }
 
 };
-
 
 
 // ========================================
@@ -252,17 +224,16 @@ const updateCart = async (req, res) => {
         } = req.body;
 
 
-        await sql.query`
+        await db.query(
 
-            UPDATE Cart
+            `UPDATE Cart
+            SET quantity = ?
+            WHERE cart_id = ?
+            AND order_id IS NULL`,
 
-            SET quantity = ${quantity}
+            [quantity, cart_id]
 
-            WHERE cart_id = ${cart_id}
-
-            AND order_id IS NULL
-
-        `;
+        );
 
 
         res.send("ok");
@@ -275,7 +246,6 @@ const updateCart = async (req, res) => {
     }
 
 };
-
 
 
 // ========================================
@@ -291,15 +261,15 @@ const deleteCart = async (req, res) => {
         } = req.body;
 
 
-        await sql.query`
+        await db.query(
 
-            DELETE FROM Cart
+            `DELETE FROM Cart
+            WHERE cart_id = ?
+            AND order_id IS NULL`,
 
-            WHERE cart_id = ${cart_id}
+            [cart_id]
 
-            AND order_id IS NULL
-
-        `;
+        );
 
 
         res.send("ok");
@@ -319,13 +289,16 @@ const deleteCart = async (req, res) => {
 // ========================================
 
 const buyNow = async (req, res) => {
+
     try {
 
         const user = req.session.user;
 
+
         if (!user) {
             return res.status(401).send("error");
         }
+
 
         const {
             product_id,
@@ -337,7 +310,9 @@ const buyNow = async (req, res) => {
             size
         } = req.body;
 
+
         req.session.buyNow = {
+
             user_id: user.id,
             product_id: product_id,
             product_name: product_name,
@@ -346,19 +321,23 @@ const buyNow = async (req, res) => {
             price_old: price_old,
             quantity: quantity,
             size: size
+
         };
 
+
         res.send("ok");
+
 
     } catch (error) {
 
         res.status(500).send("error");
 
     }
+
 };
 
 
-/// ========================================
+// ========================================
 // LẤY SẢN PHẨM MUA NGAY
 // ========================================
 
@@ -366,7 +345,7 @@ const getBuyNow = async (req, res) => {
 
     try {
 
-        // Chưa đăng nhập
+        // CHƯA ĐĂNG NHẬP
         if (!req.session.user) {
 
             return res
@@ -375,15 +354,18 @@ const getBuyNow = async (req, res) => {
 
         }
 
-        // Đã đăng nhập nhưng chưa có sản phẩm mua ngay
+
+        // ĐÃ ĐĂNG NHẬP NHƯNG CHƯA CÓ SẢN PHẨM MUA NGAY
         if (!req.session.buyNow) {
 
             return res.json(null);
 
         }
 
-        // Trả sản phẩm mua ngay
+
+        // TRẢ SẢN PHẨM MUA NGAY
         res.json(req.session.buyNow);
+
 
     } catch (error) {
 

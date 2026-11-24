@@ -1,9 +1,10 @@
-//Nhập đối tượng kết nối cơ sở dữ liệu từ file cấu hình của bạn.
-const { sql } = require('../config/db');
 
-const getAllproducts = async (req, res) => { //Khai báo hàm xử lý bất đồng bộ để lấy dữ liệu
-    try { //chạy code trong try, nếu lỗi thì nhảy xuống catch để xử lý, tránh sập server.
-        const kq = await sql.query`
+const { db } = require('../config/db');
+
+// LẤY TẤT CẢ SẢN PHẨM
+const getAllproducts = async (req, res) => {
+    try {
+        const [kq] = await db.query(`
             SELECT 
                 product_id,
                 product_name,
@@ -15,30 +16,27 @@ const getAllproducts = async (req, res) => { //Khai báo hàm xử lý bất đ�
                 category,
                 stock_quantity
             FROM products
-        `; //Gửi lệnh SQL để lấy toàn bộ dữ liệu từ bảng products và 
-        //đợi (await) cho đến khi có kết quả.
+        `);
 
-        res.json(kq.recordset); //Lấy danh sách dữ liệu (recordset) 
-        // trả về cho phía người dùng dưới định dạng JSON.
-    }
-
-    catch (err) {
+        res.json(kq);
+    } catch (err) {
         res.status(500).send(err.message);
-    } //Nếu lỗi, trả về mã trạng thái 500 (lỗi hệ thống) kèm nội dung thông báo lỗi.
-}
+    }
+};
 
 
-// Hàm xử lý để lấy thông tin sản phẩm theo ID
+// LẤY SẢN PHẨM THEO ID
 const getProductById = async (req, res) => {
     try {
-        const { id } = req.params; // Lấy giá trị id từ tham số URL
-        const kq = await sql.query`
-            SELECT * 
-            FROM products 
-            WHERE product_id = ${id} 
-        `; // Gửi lệnh SQL để lấy dữ liệu sản phẩm theo id và đợi kết quả
+        const { id } = req.params;
 
-        res.json(kq.recordset[0]);
+        const [kq] = await db.query(`
+            SELECT *
+            FROM products
+            WHERE product_id = ?
+        `, [id]);
+
+        res.json(kq[0]);
     } catch (err) {
         res.status(500).send(err.message);
     }
@@ -50,7 +48,7 @@ const getProductsByCategory = async (req, res) => {
     try {
         const { category } = req.params;
 
-        const kq = await sql.query`
+        const [kq] = await db.query(`
             SELECT 
                 product_id,
                 product_name,
@@ -62,11 +60,10 @@ const getProductsByCategory = async (req, res) => {
                 category,
                 stock_quantity
             FROM products
-            WHERE category = ${category}
-        `;
+            WHERE category = ?
+        `, [category]);
 
-        res.json(kq.recordset);
-
+        res.json(kq);
     } catch (err) {
         res.status(500).send(err.message);
     }
@@ -86,7 +83,7 @@ const addProduct = async (req, res) => {
         } = req.body;
 
         // Lấy tên file ảnh
-        const image = req.file ? req.file.filename : null
+        const image = req.file ? req.file.filename : null;
 
         // Kiểm tra ảnh
         if (!image) {
@@ -106,16 +103,21 @@ const addProduct = async (req, res) => {
         const newPrice = convertPrice(price);
         const newPriceOld = convertPrice(price_old);
 
-        // Lấy ID mới
-        const result = await sql.query`
-            SELECT ISNULL(MAX(product_id), 0) + 1 AS new_id
-            FROM products
-        `;
+        const discountPercent =
+            newPriceOld && newPriceOld > newPrice
+                ? Math.round((newPriceOld - newPrice) * 100 / newPriceOld)
+                : 0;
 
-        const newProductId = result.recordset[0].new_id;
+        // Lấy ID mới
+        const [result] = await db.query(`
+            SELECT IFNULL(MAX(product_id), 0) + 1 AS new_id
+            FROM products
+        `);
+
+        const newProductId = result[0].new_id;
 
         // Thêm sản phẩm
-        await sql.query`
+        await db.query(`
             INSERT INTO products
             (
                 product_id,
@@ -128,22 +130,18 @@ const addProduct = async (req, res) => {
                 category,
                 stock_quantity
             )
-            VALUES
-            (
-                ${newProductId},
-                ${product_name},
-                ${newPrice},
-                ${newPriceOld},
-                ${newPriceOld && newPriceOld > newPrice
-                ? Math.round((newPriceOld - newPrice) * 100 / newPriceOld)
-                : 0
-            },
-                ${image},
-                ${description},
-                ${category},
-                ${stock_quantity}
-            )
-        `;
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+        `, [
+            newProductId,
+            product_name,
+            newPrice,
+            newPriceOld,
+            discountPercent,
+            image,
+            description,
+            category,
+            stock_quantity
+        ]);
 
         res.send("ok");
     } catch (err) {
@@ -152,11 +150,11 @@ const addProduct = async (req, res) => {
 };
 
 
-
 // SỬA SẢN PHẨM
 const updateProduct = async (req, res) => {
     try {
         const { id } = req.params;
+
         const {
             product_name,
             price,
@@ -170,55 +168,72 @@ const updateProduct = async (req, res) => {
             if (!price) {
                 return null;
             }
-            const value =
-                String(price).replace(/[^\d]/g, "");
+
+            const value = String(price).replace(/[^\d]/g, "");
+
             return value ? Number(value) : null;
         }
 
         const newPrice = convertPrice(price);
         const newPriceOld = convertPrice(price_old);
 
+        const discountPercent =
+            newPriceOld && newPriceOld > newPrice
+                ? Math.round((newPriceOld - newPrice) * 100 / newPriceOld)
+                : 0;
+
         // Nếu có chọn ảnh mới
         if (req.file) {
             const image = req.file.filename;
 
-            await sql.query`
+            await db.query(`
                 UPDATE products
                 SET
-                    product_name = ${product_name},
-                    price = ${newPrice},
-                    price_old = ${newPriceOld},
-                    discount_percent = ${newPriceOld && newPriceOld > newPrice
-                    ? Math.round((newPriceOld - newPrice) * 100 / newPriceOld)
-                    : 0
-                },
-                    stock_quantity = ${stock_quantity},
-                    image = ${image},
-                    description = ${description},
-                    category = ${category}
-                WHERE product_id = ${id}
-            `;
-
+                    product_name = ?,
+                    price = ?,
+                    price_old = ?,
+                    discount_percent = ?,
+                    stock_quantity = ?,
+                    image = ?,
+                    description = ?,
+                    category = ?
+                WHERE product_id = ?
+            `, [
+                product_name,
+                newPrice,
+                newPriceOld,
+                discountPercent,
+                stock_quantity,
+                image,
+                description,
+                category,
+                id
+            ]);
         }
 
-
-        // Nếu ko chọn ảnh mới
+        // Nếu không chọn ảnh mới
         else {
-            await sql.query`
+            await db.query(`
                 UPDATE products
                 SET
-                    product_name = ${product_name},
-                    price = ${newPrice},
-                    price_old = ${newPriceOld},
-                    discount_percent = ${newPriceOld && newPriceOld > newPrice
-                    ? Math.round((newPriceOld - newPrice) * 100 / newPriceOld)
-                    : 0
-                },
-                    stock_quantity = ${stock_quantity},
-                    description = ${description},
-                    category = ${category}
-                WHERE product_id = ${id}
-            `;
+                    product_name = ?,
+                    price = ?,
+                    price_old = ?,
+                    discount_percent = ?,
+                    stock_quantity = ?,
+                    description = ?,
+                    category = ?
+                WHERE product_id = ?
+            `, [
+                product_name,
+                newPrice,
+                newPriceOld,
+                discountPercent,
+                stock_quantity,
+                description,
+                category,
+                id
+            ]);
         }
 
         res.send("ok");
@@ -231,11 +246,13 @@ const updateProduct = async (req, res) => {
 // XÓA SẢN PHẨM
 const deleteProduct = async (req, res) => {
     const { id } = req.body;
+
     try {
-        await sql.query`
+        await db.query(`
             DELETE FROM products
-            WHERE product_id = ${id}
-        `;
+            WHERE product_id = ?
+        `, [id]);
+
         res.send("ok");
     } catch (err) {
         res.status(500).send(err.message);
@@ -247,22 +264,25 @@ const deleteProduct = async (req, res) => {
 const searchProducts = async (req, res) => {
     try {
         const keyword = req.params.keyword;
-        const result = await sql.query`
+
+        const [result] = await db.query(`
             SELECT *
             FROM products
-            WHERE product_name LIKE ${'%' + keyword + '%'}
-        `;
-        res.json(result.recordset);
+            WHERE product_name LIKE ?
+        `, [`%${keyword}%`]);
+
+        res.json(result);
     } catch (error) {
         res.status(500).send(error.message);
     }
 };
 
 
+// LẤY SẢN PHẨM NGẪU NHIÊN
 const getRandomProducts = async (req, res) => {
     try {
-        const kq = await sql.query`
-            SELECT TOP 10
+        const [kq] = await db.query(`
+            SELECT
                 product_id,
                 product_name,
                 price,
@@ -273,25 +293,22 @@ const getRandomProducts = async (req, res) => {
                 category,
                 stock_quantity
             FROM products
-            ORDER BY NEWID()
-        `;
+            ORDER BY RAND()
+            LIMIT 10
+        `);
 
-        res.json(kq.recordset);
+        res.json(kq);
     } catch (err) {
         res.status(500).send(err.message);
     }
 };
 
 
-// ========================================
 // LẤY SẢN PHẨM BÁN CHẠY
-// ========================================
-
 const getBestSellingProducts = async (req, res) => {
     try {
-
-        const kq = await sql.query`
-            SELECT TOP 10
+        const [kq] = await db.query(`
+            SELECT
                 p.product_id,
                 p.product_name,
                 p.price,
@@ -302,18 +319,13 @@ const getBestSellingProducts = async (req, res) => {
                 p.category,
                 p.stock_quantity,
                 SUM(c.quantity) AS total_sold
-
             FROM Cart c
-
             INNER JOIN Orders o
                 ON c.order_id = o.order_id
-
             INNER JOIN products p
                 ON c.product_name = p.product_name
-
             WHERE c.order_id IS NOT NULL
-                AND o.status <> N'Đã hủy'
-
+                AND o.status <> 'Đã hủy'
             GROUP BY
                 p.product_id,
                 p.product_name,
@@ -324,12 +336,11 @@ const getBestSellingProducts = async (req, res) => {
                 p.description,
                 p.category,
                 p.stock_quantity
-
             ORDER BY total_sold DESC
-        `;
+            LIMIT 10
+        `);
 
-        res.json(kq.recordset);
-
+        res.json(kq);
     } catch (err) {
         res.status(500).send(err.message);
     }
@@ -347,6 +358,3 @@ module.exports = {
     getRandomProducts,
     getBestSellingProducts
 };
-//Xuất hàm này ra để các file khác trong dự án có thể sử dụng được.
-
-
