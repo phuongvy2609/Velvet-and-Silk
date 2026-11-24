@@ -768,7 +768,7 @@ h1 {
     white-space: nowrap;
 }
 
-@media (min-width: 1201px) {
+@media (min-width: 1440px) {
 
     .banner {
         width: 100%;
