@@ -2,6 +2,9 @@ const express = require('express');
 const session = require('express-session');
 const app = express();
 
+// KẾT NỐI MYSQL
+const { connectDB } = require('./config/db');
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -72,6 +75,12 @@ app.use('/', notificationUserRouter);
 
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, () => {
-    console.log(`Server đã sẵn sàng tại cổng ${PORT}`);
+connectDB().then(() => {
+
+    app.listen(PORT, () => {
+        console.log(`Server đã sẵn sàng tại cổng ${PORT}`);
+    });
+
+}).catch(() => {
+    console.log('Không thể kết nối MySQL!');
 });
